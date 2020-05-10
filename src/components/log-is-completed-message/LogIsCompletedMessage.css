@@ -1,0 +1,38 @@
+.log-is-completed-message__date {
+    font-size: 24px;
+    padding: 16px;
+}
+
+.log-is-completed-message__illustration svg {
+    font-size: 100px;
+    color: #79ACE2;
+}
+
+.log-is-completed-message__congratulations {
+    font-size: 20px;
+    padding-bottom: 24px;
+    margin: 0 32px 70px;
+    border-bottom: 1px solid #EAEAEA;
+}
+
+.message-navigation-options {
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    font-size: 14px;
+}
+
+.message-navigation-options > div {
+    padding: 8px 8px 16px;
+}
+
+button.message-navigation-options__button {
+    margin-top: 12px;
+    color: #828282;
+}
+
+
+button.log-is-completed-message__go-back {
+    font-size: 14px;
+}
+

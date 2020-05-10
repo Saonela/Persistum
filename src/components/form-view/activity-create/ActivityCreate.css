@@ -1,0 +1,12 @@
+.form-create {
+    display: flex;
+    padding-left: 12px;
+}
+
+.form-create .form-create__input {
+    width: 100%;
+}
+
+.form-create .form-create__toggle-button {
+    margin-left: auto;
+}

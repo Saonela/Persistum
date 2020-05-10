@@ -1,0 +1,26 @@
+.activity-controls {
+    display: flex;
+    align-items: center;
+}
+
+.activity-controls__style {
+    width: 28px;
+    height: 28px;
+    margin-right: 12px;
+    margin-left: auto;
+    border: 1px solid #ebebeb;
+    background: #ebebeb;
+    transition: transform 200ms ease-out;
+}
+
+.activity-controls__style:hover {
+    border-color: #79ACE2;
+}
+
+.activity-controls__controls {
+    position: absolute;
+    right: -88px;
+    opacity: 0;
+    visibility: hidden;
+    transition: transform 200ms ease-out, opacity 150ms ease-in-out 50ms;
+}

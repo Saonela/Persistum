@@ -1,0 +1,20 @@
+:root {
+    --color-text: #828282;
+    --color-border: #eaeaea;
+    --color-background: #ffffff;
+    --color-highlight: #79ACE2;
+
+    --padding-xs: 4px;
+    --padding-s: 8px;
+    --padding: 16px;
+    --padding-m: 24px;
+    --padding-l: 32px;
+    --padding-xl: 64px;
+
+    --margin-xs: 4px;
+    --margin-s: 8px;
+    --margin: 16px;
+    --margin-m: 24px;
+    --margin-l: 32px;
+    --margin-xl: 64px;
+}

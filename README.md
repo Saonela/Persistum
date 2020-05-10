@@ -1,3 +1,6 @@
+## Persistum
+Routine is key to success. Fill your goals, check them everyday and overview your total progress.
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts

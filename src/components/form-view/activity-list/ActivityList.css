@@ -1,0 +1,40 @@
+.activity-list {
+    position: relative;
+    margin-top: var(--margin);
+}
+
+.activity-list-transition-enter {
+    opacity: 0.01;
+}
+
+.activity-list-transition.activity-list-transition-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.activity-list-transition-leave {
+    opacity: 1;
+}
+
+.activity-list-transition-leave.activity-list-transition-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
+
+.no-activities-transition-enter {
+    opacity: 0.01;
+}
+
+.no-activities-transition-enter.no-activities-transition-enter-active {
+    opacity: 1;
+    transition: opacity 300ms ease-in;
+}
+
+.no-activities-transition-leave {
+    opacity: 1;
+}
+
+.no-activities-transition-leave.no-activities-transition-leave-active {
+    opacity: 0.01;
+    transition: opacity 300ms ease-in;
+}
