@@ -1,0 +1,22 @@
+@import "../../../variables.css";
+
+.log-table {
+    padding: var(--margin-m) var(--margin-l);
+}
+
+.log-table__year {
+    margin-bottom: calc(var(--margin-s) * -1);
+    font-size: var(--font-size-xl);
+    text-align: left;
+}
+
+.log-table__month {
+    margin: var(--margin-s) 0;
+    font-size: var(--font-size-l);
+    text-align: left;
+}
+
+.log-table__days {
+    display: flex;
+    flex-wrap: wrap;
+}

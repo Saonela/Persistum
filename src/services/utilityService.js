@@ -1,7 +1,7 @@
 import moment from "moment";
 
 const UtilityService = {
-    generateId () {
+    generateId() {
         let result = '';
         const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
         const charactersLength = characters.length;
@@ -18,6 +18,12 @@ const UtilityService = {
     },
     getCurrentShortTimestamp() {
         return moment().utc().format('YYYY-MM-DD');
+    },
+    getTimestampYear(timestamp) {
+        return timestamp.slice(0, 4);
+    },
+    getTimestampMonth(timestamp) {
+        return parseInt(timestamp.slice(5, 7), 10).toString();
     }
 };
 

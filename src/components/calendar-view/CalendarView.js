@@ -1,43 +1,31 @@
 import React from "react";
 import './CalendarView.css'
-import {bindActionCreators} from "redux";
-import {connect} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import LogTable from "./log-table/LogTable";
+import Legend from "../legend/Legend";
+import {getCalendarDataLog} from "../../redux/logEntriesSlice";
+import {toggleFilter} from "../../redux/filtersSlice";
 
-class CalendarView extends React.Component {
+function CalendarView() {
 
-    constructor(props) {
-        super(props);
-    }
+    const dispatch = useDispatch();
 
-    render() {
-        return (
+    const calendarData = useSelector(getCalendarDataLog);
+    const activities = useSelector(state => state.activities);
+    const filters = useSelector(state => state.filters);
+
+    return (
             <div className="calendar-view">
-                == >{JSON.stringify(this.props.activities)}
-                <br></br>
-                == >{JSON.stringify(this.props.dataLog)}
-                <br></br>
-                <LogTable dataLog={this.props.dataLog}/>
+                <div className="calendar-view__legend" >
+                    <Legend activities={activities}
+                            filters={filters}
+                            onFilter={(id) => dispatch(toggleFilter(id))}/>
+                </div>
+                <div className="calendar-view__table" >
+                    <LogTable dataLog={calendarData}/>
+                </div>
             </div>
-        )
-    }
+    )
 }
 
-const mapStateToProps = (state, ownProps) => (() => {
-    const dataLog = {}
-    Object.keys(state.dataLog).forEach((key) => {
-        dataLog[key] = {
-            activities: state.activities.filter((activity) => state.dataLog[key].activities.indexOf(activity.id) >= 0)
-        }
-    });
-    return {
-        activities: state.activities,
-        dataLog: dataLog
-    }
-});
-
-const mapDispatchToProps = (dispatch) => {
-    // return bindActionCreators({ addActivity, updateActivity, removeActivity: deleteActivity }, dispatch)
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(CalendarView);
+export default CalendarView;

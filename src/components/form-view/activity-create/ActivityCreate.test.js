@@ -1,48 +1,55 @@
 import React from "react";
-import {shallow} from "enzyme";
 import ActivityCreate from "./ActivityCreate";
+import {getByLabelText, getByTitle, queryByLabelText} from "@testing-library/dom";
+import {fireEvent, render} from "@testing-library/react";
 
 describe('ActivityCreate', () => {
-    let wrapper;
-    let onSubmit;
+
+    let container;
+    let submitSpy;
     let input;
 
     beforeEach(() => {
-        onSubmit = jest.fn();
-        wrapper = shallow(<ActivityCreate onSubmit={onSubmit}/>);
-        wrapper.setState({showInput: true});
-        input = getInput();
+        submitSpy = jest.fn();
+        const element = render(<ActivityCreate onSubmit={submitSpy}/>);
+        container = element.container;
     });
 
-    it('should toggle text-input', () => {
-        expect(input.length).toBeTruthy();
-        wrapper.find('.form-create__toggle-button').simulate('click');
-        expect(getInput().length).toBeFalsy();
+    it('should toggle text-input', async () => {
+        clickAddButton(container);
+        input = getByLabelText(container, 'Activity');
     });
 
     it('should always show text-input if force', () => {
-        wrapper = shallow(<ActivityCreate forceInputDisplay={true} onClick={onSubmit}/>);
-        expect(input.length).toBeTruthy();
-        wrapper.find('.form-create__toggle-button').simulate('click');
-        expect(input.length).toBeTruthy();
+        let {container} = render(<ActivityCreate forceInputDisplay={true} onClick={submitSpy}/>);
+        input = getByLabelText(container, 'Activity');
+        clickAddButton(container);
+        input = getByLabelText(container, 'Activity');
     });
 
-    it('should emit name on enter', () => {
-        input.props().onEnter('');
-        expect(onSubmit).not.toHaveBeenCalled();
-        input.props().onEnter('123');
-        expect(onSubmit).toHaveBeenCalledWith('123');
-        expect(getInput().length).toBeFalsy();
+    it('should emit name on enter', async () => {
+        clickAddButton(container);
+        input = getByLabelText(container,'Activity');
+        fireEvent.keyDown(input, { key: 'Enter', code: 'Enter' })
+        expect(submitSpy).not.toHaveBeenCalled();
+
+        fireEvent.change(input, {target: {value: '123'}});
+        fireEvent.keyPress(input, { key: 'Enter', charCode: 13 });
+        expect(submitSpy).toHaveBeenCalledWith('123');
     });
 
     it('should submit on toggle click', () => {
-        input.props().onBlur('56');
-        wrapper.find('.form-create__toggle-button').simulate('click');
-        expect(onSubmit).toHaveBeenCalledWith('56');
-        expect(getInput().length).toBeFalsy();
+        clickAddButton(container);
+        input = getByLabelText(container,'Activity');
+        fireEvent.change(input, {target: {value: '56'}});
+        fireEvent.blur(input);
+        clickAddButton(container);
+        expect(submitSpy).toHaveBeenCalledWith('56');
+        expect(queryByLabelText(container,'Activity')).toBeFalsy();
     });
 
-    const getInput = () => {
-        return wrapper.find('.form-create__input');
+    const clickAddButton = (container) => {
+        const button = getByTitle(container, 'Add');
+        fireEvent.click(button);
     }
 });

@@ -1,11 +1,11 @@
-import {shallow} from "enzyme";
 import React from "react";
 import LogCell from "./LogCell";
+import {render} from "@testing-library/react";
+import {getAllByRole, getByText} from "@testing-library/dom";
 
 describe('LogCell', () => {
 
-    let wrapper;
-    let onChangeSpy;
+    let container;
 
     const activities = [
         {id: 1, name: 'test activity 1', completed: true, style: {color: '#FFF'}},
@@ -14,12 +14,12 @@ describe('LogCell', () => {
     ]
 
     beforeEach(() => {
-        onChangeSpy = jest.fn();
-        wrapper = shallow(<LogCell key={1} timestamp={'2012-12-21'} activities={activities}/>);
+        const element = render(<LogCell key={1} timestamp={'2012-12-21'} activities={activities}/>);
+        container = element.container;
     });
 
     it('should show timestamp and activities', () => {
-        expect(wrapper.find('.log-cell__timestamp').text()).toBe('2012-12-21');
-        expect(wrapper.find('.log-cell__activity').length).toBe(3);
+        getByText(container, '21');
+        expect(getAllByRole(container, 'listitem').length).toBe(3);
     })
 });

@@ -1,0 +1,14 @@
+.calendar-view {
+    width: 100%;
+}
+
+.calendar-view__legend {
+    position: absolute;
+    width: 100%;
+}
+
+.calendar-view__table {
+    height: calc(100% - var(--legend-height));
+    margin-top: var(--legend-height);
+    overflow: auto;
+}

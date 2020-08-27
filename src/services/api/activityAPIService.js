@@ -7,7 +7,10 @@ const ActivityAPIService = {
         return new Promise((resolve) => {
             resolve({
                 id: id,
-                name: name
+                name: name,
+                style: {
+                    background: '#ebebeb'
+                }
             })
         });
     },

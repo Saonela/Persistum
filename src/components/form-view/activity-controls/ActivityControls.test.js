@@ -1,28 +1,31 @@
 import React from 'react';
-import {shallow} from "enzyme";
 import ActivityControls from "./ActivityControls";
+import {render} from "@testing-library/react";
+import {fireEvent, getByRole} from "@testing-library/dom";
 
 describe('ActivityControls', () => {
-    let wrapper;
+
+    let container;
     let onEditSpy;
-    let onRemoveSpy;
+    let onDeleteSpy;
 
     beforeEach(() => {
         onEditSpy = jest.fn();
-        onRemoveSpy = jest.fn();
-        wrapper = shallow(<ActivityControls onEdit={onEditSpy} onRemove={onRemoveSpy}/>);
+        onDeleteSpy = jest.fn();
+        const element = render(<ActivityControls onEdit={onEditSpy} onDelete={onDeleteSpy}/>);
+        container = element.container;
     });
 
     it('should emit event on edit', () => {
-        const button = wrapper.find('.activity-controls__edit-button');
-        button.simulate('click', { stopPropagation() {} });
+        const button = getByRole(container, 'button', {name: /edit/i});
+        fireEvent.click(button);
         expect(onEditSpy).toHaveBeenCalled();
     });
 
     it('should emit event on remove', () => {
-        const button = wrapper.find('.activity-controls__remove-button');
-        button.simulate('click', { stopPropagation() {} });
-        expect(onRemoveSpy).toHaveBeenCalled();
+        const button = getByRole(container, 'button', {name: /delete/i});
+        fireEvent.click(button);
+        expect(onDeleteSpy).toHaveBeenCalled();
     })
 
 });

@@ -1,8 +1,9 @@
 import React from 'react';
 import Header from "./Header";
-import {shallow} from "enzyme";
+import {render} from "@testing-library/react";
+import {BrowserRouter} from "react-router-dom";
 
 it('displays main logo', () => {
-  const wrapper = shallow(<Header />);
-  expect(wrapper.find('.logo')).toHaveLength(1);
+    const {getByRole} = render(<BrowserRouter><Header/></BrowserRouter>);
+    getByRole('img', {name: 'Logo'});
 });

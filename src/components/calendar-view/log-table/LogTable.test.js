@@ -1,30 +1,58 @@
-import {shallow} from "enzyme";
 import React from "react";
 import LogTable from "./LogTable";
+import {render} from "@testing-library/react";
+import {getAllByRole} from "@testing-library/dom";
 
 describe('LogTable', () => {
 
-    let wrapper;
-    let onChangeSpy;
+    let container;
 
-    const dataLog = {
-        '2012-02-16': {
-            activities: [1]
+    const dataLog = [
+        {
+            year: '2010',
+            data: [
+                {
+                    month: '11',
+                    data: [
+                        {
+                            timestamp: '2010-11-02',
+                            activities: [{id: 123456, name: 'a', style: {}}]
+                        }
+                    ]
+                }
+            ]
         },
-        '2014-12-20': {
-            activities: [2]
+        {
+            year: '2020',
+            data: [
+                {
+                    month: '4',
+                    data: [
+                        {
+                            timestamp: '2020-04-15',
+                            activities: [{id: 999, name: 'b', style: {}}]
+                        }
+                    ]
+                },
+                {
+                    month: '11',
+                    data: [
+                        {
+                            timestamp: '2020-11-10',
+                            activities: [{id: 999, name: 'c', style: {}}]
+                        }
+                    ]
+                }
+            ]
         },
-        '2019-01-11': {
-            activities: [3, 4]
-        }
-    }
+    ];
 
     beforeEach(() => {
-        onChangeSpy = jest.fn();
-        wrapper = shallow(<LogTable dataLog={dataLog}/>);
+        const element = render(<LogTable dataLog={dataLog}/>);
+        container = element.container;
     });
 
     it('should display log cells', () => {
-        expect(wrapper.find('.log-table__cell').length).toBe(3);
+        expect(getAllByRole(container, 'listitem', {name: 'Activity'}).length).toBe(3);
     })
 });

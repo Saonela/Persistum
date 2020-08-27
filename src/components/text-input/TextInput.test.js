@@ -1,37 +1,37 @@
 import React from "react";
-import {shallow} from "enzyme";
 import TextInput from "./TextInput";
+import {render} from "@testing-library/react";
+import {fireEvent, getByDisplayValue, getByLabelText} from "@testing-library/dom";
 
 describe('TextInput', () => {
-    let wrapper;
+
+    let container;
     let onEnterSpy;
     let onBlurSpy;
-    let input;
 
     beforeEach(() => {
         onEnterSpy = jest.fn();
         onBlurSpy = jest.fn();
-        wrapper = shallow(<TextInput label={'Input:'} value={'Prop Value'} onBlur={onBlurSpy} onEnter={onEnterSpy}/>);
-        input = wrapper.find('.text-input');
+        const wrapper = render(<TextInput id={'text'} value={'Prop Value'} label={'Text Input'} onBlur={onBlurSpy} onEnter={onEnterSpy}/>)
+        container = wrapper.container;
     });
 
     it('should display given label and value', () => {
-        expect(input.props().label).toBe('Input:');
-        expect(input.props().value).toBe('Prop Value');
+        getByLabelText(container, 'Text Input');
+        getByDisplayValue(container, 'Prop Value');
     });
 
     it('should emit event on enter', () => {
-        input.simulate('change', {target: {value:  'My name is Cena' }});
-        input.simulate('keypress', {key: 'a', target: {value:  'My name is Cena' }});
-        expect(onEnterSpy).not.toHaveBeenCalled();
-        input.simulate('keypress', {key: 'Enter', target: {value:  'My name is Cena' }});
-        expect(onEnterSpy).toHaveBeenCalledWith('My name is Cena');
-
+        const input = getByLabelText(container, 'Text Input');
+        fireEvent.input(input, {target: {value: 'abc123'}});
+        fireEvent.keyPress(input, { key: 'Enter', code: 'enter', charCode: 13 });
+        expect(onEnterSpy).toHaveBeenCalledWith('abc123');
     });
 
     it('should emit event on blur', () => {
-        input.simulate('change', {target: {value:  'My name is Cena' }});
-        input.simulate('blur');
-        expect(onBlurSpy).toHaveBeenCalledWith('My name is Cena');
+        const input = getByLabelText(container, 'Text Input');
+        fireEvent.input(input, {target: {value: 'abc123'}});
+        fireEvent.blur(input);
+        expect(onBlurSpy).toHaveBeenCalledWith('abc123');
     });
 });

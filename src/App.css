@@ -2,11 +2,13 @@
   height: 100%;
   text-align: center;
   color: var(--color-text);
+  font-size: var(--font-size);
 }
 
 .container {
   display: flex;
   justify-content: center;
+  height: calc(100% - 75px);
   padding-top: 75px;
   background: #ffffff;
 }

@@ -15,4 +15,13 @@ describe('UtilityService', () => {
         variable.a.b = 18;
         expect(res).not.toEqual(variable);
     });
+
+    it('should get timestamp year', () => {
+        expect(UtilityService.getTimestampYear('2020-05-23')).toEqual('2020');
+    });
+
+    it('should get timestamp month', () => {
+        expect(UtilityService.getTimestampMonth('2020-05-23')).toEqual('5');
+        expect(UtilityService.getTimestampMonth('2020-11-23')).toEqual('11');
+    });
 });

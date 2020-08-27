@@ -1,25 +1,22 @@
 import React from 'react';
-import {shallow} from "enzyme";
 import Navigation from "./Navigation";
+import {render} from "@testing-library/react";
+import {fireEvent} from "@testing-library/dom";
+import { Router } from 'react-router-dom'
+import { createMemoryHistory } from 'history'
+
+const MUI_PRIMARY_COLOR_CLASS = 'MuiIconButton-colorPrimary';
 
 it('should display active item', () => {
-    const wrapper = shallow(<Navigation.WrappedComponent history={{listen: () => {}}}/>);
-    expect(wrapper.find('.navigation__button-calendar').prop('color')).toBe('default');
-    expect(wrapper.find('.navigation__button-form').prop('color')).toBe('primary');
-    wrapper.find('Link').at(0).prop('onClick')('CALENDAR');
-    expect(wrapper.find('.navigation__button-calendar').prop('color')).toBe('primary');
-    expect(wrapper.find('.navigation__button-form').prop('color')).toBe('default');
-});
+    const history = createMemoryHistory()
+    history.push('/form');
+    const {getByRole} = render(<Router history={history}><Navigation/></Router>)
+    const calendarLinkButton = getByRole('button', {name: 'Calendar link'});
+    const formLinkButton = getByRole('button', {name: 'Form link'});
+    expect(calendarLinkButton).not.toHaveClass(MUI_PRIMARY_COLOR_CLASS)
+    expect(formLinkButton).toHaveClass(MUI_PRIMARY_COLOR_CLASS)
 
-it('should change active item on router subscribe', () => {
-    let callback;
-    const history = {
-        listen: (func) => {
-            callback = func;
-        }
-    };
-    const wrapper = shallow(<Navigation.WrappedComponent history={history}/>);
-    callback({pathname: '/calendar'});
-    expect(wrapper.find('.navigation__button-calendar').prop('color')).toBe('primary');
-    expect(wrapper.find('.navigation__button-form').prop('color')).toBe('default');
+    fireEvent.click(calendarLinkButton);
+    expect(calendarLinkButton).toHaveClass(MUI_PRIMARY_COLOR_CLASS)
+    expect(formLinkButton).not.toHaveClass(MUI_PRIMARY_COLOR_CLASS)
 });

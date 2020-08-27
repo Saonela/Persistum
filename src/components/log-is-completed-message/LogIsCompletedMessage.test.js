@@ -1,15 +1,18 @@
-import React from 'react';
-import {shallow} from "enzyme";
 import LogIsCompletedMessage from "./LogIsCompletedMessage";
+import {render} from "@testing-library/react";
+import {fireEvent, getByText} from "@testing-library/dom";
+import React from "react";
+import {BrowserRouter as Router} from "react-router-dom";
 
 it('should show date', () => {
-    const wrapper = shallow(<LogIsCompletedMessage date={'2020'}/>);
-    expect(wrapper.find('.log-is-completed-message__date').text()).toBe('2020');
+    const {container} = render(<Router><LogIsCompletedMessage date={'2020'}/></Router>);
+    getByText(container, '2020');
 });
 
 it('should emit event on go back button click', () => {
     const spy = jest.fn();
-    const wrapper = shallow(<LogIsCompletedMessage date={'2020'} onBack={spy}/>);
-    wrapper.find('.message-navigation-options__to-form .message-navigation-options__button').simulate('click');
+    const {container} = render(<Router><LogIsCompletedMessage date={'2020'} onBack={spy}/></Router>);
+    const button = getByText(container, 'Back to logging');
+    fireEvent.click(button);
     expect(spy).toHaveBeenCalled();
 });

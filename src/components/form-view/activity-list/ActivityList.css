@@ -1,6 +1,8 @@
+
 .activity-list {
     position: relative;
     margin-top: var(--margin);
+    --transition-duration: 300ms;
 }
 
 .activity-list-transition-enter {
@@ -9,7 +11,7 @@
 
 .activity-list-transition.activity-list-transition-enter-active {
     opacity: 1;
-    transition: opacity 300ms ease-in;
+    transition: opacity var(--transition-duration) ease-in;
 }
 
 .activity-list-transition-leave {
@@ -18,7 +20,7 @@
 
 .activity-list-transition-leave.activity-list-transition-leave-active {
     opacity: 0.01;
-    transition: opacity 300ms ease-in;
+    transition: opacity var(--transition-duration) ease-in;
 }
 
 .no-activities-transition-enter {
@@ -27,7 +29,7 @@
 
 .no-activities-transition-enter.no-activities-transition-enter-active {
     opacity: 1;
-    transition: opacity 300ms ease-in;
+    transition: opacity var(--transition-duration) ease-in;
 }
 
 .no-activities-transition-leave {
@@ -36,5 +38,5 @@
 
 .no-activities-transition-leave.no-activities-transition-leave-active {
     opacity: 0.01;
-    transition: opacity 300ms ease-in;
+    transition: opacity var(--transition-duration) ease-in;
 }

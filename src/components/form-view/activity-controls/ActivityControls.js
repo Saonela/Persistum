@@ -4,33 +4,31 @@ import EditIcon from "@material-ui/icons/Edit";
 import ClearIcon from "@material-ui/icons/Clear";
 import './ActivityControls.css'
 
-class ActivityControls extends React.Component {
+function ActivityControls({onEdit, onDelete}) {
 
-    handleEdit(e) {
+    const handleEdit = (e) => {
         e.stopPropagation();
-        this.props.onEdit();
+        onEdit();
     }
 
-    handleRemove(e) {
+    const handleRemove = (e) => {
         e.stopPropagation();
-        this.props.onRemove();
+        onDelete();
     }
 
-    render() {
-        return (
-            <div className="activity-controls">
-                <div className="activity-controls__style"/>
-                <div className="activity-controls__controls">
-                    <IconButton className="activity-controls__edit-button" onClick={this.handleEdit.bind(this)}>
-                        <EditIcon/>
-                    </IconButton>
-                    <IconButton className="activity-controls__remove-button" onClick={this.handleRemove.bind(this)}>
-                        <ClearIcon/>
-                    </IconButton>
-                </div>
+    return (
+        <div className="activity-controls">
+            <div className="activity-controls__style"/>
+            <div className="activity-controls__controls">
+                <IconButton className="activity-controls__edit-button" role="button" aria-label="edit" onClick={(e) => handleEdit(e)}>
+                    <EditIcon/>
+                </IconButton>
+                <IconButton className="activity-controls__remove-button" role="button" aria-label="delete" onClick={(e) => handleRemove(e)}>
+                    <ClearIcon/>
+                </IconButton>
             </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default ActivityControls;

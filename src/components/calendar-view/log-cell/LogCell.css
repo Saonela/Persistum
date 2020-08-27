@@ -1,0 +1,36 @@
+.log-cell {
+    height: 110px;
+    width: 140px;
+    padding: var(--padding-s);
+    margin-right: var(--margin-s);
+    margin-bottom: var(--margin-s);
+    border: 1px solid var(--color-border);
+}
+
+.log-cell__timestamp {
+    position: relative;
+    top: calc(var(--margin-xs) * -1);
+    left: calc(var(--margin-xs) * -1);
+    padding: var(--padding-xs);
+    width: 20px;
+    text-align: center;
+    font-size: var(--font-size);
+    font-weight: bold;
+}
+
+.log-cell__activities {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.log-cell__activity {
+    height: 22px;
+    width: 22px;
+    margin: 2px;
+    border: 1px solid var(--color-border);
+    cursor: pointer;
+}
+
+.log-cell__activity:hover {
+    border-color: var(--color-highlight);
+}

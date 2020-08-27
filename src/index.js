@@ -6,21 +6,42 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import {applyMiddleware, createStore} from "redux";
-import reducer from './reducers/index';
+import reducer from './redux/reducers/index';
 import thunk from "redux-thunk";
+import store from "./redux/store";
+// import Firebase from "./firebase";
 
-const initialState = {
-    activities: [
-        {id: 123456, name: 'Learn redux', style: ''}
-    ],
-    dataLog: {
-        '2010-11-02': {
-            activities: [123456]
-        }
-    }
-};
+// const initialState = {
+//     user: null,
+//     activities: [
+//         {id: 123456, name: 'Learn redux', style: {background: '#ebebeb'}},
+//         {id: 999, name: 'Read a book', style: {background: 'red'}},
+//         {id: 11, name: 'Tell a secret', style: {background: 'black'}}
+//     ],
+//     hiddenActivityIds: [11],
+//     dataLog: {
+//         '2010-11-02': {
+//             activities: [123456]
+//         },
+//         '2020-04-15': {
+//             activities: [999]
+//         },
+//         '2020-05-18': {
+//             activities: [123456]
+//         },
+//         '2020-05-20': {
+//             activities: [123456, 999]
+//         },
+//         '2020-05-21': {
+//             activities: [123456, 999]
+//         }
+//     }
+// };
 
-const store = createStore(reducer, initialState, applyMiddleware(thunk));
+// const store = createStore(reducer, initialState, applyMiddleware(thunk));
+// const firebase = new Firebase();
+
+console.log('stoer', store.getState())
 
 ReactDOM.render(
     <Provider store={store}>

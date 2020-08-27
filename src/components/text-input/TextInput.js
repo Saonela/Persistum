@@ -1,48 +1,25 @@
-import React from "react";
+import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
-import PropTypes from "prop-types";
 
-class TextInput extends React.Component {
+function TextInput({id, label, value, onEnter, onBlur}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: this.props.value || ''
-        }
-    }
-    handleChange(e) {
-        this.setState({
-            value: e.target.value
-        })
-    }
+    const [inputValue, setInputValue] = useState(value);
 
-    handleKeyPress(e) {
+    const handleKeyPress = (e) => {
         if (e.key === 'Enter') {
-            this.props.onEnter(this.state.value);
+            onEnter(inputValue);
         }
     }
 
-    handleBlur() {
-        this.props.onBlur(this.state.value);
-    }
-
-    render() {
-        return (
-            <TextField autoFocus className="text-input" style={{'width': '100%'}}
-                       label={this.props.label}
-                       value={this.state.value}
-                       onChange={this.handleChange.bind(this)}
-                       onBlur={this.handleBlur.bind(this)}
-                       onKeyPress={this.handleKeyPress.bind(this)}/>
-        );
-    }
+    return (
+        <TextField autoFocus className="text-input" style={{'width': '100%'}}
+               id={id}
+               label={label}
+               value={inputValue}
+               onChange={(e) => setInputValue(e.target.value)}
+               onBlur={() => onBlur(inputValue)}
+               onKeyPress={(e) => handleKeyPress(e)}/>
+    );
 }
-
-TextInput.propTypes = {
-    label: PropTypes.string,
-    value: PropTypes.string,
-    onEnter: PropTypes.func,
-    onBlur: PropTypes.func
-};
 
 export default TextInput;

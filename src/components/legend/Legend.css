@@ -1,0 +1,14 @@
+.legend {
+    display: flex;
+    flex-wrap: wrap;
+    height: var(--legend-height);
+    padding: var(--margin) var(--margin-l);
+    margin: 0 var(--margin-l);
+    border-bottom: 1px solid var(--color-border);
+    background: var(--color-background);
+    box-sizing: border-box;
+}
+
+.legend__item:not(:last-child) {
+    margin-right: var(--margin);
+}

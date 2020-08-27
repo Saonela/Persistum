@@ -1,54 +1,58 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import './Navigation.css'
 import {Link, withRouter} from "react-router-dom";
 import IconButton from "@material-ui/core/IconButton";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
+import {ExitToApp} from "@material-ui/icons";
 
-class Navigation extends React.Component {
+function Navigation({history}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-              activeItem: 'FORM'
-        };
-    }
+    const [activeRoute, setActiveRoute] = useState('');
+    const [loggedIn, setLoggedIn] = useState(false);
 
-    componentWillMount() {
-        this.unlisten = this.props.history.listen((location) => {
-            if (location.pathname === '/calendar') {
-                this.setActiveItem('FORM')
-            }
-            if (location.pathname === '/calendar') {
-                this.setActiveItem('CALENDAR')
-            }
+    useEffect(() => {
+        setRoute(history.location.pathname);
+        const unsubsribe = history.listen((location) => {
+            setRoute(location.pathname);
         });
+        return () => {
+            unsubsribe();
+        };
+    });
+
+    const setRoute = (route) => {
+        setActiveRoute(route);
+        setLoggedIn(route === '/form' || route === '/calendar');
     }
 
-    componentWillUnmount() {
-        this.unlisten();
-    }
-
-    setActiveItem(activeItem) {
-        this.setState({activeItem: activeItem});
-    }
-
-    render() {
-        return (
-            <div className="navigation">
-                <Link to="/calendar" onClick={this.setActiveItem.bind(this, 'CALENDAR')}>
-                    <IconButton className="navigation__button-calendar" color={this.state.activeItem === 'CALENDAR' ? 'primary' : 'default'}>
-                        <DateRangeIcon/>
+    return (
+        <div className="navigation">
+            actove: {activeRoute}
+            <Link to="/calendar" onClick={() => setRoute('/calendar')}>
+                <IconButton className="navigation__button-calendar"
+                            role="button"
+                            aria-label="Calendar link"
+                            color={activeRoute === '/calendar' ? 'primary' : 'default'}>
+                    <DateRangeIcon/>
+                </IconButton>
+            </Link>
+            <Link to="/form" onClick={() => setRoute('/form')}>
+                <IconButton className="navigation__button-form"
+                            role="button"
+                            aria-label="Form link"
+                            color={activeRoute === '/form' ? 'primary' : 'default'}>
+                    <PlaylistAddCheckIcon/>
+                </IconButton>
+            </Link>
+            {loggedIn ?
+                <Link to="/logout" onClick={() => setRoute('')}>
+                    <IconButton className="navigation__button-form">
+                        <ExitToApp/>
                     </IconButton>
-                </Link>
-                <Link to="/" onClick={this.setActiveItem.bind(this, 'FORM')}>
-                    <IconButton className="navigation__button-form" color={this.state.activeItem === 'FORM' ? 'primary' : 'default'}>
-                        <PlaylistAddCheckIcon/>
-                    </IconButton>
-                </Link>
-            </div>
-        );
-    }
+                </Link> : null}
+        </div>
+    );
 }
 
 export default withRouter(Navigation);

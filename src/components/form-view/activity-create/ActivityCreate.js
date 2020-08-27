@@ -1,75 +1,49 @@
 import IconButton from "@material-ui/core/IconButton";
 import AddIcon from '@material-ui/icons/Add';
-import React from "react";
+import React, {useState} from "react";
 import './ActivityCreate.css'
 import TextInput from "../../text-input/TextInput";
-import PropTypes from "prop-types";
 
-class ActivityCreate extends React.Component {
+function ActivityCreate({forceInputDisplay, onSubmit}) {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-            value: '',
-            showInput: false
-        };
-    }
+    const [inputVisible, setInputVisible] = useState(false);
+    const [name, setName] = useState('');
 
-    submit(name) {
-        if (this.isNameValid(name)) {
-            this.setState({
-                value: '',
-                showInput: false
-            });
-            this.props.onSubmit(name);
+    const submit = (name) => {
+        if (isNameValid(name)) {
+            setName('');
+            setInputVisible(false);
+            onSubmit(name);
         }
     }
 
-    toggleInput() {
-        if (this.state.showInput && this.isNameValid(this.state.value)) {
-            this.submit(this.state.value);
+    const toggleInput = () => {
+        if (inputVisible && isNameValid(name)) {
+            submit(name);
         } else {
-            this.setState((state) => {
-                return {
-                    showInput: !state.showInput
-                }
-            })
+            setInputVisible(state => !state);
         }
     }
 
-    handleEnter(name) {
-        this.setState({
-            value: name
-        });
-        this.submit(name);
+    const handleEnter = (name) => {
+        setName(name);
+        submit(name);
     }
 
-    handleBlur(name) {
-        this.setState({
-            value: name
-        });
-    }
-
-    isNameValid(name) {
+    const isNameValid = (name) => {
         return name && name.trim();
     }
 
-    render() {
-        return (
-            <div className="form-create">
-                { (this.state.showInput || this.props.forceInputDisplay) &&
-                    <TextInput className="form-create__input" label="Activity" value={this.state.value} onBlur={this.handleBlur.bind(this)} onEnter={this.handleEnter.bind(this)}/>
-                }
-                <IconButton className="form-create__toggle-button" aria-label="toggle" onClick={this.toggleInput.bind(this)}>
-                    <AddIcon/>
-                </IconButton>
-            </div>
-        )
-    }
+    return (
+        <div className="form-create">
+            { (inputVisible || forceInputDisplay) &&
+                <TextInput className="form-create__input" label="Activity" id="name" value={name} onBlur={(value) => setName(value)} onEnter={(value) => handleEnter(value)}/>
+            }
+            <IconButton className="form-create__toggle-button" title="Add" aria-label="toggle" onClick={() => toggleInput()}>
+                <AddIcon/>
+            </IconButton>
+        </div>
+    )
 }
-
-ActivityCreate.propTypes = {
-    onSubmit: PropTypes.func
-};
 
 export default ActivityCreate;

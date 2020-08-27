@@ -1,28 +1,34 @@
 import React from "react";
 import './LogTable.css'
-import LogCell from "./log-cell/LogCell";
-import PropTypes from "prop-types";
+import LogCell from "../log-cell/LogCell";
+import moment from "moment";
 
-class LogTable extends React.Component {
+function LogTable({dataLog}) {
 
-    constructor(props) {
-        super(props);
-    }
-
-    render() {
-        return (
-            <div className="log-table">
-                {Object.keys(this.props.dataLog).map((timestamp) =>
-                    <LogCell className="log-table__cell" key={timestamp} timestamp={timestamp} activities={this.props.dataLog[timestamp].activities}/>
+    return (
+        <div className="log-table">
+            {dataLog.reverse().map((yearData, i) =>
+                <div key={yearData.year} >
+                <div className="log-table__year">{yearData.year}</div>
+                {yearData.data.reverse().map((monthData, i) =>
+                    <div key={monthData.month}>
+                        <div className="log-table__month">{moment().month(monthData.month - 1).format("MMMM")}</div>
+                        <div className="log-table__days">
+                            {monthData.data.map((entryData) =>
+                                <LogCell className="log-table__cell"
+                                         key={entryData.timestamp}
+                                         timestamp={entryData.timestamp}
+                                         activities={entryData.activities}
+                                />
+                            )}
+                        </div>
+                    </div>
                 )}
-            </div>
+                </div>
+            )}
+        </div>
 
-        )
-    }
+    )
 }
-
-LogTable.propTypes = {
-    dataLog: PropTypes.object
-};
 
 export default LogTable;
