@@ -1,24 +1,31 @@
 import React from "react";
-import activitiesReducer, {addActivity, deleteActivity, getFilteredActivities, updateActivity} from "./activitiesSlice";
+import activitiesReducer, {
+    createActivity,
+    deleteActivity,
+    getAllActivities,
+    getFilteredActivities, updateActivity,
+} from "./activitiesSlice";
 
 describe('ActivitiesReducer', () => {
 
-    const state = [
-        {
-            id: 11,
-            name: 'Read 5 pages',
-            completed: false,
-            style: ''
-        }
-    ];
+    const state = {
+        data: [
+            {
+                id: 11,
+                name: 'Read 5 pages',
+                completed: false,
+                style: ''
+            }
+        ]
+    };
 
     it('should add activity', () => {
-        expect(activitiesReducer(state, addActivity({
+        expect(activitiesReducer(state, createActivity.fulfilled({
             id: 12,
             name: 'Workout 30 minutes',
             completed: false,
             style: ''
-        }))).toEqual([
+        }))).toEqual({data: [
             {
                 id: 11,
                 name: 'Read 5 pages',
@@ -31,42 +38,53 @@ describe('ActivitiesReducer', () => {
                 completed: false,
                 style: ''
             }
-        ]);
+        ]});
     });
 
     it('should update activity', () => {
-        expect(activitiesReducer(state, updateActivity({
+        expect(activitiesReducer(state, updateActivity.fulfilled({
             id: 11,
             name: 'Read 7 pages',
             completed: true
-        }))).toEqual([{
+        }))).toEqual({data :[{
             id: 11,
             name: 'Read 7 pages',
             completed: true,
             style: ''
-        }]);
+        }]});
     });
 
-    it('should remove activity', () => {
-        expect(activitiesReducer(state, deleteActivity(11))).toEqual([]);
+    it('should delete activity', () => {
+        expect(activitiesReducer(state, deleteActivity.fulfilled(11))).toEqual({data: []});
+    });
+
+    it('should get filtered activities', () => {
+        expect(getAllActivities({activities: state})).toEqual([{
+            id: 11,
+            name: 'Read 5 pages',
+            completed: false,
+            style: ''
+        }])
     });
 
     it('should get filtered activities', () => {
         const state = {
-            activities: [
-                {
-                    id: 11,
-                    name: 'Read 5 pages',
-                    completed: false,
-                    style: ''
-                },
-                {
-                    id: 12,
-                    name: 'Read 5 pages',
-                    completed: false,
-                    style: ''
-                }
-            ],
+            activities: {
+                data: [
+                    {
+                        id: 11,
+                        name: 'Read 5 pages',
+                        completed: false,
+                        style: ''
+                    },
+                    {
+                        id: 12,
+                        name: 'Read 5 pages',
+                        completed: false,
+                        style: ''
+                    }
+                ]
+            },
             filters: [11]
         };
         expect(getFilteredActivities(state)).toEqual([
@@ -76,6 +94,6 @@ describe('ActivitiesReducer', () => {
                 completed: false,
                 style: ''
             }
-        ])
+        ]);
     });
 });

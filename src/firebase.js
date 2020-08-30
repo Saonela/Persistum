@@ -11,12 +11,5 @@ const config = {
     measurementId: "G-MSNH908EVH"
 };
 
-const Firebase = app.initializeApp(config);
-// class Firebase {
-//     constructor() {
-//         console.log('INIT FIREBASE')
-//         app.initializeApp(config);
-//     }
-// }
-//
-export default Firebase;
+export const Firebase = app.initializeApp(config);
+export const FirebaseDB = Firebase.firestore();

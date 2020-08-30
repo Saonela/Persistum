@@ -6,16 +6,19 @@ import {useDispatch, useSelector} from "react-redux";
 import ActivityCreate from "./activity-create/ActivityCreate";
 import ActivityList from "./activity-list/ActivityList";
 import UtilityService from "../../services/utilityService";
-import {addActivity, deleteActivity, updateActivity} from "../../redux/activitiesSlice";
-import {getLoggedActivityIds, toggleLogEntryActivity} from "../../redux/logEntriesSlice";
+import {
+    createActivity,
+    deleteActivity,
+    getAllActivities,
+    updateActivity
+} from "../../redux/activitiesSlice";
+import {getLoggedActivityIds, toggleLogEntryActivity, updateLogEntry} from "../../redux/logEntriesSlice";
 
 function FormView() {
 
     const dispatch = useDispatch();
-    const activities = useSelector(state => state.activities);
+    const activities = useSelector(getAllActivities);
     const completedActivityIds = useSelector(getLoggedActivityIds);
-
-    console.log('datalog', completedActivityIds)
 
     const [dayIsLogged, setDayIsLogged] = useState(false);
     const [currentDate] = useState(UtilityService.getCurrentShortTimestamp());
@@ -26,10 +29,13 @@ function FormView() {
                 <div>
                     {activities.length} =
                     <div className="form-view__date">{currentDate}</div>
-                    <ActivityCreate forceInputDisplay={!activities.length} onSubmit={(name) => {dispatch(addActivity({name}))}}/>
+                    <ActivityCreate forceInputDisplay={!activities.length} onSubmit={(name) => {dispatch(createActivity(name))}}/>
                     <ActivityList activities={activities}
                                   completedActivityIds={completedActivityIds}
-                                  onToggle={(id) => {dispatch(toggleLogEntryActivity(id))}}
+                                  onToggle={(id) => {
+                                      dispatch(toggleLogEntryActivity(id));
+                                      dispatch(updateLogEntry(UtilityService.getCurrentShortTimestamp()));
+                                  }}
                                   onUpdate={(activity) => {dispatch(updateActivity(activity))}}
                                   onDelete={(activity) => {dispatch(deleteActivity(activity.id))}}/>
                     <Button className="form-view__toggle-button" variant="outlined"

@@ -1,7 +1,6 @@
-import Firebase from "../../firebase";
+import {Firebase} from "../../firebase";
 
 const firebaseAuth = Firebase.auth();
-// console.log('AUTH SERVICE API', firebaseAuth)
 
 const AuthAPIService = {
     register(email, password) {

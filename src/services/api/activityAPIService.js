@@ -1,28 +1,25 @@
+import {FirebaseDB} from "../../firebase";
 
-let id = 0;
+const activitiesCollection = FirebaseDB.collection('activities');
 
 const ActivityAPIService = {
-    create(name) {
-        id++;
-        return new Promise((resolve) => {
-            resolve({
-                id: id,
-                name: name,
-                style: {
-                    background: '#ebebeb'
-                }
-            })
-        });
+    async getAll() {
+        try {
+            let activities = await activitiesCollection.get();
+            return activities.docs.map(doc => doc.data());
+        } catch (e) {
+            console.log('e', e)
+            return [];
+        }
     },
-    update(activity) {
-        return new Promise((resolve) => {
-            resolve(JSON.parse(JSON.stringify(activity)))
-        });
+    async create(activity) {
+        await activitiesCollection.doc(activity.id).set(activity);
     },
-    delete(id) {
-        return new Promise((resolve) => {
-            resolve()
-        });
+    async update(activity) {
+        await activitiesCollection.doc(activity.id).update(activity);
+    },
+    async delete(id) {
+        await activitiesCollection.doc(id).delete();
     }
 };
 

@@ -5,13 +5,14 @@ import LogTable from "./log-table/LogTable";
 import Legend from "../legend/Legend";
 import {getCalendarDataLog} from "../../redux/logEntriesSlice";
 import {toggleFilter} from "../../redux/filtersSlice";
+import {getAllActivities} from "../../redux/activitiesSlice";
 
 function CalendarView() {
 
     const dispatch = useDispatch();
 
     const calendarData = useSelector(getCalendarDataLog);
-    const activities = useSelector(state => state.activities);
+    const activities = useSelector(getAllActivities);
     const filters = useSelector(state => state.filters);
 
     return (

@@ -1,21 +1,41 @@
-import {createSelector, createSlice} from "@reduxjs/toolkit";
+import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import UtilityService from "../services/utilityService";
 import LogEntriesService from "../services/logEntriesService";
 import {getFilteredActivities} from "./activitiesSlice";
+import {ASYNC_STATE_STATUS} from "./asyncStateStatus";
+import LogEntriesAPIService from "../services/api/logEntriesAPIService";
+
+export const fetchLogEntries = createAsyncThunk('logEntries/fetchLogEntries', async () => {
+    return await LogEntriesAPIService.getAll();
+});
+
+export const updateLogEntry = createAsyncThunk('logEntries/updateLogEntry', async (timestamp, thunkAPI) => {
+    const state = thunkAPI.getState();
+    let logEntry = state.logEntries.data.find(entry => entry.timestamp === timestamp);
+
+    if (!logEntry.activities.length) {
+        LogEntriesAPIService.delete(logEntry.id).then();
+    } else {
+        if (!logEntry.id) {
+            logEntry = Object.assign({}, logEntry, {id: UtilityService.generateId()});
+        }
+        LogEntriesAPIService.upsert(logEntry).then();
+    }
+
+    return logEntry;
+});
 
 const logEntriesSlice = createSlice({
     name: 'logEntries',
-    initialState: [
-        {timestamp: '2010-11-02', activities: [123456]},
-        {timestamp: '2020-04-15', activities: [999]},
-        {timestamp: '2020-05-18', activities: [123456]},
-        {timestamp: '2020-05-20', activities: [123456, 999]},
-        {timestamp: '2020-05-21', activities: [123456, 999]}
-    ],
+    initialState: {
+        status: ASYNC_STATE_STATUS.IDLE,
+        error: null,
+        data: []
+    },
     reducers: {
         toggleLogEntryActivity: {
             reducer(state, action) {
-                const logEntry = state.find(entry => entry.timestamp === action.payload.timestamp);
+                const logEntry = state.data.find(entry => entry.timestamp === action.payload.timestamp);
                 if (logEntry) {
                     if (logEntry.activities.includes(action.payload.activityId)) {
                         logEntry.activities = logEntry.activities.filter(id => id !== action.payload.activityId);
@@ -23,7 +43,7 @@ const logEntriesSlice = createSlice({
                         logEntry.activities.push(action.payload.activityId);
                     }
                 } else {
-                    state.push({timestamp: action.payload.timestamp, activities: [action.payload.activityId]});
+                    state.data.push({timestamp: action.payload.timestamp, activities: [action.payload.activityId]});
                 }
             },
             prepare(activityId) {
@@ -35,16 +55,39 @@ const logEntriesSlice = createSlice({
                 }
             }
         }
+    },
+    extraReducers: {
+        [fetchLogEntries.pending]: (state, action) => {
+            state.status = ASYNC_STATE_STATUS.LOADING;
+        },
+        [fetchLogEntries.fulfilled]: (state, action) => {
+            state.data = action.payload;
+            state.status = ASYNC_STATE_STATUS.SUCCEEDED;
+        },
+        [fetchLogEntries.rejected]: (state, action) => {
+            state.status = ASYNC_STATE_STATUS.FAILED;
+        },
+        [updateLogEntry.fulfilled]: (state, action) => {
+            const logEntry = getLogEntryByTimestamp({logEntries: state}, action.payload.timestamp);
+            if (logEntry) {
+                if (!logEntry.id) {
+                    logEntry.id = action.payload.id;
+                }
+            } else {
+                state.data.push(action.payload);
+            }
+        }
     }
 });
 
 export const { toggleLogEntryActivity } = logEntriesSlice.actions;
 
-export const getLogEntries = state => state.logEntries;
+export const getLogEntries = state => state.logEntries.data;
+export const getLogEntryByTimestamp = (state, timestamp) => state.logEntries.data.find(entry => entry.timestamp === timestamp);
 
 export const getLoggedActivityIds = createSelector(
     [getLogEntries, () => UtilityService.getCurrentShortTimestamp()],
-    (logEntries, currentTimestamp) => {
+    (logEntries, currentTimestamp) => {    console.log('')
         const currentLogEntry = logEntries.find(entry => entry.timestamp === currentTimestamp);
         return currentLogEntry ? currentLogEntry.activities : [];
     }

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -6,20 +6,27 @@ import createMuiTheme from "@material-ui/core/styles/createMuiTheme";
 import {Switch, Route, BrowserRouter as Router} from "react-router-dom";
 import FormView from "./components/form-view/FormView";
 import CalendarView from "./components/calendar-view/CalendarView";
-import Firebase from "./firebase";
 import RouteAuthGuard from "./components/route-auth-guard/RouteAuthGuard";
 import LoginView from "./components/login-view/LoginView";
 import RegisterView from "./components/register-view/RegisterView";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import Logout from "./components/logout/Logout";
+import {fetchActivities} from "./redux/activitiesSlice";
+import {fetchLogEntries} from "./redux/logEntriesSlice";
 const theme = createMuiTheme({
     overrides: {}
 });
 
-
 function App() {
 
+    const dispatch = useDispatch();
+
     const user = useSelector(state => state.user);
+
+    useEffect(() => {
+        dispatch(fetchActivities());
+        dispatch(fetchLogEntries());
+    }, []);
 
     return (
         <MuiThemeProvider theme={theme}>
