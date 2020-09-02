@@ -3,9 +3,9 @@ import './CalendarView.css'
 import {useDispatch, useSelector} from "react-redux";
 import LogTable from "./log-table/LogTable";
 import Legend from "../legend/Legend";
-import {getCalendarDataLog} from "../../redux/logEntriesSlice";
-import {toggleFilter} from "../../redux/filtersSlice";
-import {getAllActivities} from "../../redux/activitiesSlice";
+import {getCalendarDataLog} from "../../redux/slices/logEntriesSlice";
+import {toggleFilter} from "../../redux/slices/filtersSlice";
+import {getAllActivities} from "../../redux/slices/activitiesSlice";
 
 function CalendarView() {
 

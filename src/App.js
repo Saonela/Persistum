@@ -11,8 +11,10 @@ import LoginView from "./components/login-view/LoginView";
 import RegisterView from "./components/register-view/RegisterView";
 import {useDispatch, useSelector} from "react-redux";
 import Logout from "./components/logout/Logout";
-import {fetchActivities} from "./redux/activitiesSlice";
-import {fetchLogEntries} from "./redux/logEntriesSlice";
+import {fetchActivities} from "./redux/slices/activitiesSlice";
+import {fetchLogEntries} from "./redux/slices/logEntriesSlice";
+import AuthAPIService from "./services/api/authAPIService";
+import {setUser} from "./redux/slices/userSlice";
 const theme = createMuiTheme({
     overrides: {}
 });
@@ -24,8 +26,15 @@ function App() {
     const user = useSelector(state => state.user);
 
     useEffect(() => {
-        dispatch(fetchActivities());
-        dispatch(fetchLogEntries());
+        AuthAPIService.getCurrentUser().then((user) => {
+            if (user) {
+                dispatch(setUser({id: user.uid, email: user.email}));
+                dispatch(fetchActivities());
+                dispatch(fetchLogEntries());
+            } else {
+                // ... redirect ?
+            }
+        });
     }, []);
 
     return (

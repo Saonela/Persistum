@@ -1,4 +1,5 @@
 import filtersReducer, {toggleFilter} from "./filtersSlice";
+import {logout} from "./userSlice";
 
 describe('FiltersReducer', () => {
 
@@ -10,6 +11,10 @@ describe('FiltersReducer', () => {
 
     it('should remove id if it exists', () => {
         expect(filtersReducer(state, toggleFilter(777))).toEqual([111]);
+    });
+
+    it('should filters on logout', () => {
+        expect(filtersReducer(state, logout())).toEqual([]);
     });
 
 });

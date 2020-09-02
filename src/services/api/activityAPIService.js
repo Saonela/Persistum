@@ -1,25 +1,25 @@
 import {FirebaseDB} from "../../firebase";
 
-const activitiesCollection = FirebaseDB.collection('activities');
+const getActivitiesCollection = (userId) => FirebaseDB.collection('accounts').doc(userId).collection('activities');
 
 const ActivityAPIService = {
-    async getAll() {
+    async getAll(userId) {
         try {
-            let activities = await activitiesCollection.get();
+            let activities = await getActivitiesCollection(userId).get();
             return activities.docs.map(doc => doc.data());
         } catch (e) {
-            console.log('e', e)
+            console.log('ActivityAPIService.getAll error', e)
             return [];
         }
     },
-    async create(activity) {
-        await activitiesCollection.doc(activity.id).set(activity);
+    async create(activity, userId) {
+        await getActivitiesCollection(userId).doc(activity.id).set(activity);
     },
-    async update(activity) {
-        await activitiesCollection.doc(activity.id).update(activity);
+    async update(activity, userId) {
+        await getActivitiesCollection(userId).doc(activity.id).update(activity);
     },
-    async delete(id) {
-        await activitiesCollection.doc(id).delete();
+    async delete(id, userId) {
+        await getActivitiesCollection(userId).doc(id).delete();
     }
 };
 

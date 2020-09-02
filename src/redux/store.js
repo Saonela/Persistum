@@ -1,8 +1,8 @@
 import {configureStore} from "@reduxjs/toolkit";
-import userReducer from "./userSlice";
-import activitiesReducer from "./activitiesSlice";
-import logEntriesReducer from "./logEntriesSlice";
-import filtersReducer from "./filtersSlice";
+import userReducer from "./slices/userSlice";
+import activitiesReducer from "./slices/activitiesSlice";
+import logEntriesReducer from "./slices/logEntriesSlice";
+import filtersReducer from "./slices/filtersSlice";
 
 export default configureStore({
     reducer: {

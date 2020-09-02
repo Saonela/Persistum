@@ -5,10 +5,11 @@ import logEntriesReducer, {
     toggleLogEntryActivity,
     updateLogEntry
 } from "./logEntriesSlice";
-import {getCurrentShortTimestamp} from "../services/utilityService";
-import {ASYNC_STATE_STATUS} from "./asyncStateStatus";
+import {getCurrentShortTimestamp} from "../../services/utilityService";
+import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
+import {logout} from "./userSlice";
 
-jest.mock('../services/utilityService', () => ({
+jest.mock('../../services/utilityService', () => ({
     getCurrentShortTimestamp: jest.fn()
 }));
 
@@ -78,5 +79,17 @@ describe('LogEntriesReducer', () => {
     it('should get logged activity ids', () => {
         expect(getLoggedActivityIds.resultFunc(state.data, '2010-04-05')).toEqual([1]);
     });
-})
-;
+
+    it('should clear data on logout', () => {
+        const state = {
+            status: ASYNC_STATE_STATUS.SUCCEEDED,
+            error: {code: 404},
+            data: [{}]
+        };
+        expect(logEntriesReducer(state, logout())).toEqual({
+            status: ASYNC_STATE_STATUS.IDLE,
+            error: null,
+            data: []
+        });
+    });
+});

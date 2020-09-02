@@ -1,13 +1,14 @@
 import {createAsyncThunk, createSlice} from "@reduxjs/toolkit";
-import {ASYNC_STATE_STATUS} from "./asyncStateStatus";
-import ActivityAPIService from "../services/api/activityAPIService";
-import UtilityService from "../services/utilityService";
+import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
+import ActivityAPIService from "../../services/api/activityAPIService";
+import UtilityService from "../../services/utilityService";
+import {getUserId, logout} from "./userSlice";
 
-export const fetchActivities = createAsyncThunk('activities/fetchActivities', async () => {
-    return await ActivityAPIService.getAll();
+export const fetchActivities = createAsyncThunk('activities/fetchActivities', async (data, thunkAPI) => {
+    return await ActivityAPIService.getAll(getUserId(thunkAPI.getState()));
 });
 
-export const createActivity = createAsyncThunk('activities/createActivity', async (name) => {
+export const createActivity = createAsyncThunk('activities/createActivity', async (name, thunkAPI) => {
     const activity = {
         id: UtilityService.generateId(),
         name,
@@ -15,17 +16,17 @@ export const createActivity = createAsyncThunk('activities/createActivity', asyn
             background: '#ebebeb'
         }
     };
-    ActivityAPIService.create(activity).then();
+    ActivityAPIService.create(activity, getUserId(thunkAPI.getState())).then();
     return activity;
 });
 
-export const updateActivity = createAsyncThunk('activities/updateActivity', async (activity) => {
-    ActivityAPIService.update(activity).then();
+export const updateActivity = createAsyncThunk('activities/updateActivity', async (activity, thunkAPI) => {
+    ActivityAPIService.update(activity, getUserId(thunkAPI.getState())).then();
     return activity;
 });
 
-export const deleteActivity = createAsyncThunk('activities/deleteActivity', async (id) => {
-    ActivityAPIService.delete(id).then();
+export const deleteActivity = createAsyncThunk('activities/deleteActivity', async (id, thunkAPI) => {
+    ActivityAPIService.delete(id, getUserId(thunkAPI.getState())).then();
     return id;
 });
 
@@ -56,6 +57,13 @@ const activitiesSlice = createSlice({
         },
         [deleteActivity.fulfilled]: (state, action) => {
             state.data = state.data.filter(item => item.id !== action.payload);
+        },
+        [logout]: (state) => {
+            return {
+                status: ASYNC_STATE_STATUS.IDLE,
+                error: null,
+                data: []
+            }
         }
     }
 });

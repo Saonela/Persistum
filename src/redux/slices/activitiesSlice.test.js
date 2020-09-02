@@ -5,6 +5,8 @@ import activitiesReducer, {
     getAllActivities,
     getFilteredActivities, updateActivity,
 } from "./activitiesSlice";
+import {logout} from "./userSlice";
+import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
 
 describe('ActivitiesReducer', () => {
 
@@ -96,4 +98,19 @@ describe('ActivitiesReducer', () => {
             }
         ]);
     });
+
+
+    it('should clear data on logout', () => {
+        const state = {
+            status: ASYNC_STATE_STATUS.SUCCEEDED,
+            error: {code: 404},
+            data: [{}]
+        };
+        expect(activitiesReducer(state, logout())).toEqual({
+            status: ASYNC_STATE_STATUS.IDLE,
+            error: null,
+            data: []
+        });
+    });
+
 });

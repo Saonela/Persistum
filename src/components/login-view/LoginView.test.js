@@ -20,8 +20,16 @@ jest.mock('react-redux', () => ({
     useDispatch: jest.fn(() => {}),
 }));
 
-jest.mock("../../redux/userSlice", () => ({
+jest.mock("../../redux/slices/userSlice", () => ({
     setUser: args => args
+}));
+
+jest.mock("../../redux/slices/activitiesSlice", () => ({
+    fetchActivities: args => args
+}));
+
+jest.mock("../../redux/slices/logEntriesSlice", () => ({
+    fetchLogEntries: args => args
 }));
 
 describe('LoginView', () => {
@@ -44,8 +52,9 @@ describe('LoginView', () => {
 
     it('should set user and redirect on login',  async () => {
         let component = wrapper.find(LoginForm);
-        await component.prop('onSubmit')('john@mail.com', '1234')
+        await component.prop('onSubmit')('john@mail.com', '1234');
         expect(mockDispatchFn).toHaveBeenCalledWith({email: 'john@mail.com'});
-        expect(pushSpy).toHaveBeenCalledWith('/form')
+        expect(mockDispatchFn).toHaveBeenCalledTimes(3);
+        expect(pushSpy).toHaveBeenCalledWith('/form');
     });
 });

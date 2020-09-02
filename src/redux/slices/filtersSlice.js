@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import {logout} from "./userSlice";
 
 const filtersSlice = createSlice({
     name: 'filters',
@@ -9,6 +10,11 @@ const filtersSlice = createSlice({
                 return state.filter(id => id !== action.payload);
             }
             return [...state, action.payload];
+        }
+    },
+    extraReducers: {
+        [logout]: (state) => {
+            return [];
         }
     }
 });

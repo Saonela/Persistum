@@ -11,8 +11,8 @@ import {
     deleteActivity,
     getAllActivities,
     updateActivity
-} from "../../redux/activitiesSlice";
-import {getLoggedActivityIds, toggleLogEntryActivity, updateLogEntry} from "../../redux/logEntriesSlice";
+} from "../../redux/slices/activitiesSlice";
+import {getLoggedActivityIds, toggleLogEntryActivity, updateLogEntry} from "../../redux/slices/logEntriesSlice";
 
 function FormView() {
 

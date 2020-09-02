@@ -1,22 +1,22 @@
 import {FirebaseDB} from "../../firebase";
 
-const logEntriesCollection = FirebaseDB.collection('logEntries');
+const getLogEntriesCollection = (userId) => FirebaseDB.collection('accounts').doc(userId).collection('logEntries');
 
 const LogEntriesAPIService = {
-    async getAll() {
+    async getAll(userId) {
         try {
-            const response = await logEntriesCollection.get();
+            const response = await getLogEntriesCollection(userId).get();
             return response.docs.map(doc => doc.data());
         } catch (e) {
-            console.log('e', e)
+            console.log('LogEntriesAPIService.getAll error', e)
             return [];
         }
     },
-    async upsert(logEntry) {
-        await logEntriesCollection.doc(logEntry.id).set(logEntry);
+    async upsert(logEntry, userId) {
+        await getLogEntriesCollection(userId).doc(logEntry.id).set(logEntry);
     },
-    async delete(id) {
-        await logEntriesCollection.doc(id).delete();
+    async delete(id, userId) {
+        await getLogEntriesCollection(userId).doc(id).delete();
     }
 };
 

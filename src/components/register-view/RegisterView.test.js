@@ -20,7 +20,7 @@ jest.mock('react-redux', () => ({
     useDispatch: jest.fn(() => {}),
 }));
 
-jest.mock("../../redux/userSlice", () => ({
+jest.mock("../../redux/slices/userSlice", () => ({
     setUser: args => args
 }));
 

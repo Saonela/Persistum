@@ -1,25 +1,27 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
-import UtilityService from "../services/utilityService";
-import LogEntriesService from "../services/logEntriesService";
+import UtilityService from "../../services/utilityService";
+import LogEntriesService from "../../services/logEntriesService";
 import {getFilteredActivities} from "./activitiesSlice";
-import {ASYNC_STATE_STATUS} from "./asyncStateStatus";
-import LogEntriesAPIService from "../services/api/logEntriesAPIService";
+import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
+import LogEntriesAPIService from "../../services/api/logEntriesAPIService";
+import {getUserId, logout} from "./userSlice";
 
-export const fetchLogEntries = createAsyncThunk('logEntries/fetchLogEntries', async () => {
-    return await LogEntriesAPIService.getAll();
+export const fetchLogEntries = createAsyncThunk('logEntries/fetchLogEntries', async (data, thunkAPI) => {
+    return await LogEntriesAPIService.getAll(getUserId(thunkAPI.getState()));
 });
 
 export const updateLogEntry = createAsyncThunk('logEntries/updateLogEntry', async (timestamp, thunkAPI) => {
     const state = thunkAPI.getState();
+    const userId = getUserId(state);
     let logEntry = state.logEntries.data.find(entry => entry.timestamp === timestamp);
 
     if (!logEntry.activities.length) {
-        LogEntriesAPIService.delete(logEntry.id).then();
+        LogEntriesAPIService.delete(logEntry.id, userId).then();
     } else {
         if (!logEntry.id) {
             logEntry = Object.assign({}, logEntry, {id: UtilityService.generateId()});
         }
-        LogEntriesAPIService.upsert(logEntry).then();
+        LogEntriesAPIService.upsert(logEntry, userId).then();
     }
 
     return logEntry;
@@ -75,6 +77,13 @@ const logEntriesSlice = createSlice({
                 }
             } else {
                 state.data.push(action.payload);
+            }
+        },
+        [logout]: (state) => {
+            return {
+                status: ASYNC_STATE_STATUS.IDLE,
+                error: null,
+                data: []
             }
         }
     }
