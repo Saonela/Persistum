@@ -1,7 +1,7 @@
 import React from "react";
 import LogTable from "./LogTable";
 import {render} from "@testing-library/react";
-import {getAllByRole} from "@testing-library/dom";
+import {getAllByRole, getByText} from "@testing-library/dom";
 
 describe('LogTable', () => {
 
@@ -54,5 +54,12 @@ describe('LogTable', () => {
 
     it('should display log cells', () => {
         expect(getAllByRole(container, 'listitem', {name: 'Activity'}).length).toBe(3);
-    })
+    });
+
+    it('should display no data found message', () => {
+        const {queryByText} = render(<LogTable dataLog={dataLog}/>);
+        expect(queryByText('No data have been found!')).toBeFalsy();
+        const {getByText} = render(<LogTable dataLog={[]}/>);
+        getByText('No data have been found!');
+    });
 });

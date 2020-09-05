@@ -1,4 +1,5 @@
 import UtilityService from "./utilityService";
+import moment from "moment";
 
 const LogEntriesService = {
     populateLogEntriesWithActivities(logEntries, activities) {
@@ -44,7 +45,18 @@ const LogEntriesService = {
                 });
             }
 
-            stateArray[years.indexOf(year)].data[months.indexOf(month)].data.push({...entry});
+            const daysInMonth = moment((year + '-' + month), 'YYYY-MM').daysInMonth();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const timestamp = moment(`${year}-${month}-${day}`, 'YYYY-M-D').format('YYYY-MM-DD');
+                if (entry.timestamp === timestamp) {
+                    stateArray[years.indexOf(year)].data[months.indexOf(month)].data.push(entry);
+                } else {
+                    stateArray[years.indexOf(year)].data[months.indexOf(month)].data.push({
+                        timestamp,
+                        activities: []
+                    });
+                }
+            }
         });
 
         return stateArray;

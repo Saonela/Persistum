@@ -1,4 +1,21 @@
 import LogEntriesService from './logEntriesService';
+import moment from "moment";
+
+jest.mock('moment', () => {
+    let input;
+    const mMoment = {
+        daysInMonth: () => {
+            return 5;
+        },
+        format: (format) => {
+            return jest.requireActual('moment')(input, format).format('YYYY-MM-DD');
+        }
+    };
+    return jest.fn((params) => {
+        input = params;
+        return mMoment
+    });
+});
 
 describe('LogEntriesService', () => {
 
@@ -8,15 +25,15 @@ describe('LogEntriesService', () => {
             activities: [123456]
         },
         {
-            timestamp: '2020-04-15',
+            timestamp: '2020-04-05',
             activities: [999]
         },
         {
-            timestamp: '2020-11-10',
+            timestamp: '2020-11-01',
             activities: [999]
         },
         {
-            timestamp: '2020-12-31',
+            timestamp: '2020-12-03',
             activities: []
         }
     ];
@@ -45,7 +62,7 @@ describe('LogEntriesService', () => {
                     }]
                 },
                 {
-                    timestamp: '2020-04-15',
+                    timestamp: '2020-04-05',
                     activities: [{
                         id: 999,
                         name: 'Read',
@@ -53,7 +70,7 @@ describe('LogEntriesService', () => {
                     }]
                 },
                 {
-                    timestamp: '2020-11-10',
+                    timestamp: '2020-11-01',
                     activities: [{
                         id: 999,
                         name: 'Read',
@@ -61,7 +78,7 @@ describe('LogEntriesService', () => {
                     }]
                 },
                 {
-                    timestamp: '2020-12-31',
+                    timestamp: '2020-12-03',
                     activities: []
                 }
             ]);
@@ -76,8 +93,24 @@ describe('LogEntriesService', () => {
                         month: '11',
                         data: [
                             {
+                                timestamp: '2010-11-01',
+                                activities: []
+                            },
+                            {
                                 timestamp: '2010-11-02',
                                 activities: [123456]
+                            },
+                            {
+                                timestamp: '2010-11-03',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2010-11-04',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2010-11-05',
+                                activities: []
                             }
                         ]
                     }
@@ -90,7 +123,23 @@ describe('LogEntriesService', () => {
                         month: '4',
                         data: [
                             {
-                                timestamp: '2020-04-15',
+                                timestamp: '2020-04-01',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-02',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-03',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-04',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-05',
                                 activities: [999]
                             }
                         ]
@@ -99,9 +148,25 @@ describe('LogEntriesService', () => {
                         month: '11',
                         data: [
                             {
-                                timestamp: '2020-11-10',
+                                timestamp: '2020-11-01',
                                 activities: [999]
-                            }
+                            },
+                            {
+                                timestamp: '2020-11-02',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-11-03',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-11-04',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-11-05',
+                                activities: []
+                            },
                         ]
                     }
                 ]
