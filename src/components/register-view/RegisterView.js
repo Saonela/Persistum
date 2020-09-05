@@ -4,6 +4,8 @@ import RegisterForm from "./register-form/RegisterForm";
 import AuthAPIService from "../../services/api/authAPIService";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../redux/slices/userSlice";
+import {fetchActivities} from "../../redux/slices/activitiesSlice";
+import {fetchLogEntries} from "../../redux/slices/logEntriesSlice";
 
 function RegisterView({history}) {
 
@@ -12,6 +14,8 @@ function RegisterView({history}) {
     function register(email, password) {
         AuthAPIService.register(email, password).then(({user}) => {
             dispatch(setUser({id: user.uid, email: user.email}));
+            dispatch(fetchActivities());
+            dispatch(fetchLogEntries());
             history.push('/form');
         }, (error) => {
             console.log('REGISTER ERROR', error);

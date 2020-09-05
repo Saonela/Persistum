@@ -4,18 +4,6 @@ import {shallow} from "enzyme";
 import {useDispatch} from "react-redux";
 import LoginForm from "./login-form/LoginForm";
 
-jest.mock('../../services/api/authAPIService', () => {
-    return {
-        login(email, pass) {
-            return Promise.resolve({
-                user: {
-                    email: email
-                }
-            });
-        }
-    }
-});
-
 jest.mock('react-redux', () => ({
     useDispatch: jest.fn(() => {}),
 }));
@@ -50,9 +38,9 @@ describe('LoginView', () => {
         wrapper = shallow(<LoginView.WrappedComponent history={history}/>);
     });
 
-    it('should set user and redirect on login',  async () => {
+    it('should set user and redirect on login', () => {
         let component = wrapper.find(LoginForm);
-        await component.prop('onSubmit')('john@mail.com', '1234');
+        component.prop('onLogin')({email: 'john@mail.com'});
         expect(mockDispatchFn).toHaveBeenCalledWith({email: 'john@mail.com'});
         expect(mockDispatchFn).toHaveBeenCalledTimes(3);
         expect(pushSpy).toHaveBeenCalledWith('/form');

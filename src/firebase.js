@@ -1,4 +1,4 @@
-import * as app from "firebase";
+import * as firebase from "firebase";
 
 const config = {
     apiKey: "AIzaSyCU5NNhFFH124U3qgxxw1M5Q7VwkLGXvuU",
@@ -11,5 +11,8 @@ const config = {
     measurementId: "G-MSNH908EVH"
 };
 
-export const Firebase = app.initializeApp(config);
+export const Firebase = firebase.initializeApp(config);
 export const FirebaseDB = Firebase.firestore();
+export const FirebaseGoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
+export const FirebaseFacebookAuthProvider = new firebase.auth.FacebookAuthProvider();
+

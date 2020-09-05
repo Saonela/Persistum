@@ -22,6 +22,18 @@ const AuthAPIService = {
     login(email, password) {
         return firebaseAuth.signInWithEmailAndPassword(email, password);
     },
+    loginWithProvider(provider) {
+        return new Promise((resolve) => {
+            firebaseAuth.signInWithPopup(provider).then((response) => {
+                const user = response.user;
+                FirebaseDB.collection('accounts').doc(user.uid).set({userId: user.uid}).then();
+                resolve(response);
+            }).catch((error) => {
+                console.log('provider auth error', error);
+                alert(error.message)
+            });
+        });
+    },
     logout() {
         return firebaseAuth.signOut();
     },
