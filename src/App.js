@@ -15,6 +15,7 @@ import {fetchActivities} from "./redux/slices/activitiesSlice";
 import {fetchLogEntries} from "./redux/slices/logEntriesSlice";
 import AuthAPIService from "./services/api/authAPIService";
 import {setUser} from "./redux/slices/userSlice";
+import LandingView from "./components/landing-view/LandingView";
 const theme = createMuiTheme({
     overrides: {}
 });
@@ -42,10 +43,11 @@ function App() {
             <div className="App">
                 <Router>
                     <RouteAuthGuard isAuthenticated={!!user}>
-                        <Header/>
-                        <div style={{zIndex: 5, position: 'absolute', left: '50%'}}>USER:{JSON.stringify(user)}</div>
                         <div className="container">
                             <Switch>
+                                <Route path="/" exact>
+                                    <LandingView/>
+                                </Route>
                                 <Route path="/login" exact>
                                     <LoginView/>
                                 </Route>
@@ -56,9 +58,11 @@ function App() {
                                     <Logout/>
                                 </Route>
                                 <Route path="/form" exact>
+                                    <Header/>
                                     <FormView/>
                                 </Route>
                                 <Route path="/calendar" exact>
+                                    <Header/>
                                     <CalendarView/>
                                 </Route>
                             </Switch>

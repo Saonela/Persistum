@@ -15,7 +15,10 @@ function RouteAuthGuard({children, history, isAuthenticated}) {
     }, [isAuthenticated]);
 
     const redirectIfNotAuth = (location) => {
-        if (!isAuthenticated && location.pathname !== '/login' && location.pathname !== '/register') {
+        if (!isAuthenticated &&
+            location.pathname !== '/' &&
+            location.pathname !== '/login' &&
+            location.pathname !== '/register') {
             history.push('/login');
         }
     };

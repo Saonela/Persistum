@@ -6,6 +6,7 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from "react-redux";
 import store from "./redux/store";
+import './assets/fonts/Lato/Lato-Regular.ttf'
 // import Firebase from "./firebase";
 
 // const initialState = {

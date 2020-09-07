@@ -1,9 +1,12 @@
 :root {
-    --color-text: #828282;
+        --color-text: #2b2c34;
+    /*--color-text: #303030;*/
     --color-border: #eaeaea;
-    --color-background: #ffffff;
+    /*#eaeaea;*/
+    --color-background: #fffffe;
     --color-background-dark-opaque: #7a7a7a52;
     --color-highlight: #79ACE2;
+    --color-theme: #4973d3;
 
     --padding-xs: 4px;
     --padding-s: 8px;
@@ -22,6 +25,7 @@
     --font-size: 13px;
     --font-size-m: 24px;
     --font-size-l: 32px;
+    --font-size-ll: 48px;
     --font-size-xl: 62px;
 
     --legend-height: 62px
