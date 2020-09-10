@@ -1,9 +1,9 @@
 import React from 'react';
 import {render} from "@testing-library/react";
 import AuthProviders from "./AuthProviders";
-import AuthAPIService from "../../services/api/authAPIService";
+import AuthAPIService from "../../../services/api/authAPIService";
 
-jest.mock('../../services/api/authAPIService', () => {
+jest.mock('../../../services/api/authAPIService', () => {
     return {
         loginWithProvider(provider) {
             return Promise.resolve({
@@ -15,7 +15,7 @@ jest.mock('../../services/api/authAPIService', () => {
     }
 });
 
-jest.mock('../../firebase', () => ({
+jest.mock('../../../firebase', () => ({
     FirebaseGoogleAuthProvider: 'FirebaseGoogleAuthProvider',
     FirebaseFacebookAuthProvider: 'FirebaseFacebookAuthProvider'
 }));

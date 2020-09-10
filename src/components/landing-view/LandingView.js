@@ -30,10 +30,10 @@ function LandingView() {
                             <img className="main-illustration__stats" src={stats} alt="stats-illustration"/>
                         </figure>
                         <section className="landing__get-started">
-                            <Link to="/register" tabindex="-1">
+                            <Link to="/register" tabIndex="-1">
                                 <button className="main-button">Get started</button>
                             </Link> or
-                            <Link to="/login" tabindex="-1">
+                            <Link to="/login" tabIndex="-1">
                                 <button className="secondary-button">Login</button>
                             </Link>
                         </section>

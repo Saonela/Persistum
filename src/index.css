@@ -30,5 +30,5 @@ code {
 
 a {
   text-decoration: none;
-  color: var(--color-text);
+  color: var(--color-theme);
 }

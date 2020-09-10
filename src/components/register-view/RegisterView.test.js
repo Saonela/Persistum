@@ -1,8 +1,7 @@
 import React from "react";
 import {shallow} from "enzyme";
-import RegisterView from "./RegisterView";
-import RegisterForm from "./register-form/RegisterForm";
-import {useDispatch} from "react-redux";
+import {PureRegisterView} from "./RegisterView";
+import AuthForm from "../auth/auth-form/AuthForm";
 
 jest.mock('../../services/api/authAPIService', () => {
     return {
@@ -16,37 +15,18 @@ jest.mock('../../services/api/authAPIService', () => {
     }
 });
 
-jest.mock('react-redux', () => ({
-    useDispatch: jest.fn(() => {}),
-}));
-
-jest.mock("../../redux/slices/userSlice", () => ({
-    setUser: args => args
-}));
-
-
 describe('RegisterView', () => {
 
     let wrapper;
-    const mockDispatchFn = jest.fn();
-    const pushSpy = jest.fn();
+    const authSpy = jest.fn();
 
     beforeEach(() => {
-        const history = {
-            listen: () => {},
-            push: pushSpy,
-            location: {
-                pathname: '/form'
-            }
-        };
-        useDispatch.mockReturnValue(mockDispatchFn);
-        wrapper = shallow(<RegisterView.WrappedComponent history={history}/>);
+        wrapper = shallow(<PureRegisterView onAuthSuccess={authSpy}/>);
     });
 
-    it('should set user and redirect on register',  async () => {
-        let component = wrapper.find(RegisterForm);
+    it('should register', async () => {
+        let component = wrapper.find(AuthForm);
         await component.prop('onSubmit')('john@mail.com', '1234')
-        expect(mockDispatchFn).toHaveBeenCalledWith({email: 'john@mail.com'});
-        expect(pushSpy).toHaveBeenCalledWith('/form')
+        expect(authSpy).toHaveBeenCalledWith({email: 'john@mail.com'});
     });
 });

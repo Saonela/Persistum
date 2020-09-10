@@ -1,7 +1,8 @@
 :root {
         --color-text: #2b2c34;
     /*--color-text: #303030;*/
-    --color-border: #eaeaea;
+    /*--color-border: #eaeaea;*/
+    --color-border: #f2f2f2;
     /*#eaeaea;*/
     --color-background: #fffffe;
     --color-background-dark-opaque: #7a7a7a52;
@@ -22,11 +23,15 @@
     --margin-l: 32px;
     --margin-xl: 64px;
 
+    --border-radius: 5px;
+
     --font-size: 13px;
     --font-size-m: 24px;
     --font-size-l: 32px;
     --font-size-ll: 48px;
     --font-size-xl: 62px;
 
-    --legend-height: 62px
+    --legend-height: 62px;
+
+    --width-form-button: 202px;
 }

@@ -1,0 +1,19 @@
+.login-view {
+    /*height: 360px;*/
+}
+
+.login-view__form {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.form__auth-separator {
+    margin: var(--margin-m) 0;
+}
+
+.form__redirect {
+    margin-top: var(--margin-xl);
+    text-align: right;
+}

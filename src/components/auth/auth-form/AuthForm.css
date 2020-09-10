@@ -1,0 +1,14 @@
+.auth-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.auth-form .auth-form__field {
+    margin-top: var(--margin-s);
+}
+
+.auth-form .auth-form__submit-button {
+    width: var(--width-form-button);
+    margin: var(--margin-m) 0 0;
+}

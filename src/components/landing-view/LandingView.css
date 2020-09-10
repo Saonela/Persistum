@@ -176,6 +176,7 @@
 @media only screen and (max-width: 900px) {
     .landing {
         margin-top: 5vh;
+        padding-top: 25px;
     }
 
     .landing__content {
@@ -258,7 +259,7 @@
 
     .main-illustration {
         flex-direction: column;
-        margin-top: 50px;
+        margin-top: 80px;
     }
 
     .main-illustration *:not(:last-child) {

@@ -16,8 +16,17 @@ import {fetchLogEntries} from "./redux/slices/logEntriesSlice";
 import AuthAPIService from "./services/api/authAPIService";
 import {setUser} from "./redux/slices/userSlice";
 import LandingView from "./components/landing-view/LandingView";
+
+const themeColor = '#4973d3'
 const theme = createMuiTheme({
-    overrides: {}
+    palette: {
+        primary: {
+            main: themeColor
+        },
+        // secondary: {
+        //     main: green[500],
+        // },
+    },
 });
 
 function App() {
@@ -49,10 +58,14 @@ function App() {
                                     <LandingView/>
                                 </Route>
                                 <Route path="/login" exact>
-                                    <LoginView/>
+                                    <div className="app-theme-background">
+                                        <LoginView/>
+                                    </div>
                                 </Route>
                                 <Route path="/register" exact>
-                                    <RegisterView/>
+                                    <div className="app-theme-background">
+                                        <RegisterView/>
+                                    </div>
                                 </Route>
                                 <Route path="/logout" exact>
                                     <Logout/>

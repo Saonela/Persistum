@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/facebook.svg"
+import logo from "../../../../assets/facebook.svg"
 
 function FacebookAuthButton({onClick}) {
     return (

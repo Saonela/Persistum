@@ -1,5 +1,5 @@
 import React from "react";
-import logo from "../../../assets/google.svg"
+import logo from "../../../../assets/google.svg"
 
 function GoogleAuthButton({onClick}) {
     return (

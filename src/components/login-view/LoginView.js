@@ -1,30 +1,35 @@
 import React from "react";
-import LoginForm from "./login-form/LoginForm";
-import {Link, withRouter} from "react-router-dom";
-import {useDispatch} from "react-redux";
-import {setUser} from "../../redux/slices/userSlice";
-import {fetchActivities} from "../../redux/slices/activitiesSlice";
-import {fetchLogEntries} from "../../redux/slices/logEntriesSlice";
-import AuthProviders from "../auth-providers/AuthProviders";
+import {Link} from "react-router-dom";
+import AuthProviders from "../auth/auth-providers/AuthProviders";
+import AuthForm from "../auth/auth-form/AuthForm";
+import AuthAPIService from "../../services/api/authAPIService";
+import withAuthHandler from "../auth/with-auth-handler/WithAuthHandler";
+import "./LoginView.css"
 
-function LoginView({history}) {
+function LoginView({onAuthSuccess}) {
 
-    const dispatch = useDispatch()
-
-    function handleLoginSuccess(user) {
-        dispatch(setUser({id: user.uid, email: user.email}));
-        dispatch(fetchActivities());
-        dispatch(fetchLogEntries());
-        history.push('/form');
+    function login(email, password) {
+        AuthAPIService.login(email, password).then(({user}) => {
+            onAuthSuccess(user);
+        }, (error) => {
+            console.log('LOGIN ERROR', error);
+        });
     }
 
     return (
-        <div>
-            <LoginForm onLogin={(user) => handleLoginSuccess(user)}/>
-            <AuthProviders onAuth={(user) => handleLoginSuccess(user)}/>
-            <div>Don't have account ? <Link to="/register">Register</Link></div>
+        <div className="app-panel-container">
+            <div className="app-panel app-border login-view">
+                <h1 className="app-panel__header">Login</h1>
+                <div className="login-view__form">
+                    <AuthForm buttonLabel={'Login'} onSubmit={login}/>
+                    <p className="form__auth-separator">Or</p>
+                    <AuthProviders onAuth={(user) => onAuthSuccess(user)}/>
+                </div>
+                <div className="form__redirect">Don't have an account ? <Link to="/register">Register</Link></div>
+            </div>
         </div>
     )
 }
 
-export default withRouter(LoginView);
+export default withAuthHandler(LoginView);
+export {LoginView as PureLoginView}

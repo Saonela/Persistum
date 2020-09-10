@@ -1,8 +1,8 @@
 import React from "react";
 import GoogleAuthButton from "./google-auth-button/GoogleAuthButton";
 import FacebookAuthButton from "./facebook-auth-button/FacebookAuthButton";
-import {FirebaseFacebookAuthProvider, FirebaseGoogleAuthProvider} from "../../firebase";
-import AuthAPIService from "../../services/api/authAPIService";
+import {FirebaseFacebookAuthProvider, FirebaseGoogleAuthProvider} from "../../../firebase";
+import AuthAPIService from "../../../services/api/authAPIService";
 import "./AuthProviders.css"
 
 function AuthProviders({onAuth}) {
