@@ -2,12 +2,13 @@ import React, {useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import "./AuthForm.css"
 import {Button} from "@material-ui/core";
+import Alert from '@material-ui/lab/Alert';
 
 const ERROR_FIELD_REQUIRED = 'Field is required';
 const ERROR_EMAIL_INVALID = 'Email format is invalid';
 const ERROR_PASSWORDS_DOES_NOT_MATCH = 'Passwords does not match';
 
-function AuthForm({buttonLabel, withPasswordConfirm = false, onSubmit}) {
+function AuthForm({buttonLabel, withPasswordConfirm = false, generalErrorMessage, onSubmit}) {
 
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
@@ -103,6 +104,7 @@ function AuthForm({buttonLabel, withPasswordConfirm = false, onSubmit}) {
                                setPasswordConfirm(e.target.value)
                            }}/>
                 : null}
+            {generalErrorMessage ? <Alert className={"auth-form__general-error"} severity="error">{generalErrorMessage}</Alert> : null}
             <Button className="auth-form__submit-button" type="submit" aria-label={buttonLabel}
                     variant="outlined">{buttonLabel}</Button>
         </form>

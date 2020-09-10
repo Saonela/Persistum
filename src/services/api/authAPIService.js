@@ -11,11 +11,13 @@ const AuthAPIService = {
         });
     },
     register(email, password) {
-        return new Promise((resolve) => {
+        return new Promise((resolve, reject) => {
             return firebaseAuth.createUserWithEmailAndPassword(email, password).then((response) => {
                 const user = response.user;
                 FirebaseDB.collection('accounts').doc(user.uid).set({userId: user.uid}).then();
                 resolve(response);
+            }, (error) => {
+                reject(error);
             });
         });
     },

@@ -75,4 +75,8 @@ describe('AuthForm', () => {
         expect(queryByText('Passwords does not match')).toBeFalsy();
     });
 
+    it('should display general error message', () => {
+        const {getByText} = render(<AuthForm buttonLabel={'Submit'} generalErrorMessage={'Auth failed'} onSubmit={submitSpy}/>);
+        getByText('Auth failed');
+    });
 });

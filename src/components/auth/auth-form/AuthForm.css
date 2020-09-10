@@ -12,3 +12,7 @@
     width: var(--width-form-button);
     margin: var(--margin-m) 0 0;
 }
+
+.auth-form__general-error {
+    margin-top: var(--margin-m);
+}
