@@ -5,18 +5,23 @@ import AuthForm from "../auth/auth-form/AuthForm";
 import AuthAPIService from "../../services/api/authAPIService";
 import withAuthHandler from "../auth/with-auth-handler/WithAuthHandler";
 import "../auth/AuthView.css"
+import withLoader from "../with-loader/WithLoader";
+import {compose} from "redux";
 
-function LoginView({onAuthSuccess}) {
+function LoginView({onAuthSuccess, onLoadingStateChange}) {
 
     const [errorMessage, setErrorMessage] = useState(null);
 
     function login(email, password) {
+        onLoadingStateChange(true);
         setErrorMessage(null);
         AuthAPIService.login(email, password).then(({user}) => {
             onAuthSuccess(user);
+            onLoadingStateChange(false);
         }, (error) => {
             console.log('login error', error);
             setErrorMessage('Wrong email or password');
+            onLoadingStateChange(false);
         });
     }
 
@@ -35,5 +40,5 @@ function LoginView({onAuthSuccess}) {
     )
 }
 
-export default withAuthHandler(LoginView);
+export default compose(withLoader, withAuthHandler)(LoginView);
 export {LoginView as PureLoginView}

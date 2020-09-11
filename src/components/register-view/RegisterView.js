@@ -5,15 +5,19 @@ import AuthProviders from "../auth/auth-providers/AuthProviders";
 import AuthForm from "../auth/auth-form/AuthForm";
 import withAuthHandler from "../auth/with-auth-handler/WithAuthHandler";
 import "../auth/AuthView.css"
+import {compose} from "redux";
+import withLoader from "../with-loader/WithLoader";
 
-function RegisterView({onAuthSuccess}) {
+function RegisterView({onAuthSuccess, onLoadingStateChange}) {
 
     const [errorMessage, setErrorMessage] = useState(null);
 
     function register(email, password) {
+        onLoadingStateChange(true);
         setErrorMessage(null);
         AuthAPIService.register(email, password).then(({user}) => {
             onAuthSuccess(user);
+            onLoadingStateChange(false);
         }, (error) => {
             console.log('register error', error);
             if (error.code === 'auth/weak-password') {
@@ -21,6 +25,7 @@ function RegisterView({onAuthSuccess}) {
             } else {
                 setErrorMessage('Something went wrong. Please try again later');
             }
+            onLoadingStateChange(false);
         });
     }
 
@@ -39,5 +44,5 @@ function RegisterView({onAuthSuccess}) {
     )
 }
 
-export default withAuthHandler(RegisterView);
+export default compose(withLoader, withAuthHandler)(RegisterView);
 export {RegisterView as PureRegisterView};

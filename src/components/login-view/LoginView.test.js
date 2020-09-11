@@ -19,14 +19,17 @@ describe('LoginView', () => {
 
     let wrapper;
     const authSpy = jest.fn();
+    const loaderSpy = jest.fn();
 
     beforeEach(() => {
-        wrapper = shallow(<PureLoginView onAuthSuccess={authSpy}/>);
+        wrapper = shallow(<PureLoginView onAuthSuccess={authSpy} onLoadingStateChange={loaderSpy}/>);
     });
 
     it('should login', async () => {
         let component = wrapper.find(AuthForm);
-        await component.prop('onSubmit')('john@mail.com', '1234')
+        await component.prop('onSubmit')('john@mail.com', '1234');
+        expect(loaderSpy).toHaveBeenCalledWith(true);
         expect(authSpy).toHaveBeenCalledWith({email: 'john@mail.com'});
+        expect(loaderSpy).toHaveBeenCalledWith(false);
     });
 });

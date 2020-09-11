@@ -6,7 +6,7 @@ import {fetchLogEntries} from "../../../redux/slices/logEntriesSlice";
 import {withRouter} from "react-router-dom";
 
 function withAuthHandler(WrappedComponent) {
-    return withRouter(({history}) => {
+    return withRouter(({history, ...props}) => {
         const dispatch = useDispatch();
 
         function handleAuthSuccess(user) {
@@ -16,7 +16,7 @@ function withAuthHandler(WrappedComponent) {
             history.push('/form');
         }
 
-        return <WrappedComponent onAuthSuccess={(user) => handleAuthSuccess(user)} />;
+        return <WrappedComponent {...props} onAuthSuccess={(user) => handleAuthSuccess(user)} />;
     });
 }
 
