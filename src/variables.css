@@ -2,12 +2,16 @@
     --color-text: #2b2c34;
     /*--color-text: #303030;*/
     /*--color-border: #eaeaea;*/
-    --color-border: #f2f2f2;
+    --color-success: #3eb73e;
+    --color-border: #d3d3d3;
     /*#eaeaea;*/
     --color-background: #fffffe;
+    --color-shade-background: #e7e7e7;
     --color-background-dark-opaque: #7a7a7a52;
     --color-highlight: #79ACE2;
     --color-theme: #4973d3;
+
+    --height-header: 62px;
 
     --padding-xs: 4px;
     --padding-s: 8px;

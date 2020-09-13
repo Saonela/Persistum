@@ -3,30 +3,49 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: var(--padding) var(--padding-s) var(--padding) 56px;
-    margin-bottom: var(--margin-xs);
-    border: 1px solid var(--color-border);
-    border-radius: 5px;
+    padding: var(--padding-s) var(--padding-s) var(--padding-s) 62px;
+    border: 1px solid transparent;
     text-align: left;
+    font-size: var(--font-size);
     cursor: pointer;
+    transition: border 150ms ease-in;
 }
 
 .activity:hover {
-    border-color: var(--color-highlight);
+    border-bottom-color: var(--color-theme);
+}
+
+.activity:hover .activity__indicator {
+    border-color: var(--color-theme);
+}
+
+.activity button {
+    transition: color 150ms ease-in;
+}
+
+.activity:hover button {
+    color: var(--color-theme);
 }
 
 .activity .activity__indicator-icon {
-    font-size: 28px;
+    font-size: 24px;
 }
 .activity__indicator {
+    display: flex;
     position: absolute;
-    left: 16px;
-    color: #39b639;
+    left: 12px;
+    color: var(--color-success);
+    border: 1px solid var(--color-border);
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    align-items: center;
+    justify-content: center;
+    transition: border 150ms ease-in;
 }
 
 .activity__name {
     width: 100%;
-    margin-right: 112px;
 }
 
 .activity__name--edit {
@@ -37,18 +56,4 @@
 .activity--completed .activity__name-text {
     opacity: 0.75;
     text-decoration: line-through;
-}
-
-.activity:hover .activity-controls__style {
-    transform: translateX(-96px);
-}
-
-.activity:hover .activity-controls__controls {
-    opacity: 1;
-    visibility: visible;
-    transform: translateX(-96px);
-}
-
-.activity__activity-controls {
-    margin-left: auto;
 }

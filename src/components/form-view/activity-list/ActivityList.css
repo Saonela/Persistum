@@ -22,21 +22,3 @@
     opacity: 0.01;
     transition: opacity var(--transition-duration) ease-in;
 }
-
-.no-activities-transition-enter {
-    opacity: 0.01;
-}
-
-.no-activities-transition-enter.no-activities-transition-enter-active {
-    opacity: 1;
-    transition: opacity var(--transition-duration) ease-in;
-}
-
-.no-activities-transition-leave {
-    opacity: 1;
-}
-
-.no-activities-transition-leave.no-activities-transition-leave-active {
-    opacity: 0.01;
-    transition: opacity var(--transition-duration) ease-in;
-}

@@ -1,12 +1,17 @@
-.form-create {
+.activity-create {
     display: flex;
-    padding-left: 12px;
+    margin-top: var(--margin-s);
+    margin-right: var(--margin-s);
 }
 
-.form-create .form-create__input {
+.activity-create .activity-create__input {
     width: 100%;
 }
 
-.form-create .form-create__toggle-button {
+.activity-create .activity-create__toggle-button {
     margin-left: auto;
+}
+
+.activity-create .activity-create__toggle-button:hover {
+    color: var(--color-theme);
 }

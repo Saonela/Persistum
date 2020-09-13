@@ -18,7 +18,7 @@ function ActivityCreate({forceInputDisplay, onSubmit}) {
     }
 
     const toggleInput = () => {
-        if (inputVisible && isNameValid(name)) {
+        if (inputVisible) {
             submit(name);
         } else {
             setInputVisible(state => !state);
@@ -30,16 +30,31 @@ function ActivityCreate({forceInputDisplay, onSubmit}) {
         submit(name);
     }
 
+    const handleBlur = (name) => {
+        setName(name);
+        if (!isNameValid(name)) {
+            setInputVisible(false);
+        }
+    }
+
     const isNameValid = (name) => {
         return name && name.trim();
     }
 
     return (
-        <div className="form-create">
+        <div className="activity-create">
             { (inputVisible || forceInputDisplay) &&
-                <TextInput className="form-create__input" label="Activity" id="name" value={name} onBlur={(value) => setName(value)} onEnter={(value) => handleEnter(value)}/>
+                <TextInput id="name"
+                           className="activity-create__input"
+                           label="Activity"
+                           value={name}
+                           onBlur={(value) => handleBlur(value)}
+                           onEnter={(value) => handleEnter(value)}/>
             }
-            <IconButton className="form-create__toggle-button" title="Add" aria-label="toggle" onClick={() => toggleInput()}>
+            <IconButton className="activity-create__toggle-button"
+                        title="Add"
+                        aria-label="toggle"
+                        onClick={() => toggleInput()}>
                 <AddIcon/>
             </IconButton>
         </div>

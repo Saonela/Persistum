@@ -1,7 +1,19 @@
 import React from 'react';
 import ActivityControls from "./ActivityControls";
 import {render} from "@testing-library/react";
-import {fireEvent, getByRole} from "@testing-library/dom";
+import {
+    fireEvent,
+    getByRole,
+    queryByRole,
+} from "@testing-library/dom";
+
+jest.mock('react-transition-group', () => {
+    const FakeTransition = jest.fn(({ children }) => children)
+    const FakeCSSTransition = jest.fn(props => {
+        return <FakeTransition>{props.children}</FakeTransition>}
+    )
+    return { CSSTransitionGroup: FakeCSSTransition, Transition: FakeTransition };
+});
 
 describe('ActivityControls', () => {
 
@@ -16,16 +28,45 @@ describe('ActivityControls', () => {
         container = element.container;
     });
 
+    it('should expand activity controls', () => {
+        expect(queryByRole(container, 'button', {name: 'edit'})).toBeFalsy();
+        expect(queryByRole(container, 'button', {name: 'delete'})).toBeFalsy();
+        const expandButton = TestHelper.getExpandButton()
+        fireEvent.click(expandButton);
+        TestHelper.getEditButton();
+        TestHelper.getDeleteButton();
+        fireEvent.click(expandButton);
+        expect(queryByRole(container, 'button', {name: 'edit'})).toBeFalsy();
+        expect(queryByRole(container, 'button', {name: 'delete'})).toBeFalsy();
+    });
+
+
     it('should emit event on edit', () => {
-        const button = getByRole(container, 'button', {name: /edit/i});
+        const expandButton = TestHelper.getExpandButton()
+        fireEvent.click(expandButton);
+        const button = TestHelper.getEditButton();
         fireEvent.click(button);
         expect(onEditSpy).toHaveBeenCalled();
     });
 
     it('should emit event on remove', () => {
-        const button = getByRole(container, 'button', {name: /delete/i});
+        const expandButton = TestHelper.getExpandButton()
+        fireEvent.click(expandButton);
+        const button = TestHelper.getDeleteButton();
         fireEvent.click(button);
         expect(onDeleteSpy).toHaveBeenCalled();
-    })
+    });
+
+    const TestHelper = {
+        getEditButton: () => {
+            return getByRole(container, 'button', {name: /edit/i});
+        },
+        getDeleteButton: () => {
+            return getByRole(container, 'button', {name: /delete/i});
+        },
+        getExpandButton: () => {
+            return getByRole(container, 'button', {name: 'Expand activity controls'});
+        }
+    }
 
 });

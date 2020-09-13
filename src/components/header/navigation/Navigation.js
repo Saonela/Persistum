@@ -5,6 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 import DateRangeIcon from "@material-ui/icons/DateRange";
 import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import {ExitToApp} from "@material-ui/icons";
+import Tooltip from "@material-ui/core/Tooltip";
 
 function Navigation({history}) {
 
@@ -28,15 +29,17 @@ function Navigation({history}) {
 
     return (
         <div className="navigation">
-            actove: {activeRoute}
-            <Link to="/calendar" onClick={() => setRoute('/calendar')}>
-                <IconButton className="navigation__button-calendar"
-                            role="button"
-                            aria-label="Calendar link"
-                            color={activeRoute === '/calendar' ? 'primary' : 'default'}>
-                    <DateRangeIcon/>
-                </IconButton>
-            </Link>
+            <Tooltip disableFocusListener title="Calendar" placement="bottom">
+                <Link to="/calendar" onClick={() => setRoute('/calendar')}>
+                    <IconButton className="navigation__button-calendar"
+                                role="button"
+                                aria-label="Calendar link"
+                                color={activeRoute === '/calendar' ? 'primary' : 'default'}>
+                        <DateRangeIcon/>
+                    </IconButton>
+                </Link>
+            </Tooltip>
+            <Tooltip disableFocusListener title="Form" placement="bottom">
             <Link to="/form" onClick={() => setRoute('/form')}>
                 <IconButton className="navigation__button-form"
                             role="button"
@@ -45,12 +48,16 @@ function Navigation({history}) {
                     <PlaylistAddCheckIcon/>
                 </IconButton>
             </Link>
+            </Tooltip>
             {loggedIn ?
-                <Link to="/logout" onClick={() => setRoute('')}>
-                    <IconButton className="navigation__button-form">
-                        <ExitToApp/>
-                    </IconButton>
-                </Link> : null}
+                <Tooltip disableFocusListener title="Logout" placement="bottom">
+                    <Link to="/logout" onClick={() => setRoute('')}>
+                        <IconButton className="navigation__button-form">
+                            <ExitToApp/>
+                        </IconButton>
+                    </Link>
+                </Tooltip>
+            : null}
         </div>
     );
 }

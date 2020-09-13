@@ -13,23 +13,30 @@ import {
     updateActivity
 } from "../../redux/slices/activitiesSlice";
 import {getLoggedActivityIds, toggleLogEntryActivity, updateLogEntry} from "../../redux/slices/logEntriesSlice";
+import FormDate from "./form-date/FormDate";
+import {ASYNC_STATE_STATUS} from "../../redux/asyncStateStatus";
+import NoActivitiesMessage from "./no-activities-message/NoActivitiesMessage";
+import BackgroundLoader from "../background-loader/BackgroundLoader";
 
 function FormView() {
 
     const dispatch = useDispatch();
     const activities = useSelector(getAllActivities);
     const completedActivityIds = useSelector(getLoggedActivityIds);
+    const loadingStatus = useSelector(state => state.activities.status);
+    const loading = loadingStatus === ASYNC_STATE_STATUS.LOADING;
 
     const [dayIsLogged, setDayIsLogged] = useState(false);
     const [currentDate] = useState(UtilityService.getCurrentShortTimestamp());
 
     return (
-        <div className="form-view">
+        <div className="app-panel app-border form-view">
+            {loading && <BackgroundLoader/>}
             {!dayIsLogged ?
                 <div>
-                    {activities.length} =
-                    <div className="form-view__date">{currentDate}</div>
-                    <ActivityCreate forceInputDisplay={!activities.length} onSubmit={(name) => {dispatch(createActivity(name))}}/>
+                    <FormDate date={currentDate}/>
+                    <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
+                                    onSubmit={(name) => {dispatch(createActivity(name))}}/>
                     <ActivityList activities={activities}
                                   completedActivityIds={completedActivityIds}
                                   onToggle={(id) => {
@@ -38,10 +45,20 @@ function FormView() {
                                   }}
                                   onUpdate={(activity) => {dispatch(updateActivity(activity))}}
                                   onDelete={(activity) => {dispatch(deleteActivity(activity.id))}}/>
-                    <Button className="form-view__toggle-button" variant="outlined"
-                            onClick={() => setDayIsLogged(true)}>Call it a day</Button>
+                    {!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE ?
+                        <div className="no-activities-message" data-testid="no-activities">
+                            <NoActivitiesMessage/>
+                        </div>
+                    :
+                        <Button className="form-view__toggle-button"
+                                variant="outlined"
+                                color="primary"
+                                aria-label="complete-day-logging"
+                                onClick={() => setDayIsLogged(true)}>Call it a day</Button>
+                    }
                 </div> :
-                <LogIsCompletedMessage className="form-view__log-completed-message" date={currentDate}
+                <LogIsCompletedMessage className="form-view__log-completed-message"
+                                       date={currentDate}
                                        onBack={() => setDayIsLogged(false)}/>
             }
         </div>

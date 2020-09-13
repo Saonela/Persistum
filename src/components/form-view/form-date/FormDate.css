@@ -1,0 +1,19 @@
+.form-date {
+    display: flex;
+}
+
+.form-date__container {
+    display: flex;
+    /*border-bottom: 1px solid;*/
+    padding-bottom: var( --padding-s);
+}
+
+.form-date__day {
+    font-size: 42px;
+}
+
+.inner-block {
+    text-align: left;
+    font-size: 16px;
+    margin: auto var(--margin-s) auto;
+}

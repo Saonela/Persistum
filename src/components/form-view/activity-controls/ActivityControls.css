@@ -3,14 +3,25 @@
     align-items: center;
 }
 
+.activity-controls__mask {
+    position: absolute;
+    right: 0;
+    width: 56px;
+    height: 80%;
+    background: var(--color-background);
+}
+
+.activity-controls__expand-button {
+    z-index: 1;
+}
+
 .activity-controls__style {
     width: 28px;
     height: 28px;
-    margin-right: 12px;
+    margin-right: 16px;
     margin-left: auto;
     border: 1px solid #ebebeb;
     background: #ebebeb;
-    transition: transform 200ms ease-out;
 }
 
 .activity-controls__style:hover {
@@ -18,9 +29,29 @@
 }
 
 .activity-controls__controls {
-    position: absolute;
-    right: -88px;
-    opacity: 0;
-    visibility: hidden;
-    transition: transform 200ms ease-out, opacity 150ms ease-in-out 50ms;
+    display: flex;
+    align-items: center;
+    margin-left: var(--margin);
+}
+
+.activity-controls-transition-enter {
+    opacity: 0.75;
+    transform: translateX(70px);
+    transition: opacity 100ms ease-in, transform 100ms ease-in;
+}
+
+.activity-controls-transition-enter.activity-controls-transition-enter-active {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.activity-controls-transition-leave {
+    opacity: 1;
+    transform: translateX(0);
+    transition: opacity 100ms ease-in, transform 100ms ease-in;
+}
+
+.activity-controls-transition-leave.activity-controls-transition-leave-active {
+    opacity: 0.75;
+    transform: translateX(70px);
 }

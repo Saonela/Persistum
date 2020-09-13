@@ -3,10 +3,9 @@ import './NoActivitiesMessage.css'
 
 function NoActivitiesMessage() {
     return (
-        <div className="no-activities-message">
-            You have no activities<br/>
+        <div className="no-activities-message" role="alert">
+            You have no activities.<br/>
             Go, create one!
-            {/*<div className="no-activities-message__image"/>*/}
         </div>
     )
 }

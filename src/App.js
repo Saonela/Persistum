@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect, useState} from 'react';
 import './App.css';
 import Header from './components/header/Header';
 import { MuiThemeProvider } from '@material-ui/core/styles';
@@ -16,8 +16,9 @@ import {fetchLogEntries} from "./redux/slices/logEntriesSlice";
 import AuthAPIService from "./services/api/authAPIService";
 import {setUser} from "./redux/slices/userSlice";
 import LandingView from "./components/landing-view/LandingView";
+import withLoader from "./components/with-loader/WithLoader";
 
-const themeColor = '#4973d3'
+const themeColor = '#4973d3'; // TODO: get from variable
 const theme = createMuiTheme({
     palette: {
         primary: {
@@ -29,29 +30,39 @@ const theme = createMuiTheme({
     },
 });
 
-function App() {
+const appRoutes = ['/form', '/calendar'];
+
+function App({onLoadingStateChange}) {
 
     const dispatch = useDispatch();
+    const [loading, setLoading] = useState(true);
 
     const user = useSelector(state => state.user);
 
     useEffect(() => {
-        AuthAPIService.getCurrentUser().then((user) => {
-            if (user) {
-                dispatch(setUser({id: user.uid, email: user.email}));
-                dispatch(fetchActivities());
-                dispatch(fetchLogEntries());
-            } else {
-                // ... redirect ?
-            }
-        });
+        if (appRoutes.includes(window.location.pathname)) {
+            setLoading(true);
+            onLoadingStateChange(true)
+
+            AuthAPIService.getCurrentUser().then((user) => {
+                if (user) {
+                    dispatch(setUser({id: user.uid, email: user.email}));
+                    dispatch(fetchActivities());
+                    dispatch(fetchLogEntries());
+                } else {
+                    // ... redirect ? (already done by guard)
+                }
+                setLoading(false);
+                onLoadingStateChange(false);
+            });
+        }
     }, []);
 
     return (
         <MuiThemeProvider theme={theme}>
             <div className="App">
                 <Router>
-                    <RouteAuthGuard isAuthenticated={!!user}>
+                    <RouteAuthGuard isAuthenticated={!!user || loading}>
                         <div className="container">
                             <Switch>
                                 <Route path="/" exact>
@@ -72,7 +83,9 @@ function App() {
                                 </Route>
                                 <Route path="/form" exact>
                                     <Header/>
-                                    <FormView/>
+                                    <div className="inner-container">
+                                        <FormView/>
+                                    </div>
                                 </Route>
                                 <Route path="/calendar" exact>
                                     <Header/>
@@ -87,4 +100,4 @@ function App() {
     );
 }
 
-export default App;
+export default withLoader(App);

@@ -18,6 +18,8 @@ describe('ActivityCreate', () => {
     it('should toggle text-input', async () => {
         clickAddButton(container);
         input = getByLabelText(container, 'Activity');
+        fireEvent.blur(input);
+        expect(queryByLabelText(container, 'Activity')).toBeFalsy();
     });
 
     it('should always show text-input if force', () => {

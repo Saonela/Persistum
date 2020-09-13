@@ -22,7 +22,11 @@ const AuthAPIService = {
         });
     },
     login(email, password) {
-        return firebaseAuth.signInWithEmailAndPassword(email, password);
+        firebaseAuth.setPersistence(Firebase.auth.Auth.Persistence.LOCAL).then(() => {
+            return firebaseAuth.signInWithEmailAndPassword(email, password);
+        }).catch((error) => {
+            console.log('firebase set persistence failed', error);
+        });
     },
     loginWithProvider(provider) {
         return new Promise((resolve) => {
