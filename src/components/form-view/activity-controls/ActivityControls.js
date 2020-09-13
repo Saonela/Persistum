@@ -14,11 +14,13 @@ function ActivityControls({onEdit, onDelete}) {
 
     const handleEdit = (e) => {
         e.stopPropagation();
+        setShowControls(false);
         onEdit();
     }
 
     const handleRemove = (e) => {
         e.stopPropagation();
+        setShowControls(false);
         onDelete();
     }
 

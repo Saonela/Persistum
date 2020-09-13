@@ -3,14 +3,13 @@ import './LogIsCompletedMessage.css'
 import CheckCircleOutlineIcon from '@material-ui/icons/CheckCircleOutline';
 import Button from "@material-ui/core/Button";
 import {Link} from "react-router-dom";
+import FormDate from "../form-view/form-date/FormDate";
 
 function LogIsCompletedMessage({date, onBack}) {
 
     return (
         <div className="log-is-completed-message">
-            <div className="log-is-completed-message__date">
-                {date}
-            </div>
+            <FormDate date={date}/>
             <div className="log-is-completed-message__illustration">
                 <CheckCircleOutlineIcon/>
             </div>

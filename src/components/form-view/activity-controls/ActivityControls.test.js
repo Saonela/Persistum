@@ -29,32 +29,32 @@ describe('ActivityControls', () => {
     });
 
     it('should expand activity controls', () => {
-        expect(queryByRole(container, 'button', {name: 'edit'})).toBeFalsy();
-        expect(queryByRole(container, 'button', {name: 'delete'})).toBeFalsy();
+        TestHelper.expectControlsToBeHidden();
         const expandButton = TestHelper.getExpandButton()
         fireEvent.click(expandButton);
         TestHelper.getEditButton();
         TestHelper.getDeleteButton();
         fireEvent.click(expandButton);
-        expect(queryByRole(container, 'button', {name: 'edit'})).toBeFalsy();
-        expect(queryByRole(container, 'button', {name: 'delete'})).toBeFalsy();
+        TestHelper.expectControlsToBeHidden();
     });
 
 
-    it('should emit event on edit', () => {
+    it('should emit event and close controls on edit', () => {
         const expandButton = TestHelper.getExpandButton()
         fireEvent.click(expandButton);
         const button = TestHelper.getEditButton();
         fireEvent.click(button);
         expect(onEditSpy).toHaveBeenCalled();
+        TestHelper.expectControlsToBeHidden();
     });
 
-    it('should emit event on remove', () => {
+    it('should emit event and close controls on remove', () => {
         const expandButton = TestHelper.getExpandButton()
         fireEvent.click(expandButton);
         const button = TestHelper.getDeleteButton();
         fireEvent.click(button);
         expect(onDeleteSpy).toHaveBeenCalled();
+        TestHelper.expectControlsToBeHidden();
     });
 
     const TestHelper = {
@@ -66,6 +66,10 @@ describe('ActivityControls', () => {
         },
         getExpandButton: () => {
             return getByRole(container, 'button', {name: 'Expand activity controls'});
+        },
+        expectControlsToBeHidden: () => {
+            expect(queryByRole(container, 'button', {name: 'edit'})).toBeFalsy();
+            expect(queryByRole(container, 'button', {name: 'delete'})).toBeFalsy();
         }
     }
 

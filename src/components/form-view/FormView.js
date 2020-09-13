@@ -50,11 +50,14 @@ function FormView() {
                             <NoActivitiesMessage/>
                         </div>
                     :
-                        <Button className="form-view__toggle-button"
-                                variant="outlined"
-                                color="primary"
-                                aria-label="complete-day-logging"
-                                onClick={() => setDayIsLogged(true)}>Call it a day</Button>
+                        <div className="form-view__footer">
+                            <Button className="form-view__toggle-button"
+                                    variant="outlined"
+                                    color="default"
+                                    size="small"
+                                    aria-label="complete-day-logging"
+                                    onClick={() => setDayIsLogged(true)}>Call it a day</Button>
+                        </div>
                     }
                 </div> :
                 <LogIsCompletedMessage className="form-view__log-completed-message"

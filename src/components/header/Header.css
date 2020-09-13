@@ -11,11 +11,19 @@
     justify-content: space-between;
     max-width: 1300px;
     width: 100%;
-    padding: 12px 64px;
+    padding: 12px var(--padding-xl);
     margin: 0 auto;
 }
 
 .main-logo {
     height: auto;
     width: 90px;
+}
+
+@media only screen and (max-width: 680px) {
+    .header__content {
+        padding: 12px var(--padding-l);
+        margin: 0 var(--margin-m);
+        border-bottom: 1px solid var(--color-border);
+    }
 }

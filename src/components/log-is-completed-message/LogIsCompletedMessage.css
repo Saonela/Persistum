@@ -1,25 +1,27 @@
-.log-is-completed-message__date {
-    font-size: 24px;
-    padding: 16px;
+.log-is-completed-message__illustration {
+    padding-top: var(--padding-l);
+    margin-top: var(--margin-xl);
+    margin-bottom: var(--margin-m);
+    border-top: 1px solid var(--color-border);
 }
 
 .log-is-completed-message__illustration svg {
     font-size: 100px;
-    color: #79ACE2;
+    color: var(--color-success);
 }
 
 .log-is-completed-message__congratulations {
     font-size: 20px;
-    padding-bottom: 24px;
-    margin: 0 32px 70px;
-    border-bottom: 1px solid #EAEAEA;
+    padding-bottom: var(--padding-l);
+    margin: 0 0 var(--margin-xl);
+    border-bottom: 1px solid var(--color-border);
 }
 
 .message-navigation-options {
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     flex-wrap: wrap;
-    font-size: 14px;
+    font-size: var(--font-size);
 }
 
 .message-navigation-options > div {
@@ -27,10 +29,8 @@
 }
 
 button.message-navigation-options__button {
-    margin-top: 12px;
-    color: #828282;
+    margin-top: var(--margin);
 }
-
 
 button.log-is-completed-message__go-back {
     font-size: 14px;

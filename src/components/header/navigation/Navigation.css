@@ -8,3 +8,9 @@
     margin-right: var(--margin-xs);
 }
 
+@media only screen and (max-width: 500px) {
+    .navigation {
+        width: 100%;
+        justify-content: space-between;
+    }
+}

@@ -1,7 +1,6 @@
 .activity-create {
     display: flex;
     margin-top: var(--margin-s);
-    margin-right: var(--margin-s);
 }
 
 .activity-create .activity-create__input {

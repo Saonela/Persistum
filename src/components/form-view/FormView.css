@@ -8,7 +8,32 @@
     background: var(--color-background);
 }
 
+.form-view__footer {
+    border-top: 1px solid var(--color-border);
+    margin-top: var(--margin-xl);
+}
+
 button.form-view__toggle-button {
     float: left;
-    margin-top: var(--margin-xl);
+    margin-top: var(--margin-m);
+}
+
+@media only screen and (max-width: 680px) {
+    .form-view {
+        max-width: none;
+        height: 100%;
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        box-sizing: border-box;
+        overflow: auto;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .form-view {
+        padding-top: var(--padding-l);
+        padding-right: var(--padding-m);
+        padding-left: var(--padding-m);
+    }
 }

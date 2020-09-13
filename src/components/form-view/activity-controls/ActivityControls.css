@@ -1,4 +1,5 @@
 .activity-controls {
+    position: relative;
     display: flex;
     align-items: center;
 }
@@ -31,7 +32,7 @@
 .activity-controls__controls {
     display: flex;
     align-items: center;
-    margin-left: var(--margin);
+    padding-left: var(--margin);
 }
 
 .activity-controls-transition-enter {
@@ -54,4 +55,16 @@
 .activity-controls-transition-leave.activity-controls-transition-leave-active {
     opacity: 0.75;
     transform: translateX(70px);
+}
+
+@media only screen and (max-width: 540px) {
+    .activity-controls__controls {
+        position: absolute;
+        top: 0;
+        left: -156px;
+        background: var(--color-background);
+    }
+    .activity-controls__mask {
+        width: 44px;
+    }
 }

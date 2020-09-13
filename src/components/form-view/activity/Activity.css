@@ -3,28 +3,16 @@
     align-items: center;
     justify-content: space-between;
     position: relative;
-    padding: var(--padding-s) var(--padding-s) var(--padding-s) 62px;
+    padding: var(--padding-s) 0 var(--padding-s) 62px;
     border: 1px solid transparent;
     text-align: left;
     font-size: var(--font-size);
     cursor: pointer;
-    transition: border 150ms ease-in;
-}
-
-.activity:hover {
-    border-bottom-color: var(--color-theme);
-}
-
-.activity:hover .activity__indicator {
-    border-color: var(--color-theme);
+    transition: border 150ms ease-in, color 150ms ease-in;
 }
 
 .activity button {
     transition: color 150ms ease-in;
-}
-
-.activity:hover button {
-    color: var(--color-theme);
 }
 
 .activity .activity__indicator-icon {
@@ -56,4 +44,18 @@
 .activity--completed .activity__name-text {
     opacity: 0.75;
     text-decoration: line-through;
+}
+
+@media only screen and (min-width: 680px) {
+    .activity:hover {
+        color: var(--color-theme);
+    }
+
+    .activity:hover .activity__indicator {
+        border-color: var(--color-theme);
+    }
+
+    .activity:hover button {
+        color: var(--color-theme);
+    }
 }

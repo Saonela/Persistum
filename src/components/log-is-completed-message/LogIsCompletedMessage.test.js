@@ -4,11 +4,6 @@ import {fireEvent, getByText} from "@testing-library/dom";
 import React from "react";
 import {BrowserRouter as Router} from "react-router-dom";
 
-it('should show date', () => {
-    const {container} = render(<Router><LogIsCompletedMessage date={'2020'}/></Router>);
-    getByText(container, '2020');
-});
-
 it('should emit event on go back button click', () => {
     const spy = jest.fn();
     const {container} = render(<Router><LogIsCompletedMessage date={'2020'} onBack={spy}/></Router>);
