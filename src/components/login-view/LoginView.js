@@ -16,8 +16,8 @@ function LoginView({onAuthSuccess, onLoadingStateChange}) {
         onLoadingStateChange(true);
         setErrorMessage(null);
         AuthAPIService.login(email, password).then(({user}) => {
-            onAuthSuccess(user);
             onLoadingStateChange(false);
+            onAuthSuccess(user);
         }, (error) => {
             console.log('login error', error);
             setErrorMessage('Wrong email or password');

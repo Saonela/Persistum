@@ -40,7 +40,7 @@ function App({onLoadingStateChange}) {
     const user = useSelector(state => state.user);
 
     useEffect(() => {
-        if (appRoutes.includes(window.location.pathname)) {
+        if (appRoutes.includes(window.location.pathname) || window.location.pathname === '/') {
             setLoading(true);
             onLoadingStateChange(true)
 

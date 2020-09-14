@@ -16,8 +16,8 @@ function RegisterView({onAuthSuccess, onLoadingStateChange}) {
         onLoadingStateChange(true);
         setErrorMessage(null);
         AuthAPIService.register(email, password).then(({user}) => {
-            onAuthSuccess(user);
             onLoadingStateChange(false);
+            onAuthSuccess(user);
         }, (error) => {
             console.log('register error', error);
             if (error.code === 'auth/weak-password') {

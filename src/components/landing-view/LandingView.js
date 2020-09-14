@@ -4,8 +4,11 @@ import list from "../../assets/landing/list.svg"
 import calendar from "../../assets/landing/calendar.svg"
 import stats from "../../assets/landing/stats.svg"
 import {Link, withRouter} from "react-router-dom";
+import {useSelector} from "react-redux";
 
 function LandingView() {
+    const user = useSelector(state => state.user);
+
     return (
         <React.Fragment>
             <div className="landing-wrapper">
@@ -30,7 +33,7 @@ function LandingView() {
                             <img className="main-illustration__stats" src={stats} alt="stats-illustration"/>
                         </figure>
                         <section className="landing__get-started">
-                            <Link to="/register" tabIndex="-1">
+                            <Link to={user ? "/form" : "/register"} tabIndex="-1">
                                 <button className="main-button">Get started</button>
                             </Link> or
                             <Link to="/login" tabIndex="-1">

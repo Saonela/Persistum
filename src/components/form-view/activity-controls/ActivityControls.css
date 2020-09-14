@@ -7,7 +7,7 @@
 .activity-controls__mask {
     position: absolute;
     right: 0;
-    width: 56px;
+    width: 48px;
     height: 80%;
     background: var(--color-background);
 }

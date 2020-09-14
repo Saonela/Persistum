@@ -59,6 +59,32 @@
     box-shadow: 12px 8px 31px -12px rgba(43, 44, 52, .6);
 }
 
+button.app-button {
+    font-size: var(--font-size);
+    font-family: Lato, sans-serif;
+    background: var(--color-theme);
+    font-weight: bold;
+    border-radius: 8px;
+    color: white;
+    outline: 0;
+    border: none;
+    cursor: pointer;
+    transition: opacity 200ms ease-out, box-shadow 200ms ease-out;
+    opacity: 1;
+    padding: var(--padding-s) var(--padding-m);
+    text-transform: inherit;
+}
+
+button.app-button--outline {
+    border: 1px solid var(--color-theme);
+    background: #ffffff;
+    color: var(--color-theme);
+}
+
+button.app-button:hover {
+    opacity: 0.8;
+}
+
 @media only screen and (max-width: 700px) {
     .app-panel {
         min-width: 75vw;

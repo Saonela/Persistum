@@ -1,4 +1,5 @@
 import {Firebase, FirebaseDB} from "../../firebase";
+import * as firebase from "firebase";
 
 const firebaseAuth = Firebase.auth();
 
@@ -22,10 +23,15 @@ const AuthAPIService = {
         });
     },
     login(email, password) {
-        firebaseAuth.setPersistence(Firebase.auth.Auth.Persistence.LOCAL).then(() => {
-            return firebaseAuth.signInWithEmailAndPassword(email, password);
-        }).catch((error) => {
-            console.log('firebase set persistence failed', error);
+        return new Promise((resolve, reject) => {
+            firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
+                return firebaseAuth.signInWithEmailAndPassword(email, password).then((response) => {
+                    resolve(response);
+                });
+            }).catch((error) => {
+                console.log('firebase set persistence failed', error);
+                reject(error);
+            });
         });
     },
     loginWithProvider(provider) {

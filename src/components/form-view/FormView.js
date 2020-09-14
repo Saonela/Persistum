@@ -19,7 +19,6 @@ import NoActivitiesMessage from "./no-activities-message/NoActivitiesMessage";
 import BackgroundLoader from "../background-loader/BackgroundLoader";
 
 function FormView() {
-
     const dispatch = useDispatch();
     const activities = useSelector(getAllActivities);
     const completedActivityIds = useSelector(getLoggedActivityIds);
@@ -33,7 +32,7 @@ function FormView() {
         <div className="app-panel app-border form-view">
             {loading && <BackgroundLoader/>}
             {!dayIsLogged ?
-                <div>
+                <div className="form-view__form">
                     <FormDate date={currentDate}/>
                     <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
                                     onSubmit={(name) => {dispatch(createActivity(name))}}/>
@@ -51,7 +50,7 @@ function FormView() {
                         </div>
                     :
                         <div className="form-view__footer">
-                            <Button className="form-view__toggle-button"
+                            <Button className="app-button app-button--outline form-view__toggle-button"
                                     variant="outlined"
                                     color="default"
                                     size="small"

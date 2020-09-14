@@ -1,6 +1,6 @@
 .log-is-completed-message__illustration {
     padding-top: var(--padding-l);
-    margin-top: var(--margin-xl);
+    margin-top: 50px;
     margin-bottom: var(--margin-m);
     border-top: 1px solid var(--color-border);
 }
@@ -13,7 +13,7 @@
 .log-is-completed-message__congratulations {
     font-size: 20px;
     padding-bottom: var(--padding-l);
-    margin: 0 0 var(--margin-xl);
+    margin: 0 0 50px;
     border-bottom: 1px solid var(--color-border);
 }
 
