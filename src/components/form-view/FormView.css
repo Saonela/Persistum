@@ -4,7 +4,7 @@
     padding: var(--padding) var(--padding-l);
     border: 1px solid var(--color-border);
     border-radius: 5px;
-    margin: 10vh auto 0;
+    margin: 10vh auto;
     background: var(--color-background);
 }
 

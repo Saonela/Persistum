@@ -1,8 +1,12 @@
+.log-is-completed-message {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
 .log-is-completed-message__illustration {
-    padding-top: var(--padding-l);
-    margin-top: 50px;
     margin-bottom: var(--margin-m);
-    border-top: 1px solid var(--color-border);
 }
 
 .log-is-completed-message__illustration svg {
@@ -12,27 +16,33 @@
 
 .log-is-completed-message__congratulations {
     font-size: 20px;
-    padding-bottom: var(--padding-l);
-    margin: 0 0 50px;
-    border-bottom: 1px solid var(--color-border);
 }
 
 .message-navigation-options {
     display: flex;
     justify-content: space-around;
     flex-wrap: wrap;
+    border-top: 1px solid var(--color-border);
     font-size: var(--font-size);
+    padding-top: var(--padding-l);
+    padding-bottom: var(--padding-l);
+    margin-bottom: calc(var(--margin) * -1);
 }
 
 .message-navigation-options > div {
-    padding: 8px 8px 16px;
+    padding: var(--margin-s);
 }
 
 button.message-navigation-options__button {
-    margin-top: var(--margin);
+    margin-bottom: var(--margin);
 }
 
 button.log-is-completed-message__go-back {
     font-size: 14px;
 }
 
+@media only screen and (min-width: 680px) {
+    .log-is-completed-message {
+        min-height: 500px;
+    }
+}
