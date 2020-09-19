@@ -36,23 +36,31 @@
 }
 
 .activity-controls-transition-enter {
+    position: relative;
+    z-index: 1;
     opacity: 0.75;
     transform: translateX(70px);
     transition: opacity 100ms ease-in, transform 100ms ease-in;
 }
 
 .activity-controls-transition-enter.activity-controls-transition-enter-active {
+    position: relative;
+    z-index: 1;
     opacity: 1;
     transform: translateX(0);
 }
 
 .activity-controls-transition-leave {
+    position: relative;
+    z-index: 1;
     opacity: 1;
     transform: translateX(0);
     transition: opacity 100ms ease-in, transform 100ms ease-in;
 }
 
 .activity-controls-transition-leave.activity-controls-transition-leave-active {
+    position: relative;
+    z-index: 1;
     opacity: 0.75;
     transform: translateX(70px);
 }

@@ -1,6 +1,6 @@
 import React from 'react';
 import ActivityControls from "./ActivityControls";
-import {render} from "@testing-library/react";
+import {render, screen} from "@testing-library/react";
 import {
     fireEvent,
     getByRole,
@@ -18,13 +18,19 @@ jest.mock('react-transition-group', () => {
 describe('ActivityControls', () => {
 
     let container;
-    let onEditSpy;
+    let onNameEditToggleSpy;
+    let onUpdateSpy;
     let onDeleteSpy;
 
     beforeEach(() => {
-        onEditSpy = jest.fn();
+        onNameEditToggleSpy = jest.fn();
+        onUpdateSpy = jest.fn();
         onDeleteSpy = jest.fn();
-        const element = render(<ActivityControls onEdit={onEditSpy} onDelete={onDeleteSpy}/>);
+        const element = render(
+            <ActivityControls activity={{style: {background: '#ffffff'}}}
+                              onNameEditToggle={onNameEditToggleSpy}
+                              onUpdate={onUpdateSpy}
+                              onDelete={onDeleteSpy}/>);
         container = element.container;
     });
 
@@ -38,13 +44,22 @@ describe('ActivityControls', () => {
         TestHelper.expectControlsToBeHidden();
     });
 
+    it('should emit event on color change', () => {
+        const expandButton = TestHelper.getExpandButton()
+        fireEvent.click(expandButton);
+        const button = screen.getByRole('button', {name: 'Toggle color picker'});
+        fireEvent.click(button)
+        screen.getByTestId('color-picker');
+        fireEvent.click(screen.getByTitle('#FF6900'));
+        expect(onUpdateSpy).toHaveBeenCalled();
+    });
 
-    it('should emit event and close controls on edit', () => {
+    it('should emit event and close controls on name edit toggle', () => {
         const expandButton = TestHelper.getExpandButton()
         fireEvent.click(expandButton);
         const button = TestHelper.getEditButton();
         fireEvent.click(button);
-        expect(onEditSpy).toHaveBeenCalled();
+        expect(onNameEditToggleSpy).toHaveBeenCalled();
         TestHelper.expectControlsToBeHidden();
     });
 

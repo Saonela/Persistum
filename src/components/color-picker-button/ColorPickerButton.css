@@ -1,17 +1,48 @@
 
 .color-picker-button {
-    height: 22px;
-    width: 22px;
-    margin: 2px;
-    border: 1px solid var(--color-border);
-    cursor: pointer;
+    height: 48px;
+    width: 48px;
+    margin-right: 6px;
 }
 
 .color-picker-button__trigger {
     width: 100%;
     height: 100%;
+    padding: 0;
+    border: 0;
+    box-shadow: none;
+    background: transparent;
+    cursor: pointer;
+}
+
+.color-picker-button__trigger-visual {
+    width: 28px;
+    height: 28px;
+    margin: auto;
+}
+
+.color-picker-button__trigger:active,
+.color-picker-button__trigger:focus,
+.color-picker-button__trigger:hover {
+    outline: 0;
+}
+
+.color-picker-button__trigger:active .color-picker-button__trigger-visual,
+.color-picker-button__trigger:focus .color-picker-button__trigger-visual,
+.color-picker-button__trigger:hover .color-picker-button__trigger-visual {
+    box-shadow: var(--color-border) 0 0 10px 2px;
 }
 
 .color-picker-button__wrapper {
-    width: 200px;
+    position: relative;
+    top: 4px;
+    left: -220px;
+    z-index: 5;
+    width: 276px;
+}
+
+@media only screen and (max-width: 680px) {
+    .color-picker-button__wrapper {
+        left: -96px;
+    }
 }

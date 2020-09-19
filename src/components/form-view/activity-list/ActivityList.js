@@ -26,10 +26,11 @@ function ActivityList({activities, completedActivityIds, onUpdate, onDelete, onT
                               activity={activity}
                               completed={completedActivityIds.indexOf(activity.id) >= 0}
                               onToggle={() => onToggle(activity.id)}
-                              onChange={(activity) => onUpdate(activity)}
+                              onUpdate={onUpdate}
                               onDelete={() => setActivityToRemove(activity)}/>
                 )}
             </CSSTransitionGroup>
+            <div className="activity-list__overflow-mask"/>
             {activityToRemove &&
             <ActivityRemoveDialog activity={activityToRemove}
                                   onConfirm={() => handleDelete()}

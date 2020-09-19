@@ -5,6 +5,15 @@
     --transition-duration: 300ms;
 }
 
+.activity-list__overflow-mask {
+    position: absolute;
+    top: 0;
+    right: -30px;
+    width: 32px;
+    height: 100%;
+    background: var(--color-background);
+}
+
 .activity-list-transition-enter {
     opacity: 0.01;
 }

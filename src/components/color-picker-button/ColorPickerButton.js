@@ -1,28 +1,55 @@
-import React, {useState} from "react";
-import {ChromePicker} from 'react-color';
+import React, {useEffect, useRef, useState} from "react";
+import {TwitterPicker} from 'react-color';
 import './ColorPickerButton.css'
 
 function ColorPickerButton({color, onChange}) {
 
     const [showColorPicker, setShowColorPicker] = useState(false);
 
-    const container = React.createRef();
+    const refShowColorPicker = useRef(showColorPicker);
 
-    const toggleColorPicker = () => {
+    useEffect(() => {
+        refShowColorPicker.current = showColorPicker;
+        const closeColorPicker = () => {
+            if (refShowColorPicker.current) {
+                setShowColorPicker(false);
+            }
+        };
+
+        if (refShowColorPicker.current) {
+            window.addEventListener('click', closeColorPicker);
+        }
+        return () => {
+            window.removeEventListener('click', closeColorPicker);
+        }
+    }, [showColorPicker]);
+
+    const toggleColorPicker = (e) => {
         setShowColorPicker(value => !value);
-        container.current.focus();
+    }
+
+    const handleColorChange = (color) => {
+        onChange(color);
     }
 
     return (
-        <div className="color-picker-button" style={{'background-color': color}}>
-            <div className="color-picker-button__trigger" onClick={() => toggleColorPicker()}/>
-            <div className="color-picker-button__wrapper"
-                 style={{"visibility": showColorPicker ? "visible" : "hidden"}}
-                 ref={container}
-                 tabIndex="0"
-                 onBlur={() => setShowColorPicker(false)}>
-                <ChromePicker color={color} onChangeComplete={(value) => onChange(value.hex)}/>
-            </div>
+        <div className="color-picker-button">
+            <button className="color-picker-button__trigger"
+                    aria-label="Toggle color picker"
+                    onClick={(e) => toggleColorPicker(e)}>
+                <div className="color-picker-button__trigger-visual"
+                     data-testid="color-picker-trigger-visual"
+                     style={{'backgroundColor': color}}/>
+            </button>
+            {showColorPicker &&
+                <div className="color-picker-button__wrapper"
+                     data-testid="color-picker"
+                     onClick={(e) => e.stopPropagation()}>
+                <TwitterPicker color={color}
+                               triangle={"hide"}
+                               onChange={(value) => handleColorChange(value.hex)}/>
+                </div>
+            }
         </div>
     );
 }

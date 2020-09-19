@@ -19,13 +19,16 @@ jest.mock('react-transition-group', () => {
 describe('Activity', () => {
 
     let container;
-    let onChangeSpy;
+    let onUpdateSpy;
     let onToggleSpy;
 
     beforeEach(() => {
-        onChangeSpy = jest.fn();
+        onUpdateSpy = jest.fn();
         onToggleSpy = jest.fn();
-        const element = render(<Activity activity={{id: 1, name: 'test activity'}} completed={false} onToggle={onToggleSpy} onChange={onChangeSpy}/>);
+        const element = render(<Activity activity={{id: 1, name: 'test activity', style: {background: '#ffffff'}}}
+                                         completed={false}
+                                         onToggle={onToggleSpy}
+                                         onUpdate={onUpdateSpy}/>);
         container = element.container;
     });
 
@@ -70,7 +73,7 @@ describe('Activity', () => {
         fireEvent.blur(input);
         getByText(container, 'test activity')
         expect(queryByDisplayValue(container, 'test activity')).toBeFalsy();
-        expect(onChangeSpy).toHaveBeenCalledWith({id: 1, name: 'My test activity!'});
+        expect(onUpdateSpy).toHaveBeenCalledWith({id: 1, name: 'My test activity!', style: {background: '#ffffff'}});
     });
 
     const TestHelper = {
