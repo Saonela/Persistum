@@ -24,7 +24,7 @@ function ActivityControls({activity, onNameEditToggle, onUpdate, onDelete}) {
     }
 
     return (
-        <div className="activity-controls" onClick={(e) => e.stopPropagation()}>
+        <div className="activity-controls">
             <CSSTransitionGroup
                 transitionName="activity-controls-transition"
                 transitionEnterTimeout={transitionDuration}
@@ -41,10 +41,7 @@ function ActivityControls({activity, onNameEditToggle, onUpdate, onDelete}) {
                 </div>
                 }
             </CSSTransitionGroup>
-            <IconButton onClick={(e) => {
-                    e.stopPropagation();
-                    setShowControls(state => !state);
-                }}
+            <IconButton onClick={() => setShowControls(state => !state)}
                 className="activity-controls__expand-button"
                 role="button"
                 aria-label="Expand activity controls"

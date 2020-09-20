@@ -9,6 +9,7 @@
     position: absolute;
     top: 0;
     right: -30px;
+    z-index: 1;
     width: 32px;
     height: 100%;
     background: var(--color-background);
@@ -35,5 +36,9 @@
 @media only screen and (max-width: 540px) {
     .activity-list {
         margin-left: -8px;
+    }
+
+    .activity-list__overflow-mask {
+        right: -24px;
     }
 }

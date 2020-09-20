@@ -15,20 +15,25 @@ function Activity({activity, completed, onToggle, onUpdate, onDelete}) {
     }
 
     return (
-        <div className={"activity " + (completed ? 'activity--completed' : '')} role="listitem" onClick={() => onToggle()}>
-            <div className="activity__indicator">
-                <FadeTransition>
-                    {completed && <Icon className="activity__indicator-icon" role="alert" aria-hidden="false" aria-label="Done">done</Icon>}
-                </FadeTransition>
-            </div>
-            <div className={"activity__name " + (editMode ? "activity__name--edit" : "")}>
-                {editMode ?
-                    <TextInput className="activity__name-input"
-                               value={activity.name}
-                               onEnter={(name) => handleUpdate({name: name})}
-                               onBlur={(name) => handleUpdate({name: name})}/>
-                   : <div className="activity__name-text">{activity.name}</div>
-                }
+        <div className={"activity " + (completed ? 'activity--completed' : '')} role="listitem">
+            <div className="activity__click-area" onClick={() => onToggle()} data-testid="activity-click-area">
+                <div className="activity__indicator">
+                    <FadeTransition>
+                        {completed && <Icon className="activity__indicator-icon"
+                                            role="alert"
+                                            aria-hidden="false"
+                                            aria-label="Done">done</Icon>}
+                    </FadeTransition>
+                </div>
+                <div className={"activity__name " + (editMode ? "activity__name--edit" : "")}>
+                    {editMode ?
+                        <TextInput className="activity__name-input"
+                                   value={activity.name}
+                                   onEnter={(name) => handleUpdate({name: name})}
+                                   onBlur={(name) => handleUpdate({name: name})}/>
+                        : <div className="activity__name-text">{activity.name}</div>
+                    }
+                </div>
             </div>
             <ActivityControls activity={activity}
                               onNameEditToggle={() => setEditMode(value => !value)}

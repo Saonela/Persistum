@@ -10,19 +10,19 @@ function ColorPickerButton({color, onChange}) {
 
     useEffect(() => {
         refShowColorPicker.current = showColorPicker;
+    }, [showColorPicker]);
+
+    useEffect(() => {
         const closeColorPicker = () => {
             if (refShowColorPicker.current) {
                 setShowColorPicker(false);
             }
         };
-
-        if (refShowColorPicker.current) {
-            window.addEventListener('click', closeColorPicker);
-        }
+        window.addEventListener('click', closeColorPicker);
         return () => {
             window.removeEventListener('click', closeColorPicker);
         }
-    }, [showColorPicker]);
+    }, []);
 
     const toggleColorPicker = (e) => {
         setShowColorPicker(value => !value);

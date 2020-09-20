@@ -2,7 +2,7 @@ import React from 'react';
 import Activity from "./Activity";
 import {
     getByDisplayValue,
-    getByRole,
+    getByRole, getByTestId,
     getByText, queryByDisplayValue,
     queryByRole, queryByText,
 } from "@testing-library/dom";
@@ -42,8 +42,7 @@ describe('Activity', () => {
     });
 
     it('should emit activity completion state on click', () => {
-        const activity = getByRole(container, 'listitem');
-        fireEvent.click(activity);
+        fireEvent.click(getByTestId(container, 'activity-click-area'));
         expect(onToggleSpy).toHaveBeenCalledWith();
     });
 

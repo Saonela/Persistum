@@ -12,6 +12,11 @@
     -webkit-tap-highlight-color: transparent;
 }
 
+.activity__click-area {
+    display: flex;
+    align-items: center;
+}
+
 .activity button {
     transition: color 150ms ease-in;
 }
