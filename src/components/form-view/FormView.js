@@ -26,14 +26,14 @@ function FormView() {
     const loading = loadingStatus === ASYNC_STATE_STATUS.LOADING;
 
     const [dayIsLogged, setDayIsLogged] = useState(false);
-    const [currentDate] = useState(UtilityService.getCurrentShortTimestamp());
+    const [date] = useState(UtilityService.getCurrentShortTimestamp());
 
     return (
         <div className="app-panel app-border form-view">
             {loading && <BackgroundLoader/>}
             {!dayIsLogged ?
                 <div className="form-view__form">
-                    <FormDate date={currentDate}/>
+                    <FormDate date={date} setDate={(date) => console.log('FORM setdate', date)}/>
                     <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
                                     onSubmit={(name) => {dispatch(createActivity(name))}}/>
                     <ActivityList activities={activities}
@@ -60,7 +60,7 @@ function FormView() {
                     }
                 </div> :
                 <LogIsCompletedMessage className="form-view__log-completed-message"
-                                       date={currentDate}
+                                       date={date}
                                        onBack={() => setDayIsLogged(false)}/>
             }
         </div>
