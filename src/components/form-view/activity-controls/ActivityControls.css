@@ -34,6 +34,7 @@
     display: flex;
     align-items: center;
     position: relative;
+    height: 100%;
     padding-left: var(--margin);
 }
 
@@ -66,6 +67,29 @@
         left: -156px;
         background: var(--color-background);
     }
+
+    .activity-controls-transition-enter {
+        opacity: 1;
+        transform: translate(70px, -50%);
+        transition: transform 100ms ease-in;
+    }
+
+    .activity-controls-transition-enter.activity-controls-transition-enter-active {
+        opacity: 1;
+        transform: translate(0px, -50%);
+    }
+
+    .activity-controls-transition-leave {
+        opacity: 1;
+        transform: translate(0px, -50%);
+        transition: transform 100ms ease-in;
+    }
+
+    .activity-controls-transition-leave.activity-controls-transition-leave-active {
+        opacity: 1;
+        transform: translate(70px, -50%);
+    }
+
     .activity-controls__mask {
         width: 44px;
     }

@@ -1,6 +1,5 @@
 .activity {
     display: flex;
-    align-items: center;
     justify-content: space-between;
     position: relative;
     padding: var(--padding-s) 0 var(--padding-s) 62px;
@@ -15,6 +14,7 @@
 .activity__click-area {
     display: flex;
     align-items: center;
+    width: 100%;
 }
 
 .activity button {
