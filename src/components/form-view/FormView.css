@@ -6,6 +6,7 @@
     border-radius: 5px;
     margin: 10vh auto;
     background: var(--color-background);
+    overflow: auto;
 }
 
 .form-view__form {
