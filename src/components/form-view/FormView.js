@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import './FormView.css'
 import Button from "@material-ui/core/Button";
 import LogIsCompletedMessage from "../log-is-completed-message/LogIsCompletedMessage";
@@ -12,7 +12,12 @@ import {
     getAllActivities,
     updateActivity
 } from "../../redux/slices/activitiesSlice";
-import {getLoggedActivityIds, toggleLogEntryActivity, updateLogEntry} from "../../redux/slices/logEntriesSlice";
+import {
+    getLoggedActivityIds,
+    getTimestamp, resetTimestamp, setTimestamp,
+    toggleLogEntryActivity,
+    updateLogEntry
+} from "../../redux/slices/logEntriesSlice";
 import FormDate from "./form-date/FormDate";
 import {ASYNC_STATE_STATUS} from "../../redux/asyncStateStatus";
 import NoActivitiesMessage from "./no-activities-message/NoActivitiesMessage";
@@ -20,27 +25,39 @@ import BackgroundLoader from "../background-loader/BackgroundLoader";
 
 function FormView() {
     const dispatch = useDispatch();
+
+    const date = useSelector(getTimestamp);
     const activities = useSelector(getAllActivities);
     const completedActivityIds = useSelector(getLoggedActivityIds);
     const loadingStatus = useSelector(state => state.activities.status);
-    const loading = loadingStatus === ASYNC_STATE_STATUS.LOADING;
 
+    const loading = loadingStatus === ASYNC_STATE_STATUS.LOADING;
     const [dayIsLogged, setDayIsLogged] = useState(false);
-    const [date] = useState(UtilityService.getCurrentShortTimestamp());
+
+    useEffect(() => {
+        return () => {
+            dispatch(resetTimestamp());
+        }
+    }, [dispatch]);
+
+    const isCurrentDate = () => {
+        return date === UtilityService.getCurrentShortTimestamp();
+    }
 
     return (
         <div className="app-panel app-border form-view">
             {loading && <BackgroundLoader/>}
             {!dayIsLogged ?
                 <div className="form-view__form">
-                    <FormDate date={date} setDate={(date) => console.log('FORM setdate', date)}/>
+                    <FormDate date={date} setDate={(date) => dispatch(setTimestamp(date))}/>
+                    {!isCurrentDate() && <div className="form-view__edit-message">You are not on the current date</div>}
                     <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
                                     onSubmit={(name) => {dispatch(createActivity(name))}}/>
                     <ActivityList activities={activities}
                                   completedActivityIds={completedActivityIds}
                                   onToggle={(id) => {
                                       dispatch(toggleLogEntryActivity(id));
-                                      dispatch(updateLogEntry(UtilityService.getCurrentShortTimestamp()));
+                                      dispatch(updateLogEntry(date));
                                   }}
                                   onUpdate={(activity) => {dispatch(updateActivity(activity))}}
                                   onDelete={(activity) => {dispatch(deleteActivity(activity.id))}}/>

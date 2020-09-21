@@ -32,29 +32,27 @@ const logEntriesSlice = createSlice({
     initialState: {
         status: ASYNC_STATE_STATUS.IDLE,
         error: null,
-        data: []
+        data: [],
+        timestamp: UtilityService.getCurrentShortTimestamp()
     },
     reducers: {
-        toggleLogEntryActivity: {
-            reducer(state, action) {
-                const logEntry = state.data.find(entry => entry.timestamp === action.payload.timestamp);
-                if (logEntry) {
-                    if (logEntry.activities.includes(action.payload.activityId)) {
-                        logEntry.activities = logEntry.activities.filter(id => id !== action.payload.activityId);
-                    } else {
-                        logEntry.activities.push(action.payload.activityId);
-                    }
+        setTimestamp(state, action) {
+            state.timestamp = action.payload;
+        },
+        resetTimestamp(state, action) {
+            state.timestamp = UtilityService.getCurrentShortTimestamp();
+        },
+        toggleLogEntryActivity(state, action) {
+            const activityId = action.payload;
+            const logEntry = state.data.find(entry => entry.timestamp === state.timestamp);
+            if (logEntry) {
+                if (logEntry.activities.includes(activityId)) {
+                    logEntry.activities = logEntry.activities.filter(id => id !== activityId);
                 } else {
-                    state.data.push({timestamp: action.payload.timestamp, activities: [action.payload.activityId]});
+                    logEntry.activities.push(activityId);
                 }
-            },
-            prepare(activityId) {
-                return {
-                    payload: {
-                        timestamp: UtilityService.getCurrentShortTimestamp(),
-                        activityId
-                    }
-                }
+            } else {
+                state.data.push({timestamp: state.timestamp, activities: [activityId]});
             }
         }
     },
@@ -89,14 +87,15 @@ const logEntriesSlice = createSlice({
     }
 });
 
-export const { toggleLogEntryActivity } = logEntriesSlice.actions;
+export const { setTimestamp, resetTimestamp, toggleLogEntryActivity } = logEntriesSlice.actions;
 
+export const getTimestamp = state => state.logEntries.timestamp;
 export const getLogEntries = state => state.logEntries.data;
 export const getLogEntryByTimestamp = (state, timestamp) => state.logEntries.data.find(entry => entry.timestamp === timestamp);
 
 export const getLoggedActivityIds = createSelector(
-    [getLogEntries, () => UtilityService.getCurrentShortTimestamp()],
-    (logEntries, currentTimestamp) => {    console.log('')
+    [getLogEntries, getTimestamp],
+    (logEntries, currentTimestamp) => {
         const currentLogEntry = logEntries.find(entry => entry.timestamp === currentTimestamp);
         return currentLogEntry ? currentLogEntry.activities : [];
     }

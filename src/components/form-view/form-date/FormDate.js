@@ -9,7 +9,7 @@ import EditIcon from "@material-ui/icons/Edit";
 function FormDate({date, setDate, disabled}) {
     const DateDisplay = React.forwardRef(({value, onClick}, ref) => (
         <div className="form-date">
-            <div className="form-date__container" onClick={onClick} data-testid="form-date-container">
+            <div className="form-date__container">
                 <p className="form-date__day">{moment(value).format('dddd')} {moment(value).format('DD')}</p>
                 <div className="inner-block">
                     <p className="form-date__year">{moment(value).format('YYYY')}</p>
@@ -28,9 +28,9 @@ function FormDate({date, setDate, disabled}) {
         <DatePicker
             dateFormat="yyyy-MM-dd"
             maxDate={new Date()}
-            selected={moment(date).utc().toDate()}
+            selected={moment(date, 'YYYY-MM-DD').utc().toDate()}
             onChange={(date) => {
-                setDate(moment(date).format('YYYY-MM-DD'))
+                setDate(moment(date, 'YYYY-MM-DD').format('YYYY-MM-DD'))
             }}
             disabled={disabled}
             customInput={<DateDisplay/>}/>

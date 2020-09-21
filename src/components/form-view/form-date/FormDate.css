@@ -6,7 +6,6 @@
     display: flex;
     flex-wrap: wrap;
     padding-bottom: var(--padding-s);
-    cursor: pointer;
 }
 
 .form-date__day {

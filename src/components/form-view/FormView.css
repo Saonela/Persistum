@@ -9,6 +9,13 @@
     overflow: auto;
 }
 
+.form-view__edit-message {
+    height: 16px;
+    margin-bottom: -16px;
+    text-align: left;
+    color: var(--color-theme);
+}
+
 .form-view__form {
     height: 100%;
     display: flex;
@@ -18,11 +25,12 @@
 .form-view__footer {
     border-top: 1px solid var(--color-border);
     margin-top: var(--margin-xl);
+    margin-bottom: calc(var(--margin) * -1);
 }
 
 button.form-view__toggle-button {
     float: right;
-    margin-top: var(--margin-m);
+    margin: var(--margin-m) 0;
 }
 
 @media only screen and (max-width: 680px) {

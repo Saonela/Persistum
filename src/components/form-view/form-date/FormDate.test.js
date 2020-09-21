@@ -40,8 +40,6 @@ describe('FormDate', () => {
     it('should disable and hide button', () => {
         render(<FormDate date={'2020-09-01'} disabled/>);
         expect(screen.queryByRole('button', {name: 'Edit date'})).toBeFalsy();
-        fireEvent.click(screen.getByTestId('form-date-container'));
-        expect(screen.queryByRole('button', {name: 'Choose Wednesday, September 2nd, 2020'})).toBeFalsy();
     });
 
 });
