@@ -18,6 +18,14 @@ const ActivityAPIService = {
     async update(activity, userId) {
         await getActivitiesCollection(userId).doc(activity.id).update(activity);
     },
+    async updateMany(activities, userId) {
+        const batch = FirebaseDB.batch();
+        activities.forEach((activity) => {
+            const doc = getActivitiesCollection(userId).doc(activity.id);
+            batch.update(doc, {positionIndex: activity.positionIndex});
+        });
+        batch.commit().then();
+    },
     async delete(id, userId) {
         await getActivitiesCollection(userId).doc(id).delete();
     }

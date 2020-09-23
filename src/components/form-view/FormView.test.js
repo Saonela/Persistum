@@ -29,6 +29,22 @@ jest.mock('react-transition-group', () => {
     return { CSSTransitionGroup: FakeCSSTransition, Transition: FakeTransition };
 });
 
+jest.mock('react-beautiful-dnd', () => ({
+    Droppable: ({ children }) => children({
+        draggableProps: {
+            style: {},
+        },
+        innerRef: jest.fn(),
+    }, {}),
+    Draggable: ({ children }) => children({
+        draggableProps: {
+            style: {},
+        },
+        innerRef: jest.fn(),
+    }, {}),
+    DragDropContext: ({ children }) => children,
+}));
+
 jest.mock('../../services/utilityService', () => ({
     getCurrentShortTimestamp: jest.fn()
 }));

@@ -30,6 +30,15 @@ export const deleteActivity = createAsyncThunk('activities/deleteActivity', asyn
     return id;
 });
 
+export const updateActivitiesOrder = createAsyncThunk('activities/updateActivitiesOrder', async (data, thunkAPI) => {
+    const activitiesData = thunkAPI.getState().activities.data.map((activity, i) => {
+        return {
+            id: activity.id,
+            positionIndex: activity.positionIndex || activity.positionIndex === 0 ? activity.positionIndex : i};
+    });
+    ActivityAPIService.updateMany(activitiesData, getUserId(thunkAPI.getState())).then();
+});
+
 const activitiesSlice = createSlice({
     name: 'activities',
     initialState: {
@@ -37,13 +46,22 @@ const activitiesSlice = createSlice({
         error: null,
         data: []
     },
-    reducers: {},
+    reducers: {
+        reorderActivities(state, action) {
+            const {sourceIndex, destinationIndex} = action.payload;
+            let activities = state.data.slice();
+            const [removed] = activities.splice(sourceIndex, 1);
+            activities.splice(destinationIndex, 0, removed);
+            state.data = activities;
+        },
+    },
     extraReducers: {
         [fetchActivities.pending]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.LOADING;
         },
         [fetchActivities.fulfilled]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.SUCCEEDED;
+            action.payload.sort((a, b) => a.positionIndex - b.positionIndex);
             state.data = action.payload;
         },
         [fetchActivities.rejected]: (state, action) => {
@@ -67,6 +85,8 @@ const activitiesSlice = createSlice({
         }
     }
 });
+
+export const {reorderActivities} = activitiesSlice.actions;
 
 export const getAllActivities = state => state.activities.data;
 export const getFilteredActivities = state => state.activities.data.filter(activity => !state.filters.includes(activity.id));

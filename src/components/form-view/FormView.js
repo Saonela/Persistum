@@ -9,7 +9,7 @@ import UtilityService from "../../services/utilityService";
 import {
     createActivity,
     deleteActivity,
-    getAllActivities,
+    getAllActivities, reorderActivities, updateActivitiesOrder,
     updateActivity
 } from "../../redux/slices/activitiesSlice";
 import {
@@ -60,7 +60,15 @@ function FormView() {
                                       dispatch(updateLogEntry(date));
                                   }}
                                   onUpdate={(activity) => {dispatch(updateActivity(activity))}}
-                                  onDelete={(activity) => {dispatch(deleteActivity(activity.id))}}/>
+                                  onDelete={(activity) => {
+                                      dispatch(deleteActivity(activity.id));
+                                      dispatch(updateActivitiesOrder());
+                                  }}
+                                  onDragEnd={(indexData) => {
+                                      dispatch(reorderActivities(indexData));
+                                      console.log('call ')
+                                      dispatch(updateActivitiesOrder());
+                                  }}/>
                     {!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE ?
                         <div className="no-activities-message" data-testid="no-activities">
                             <NoActivitiesMessage/>
