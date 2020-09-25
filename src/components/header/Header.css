@@ -2,7 +2,7 @@
     display: flex;
     width: 100%;
     height: var(--height-header);
-    border: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
     z-index: 1;
     background: var(--color-background);
 }
@@ -21,13 +21,19 @@
     width: 90px;
 }
 
+@media only screen and (max-width: 1300px) {
+    .header__content {
+        padding: 0;
+    }
+}
+
 @media only screen and (max-width: 680px) {
     .header {
         border: none;
     }
 
     .header__content {
-        padding: 12px var(--padding-l);
+        padding: 0;
         margin: 0 var(--margin-m);
         border-bottom: 1px solid var(--color-border);
     }

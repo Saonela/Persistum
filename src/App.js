@@ -89,7 +89,9 @@ function App({onLoadingStateChange}) {
                                 </Route>
                                 <Route path="/calendar" exact>
                                     <Header/>
-                                    <CalendarView/>
+                                    <div className="inner-container">
+                                        <CalendarView/>
+                                    </div>
                                 </Route>
                             </Switch>
                         </div>

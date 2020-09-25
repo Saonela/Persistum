@@ -41,4 +41,10 @@ describe('LandingView', () => {
         expect(history.location.pathname).toBe('/form');
     });
 
+    it('should match snapshot', () => {
+        const history = createMemoryHistory()
+        const {asFragment} = render(<Router history={history}><LandingView/></Router>);
+        expect(asFragment()).toMatchSnapshot();
+    });
+
 });

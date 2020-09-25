@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`LandingView should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="landing-wrapper"
+  >
+    <div
+      class="background-figure background-figure-1"
+    />
+    <div
+      class="figures-group"
+    >
+      <div
+        class="background-figure background-figure-2"
+      />
+      <div
+        class="background-figure background-figure-3"
+      />
+      <div
+        class="background-figure background-figure-4"
+      />
+    </div>
+    <div
+      class="landing"
+    >
+      <div
+        class="landing__content"
+      >
+        <h1
+          class="landing__header"
+        >
+          Welcome to 
+          <span>
+            Persistum.
+          </span>
+        </h1>
+        <p
+          class="landing__description"
+        >
+          Never let your routine get out of order. 
+          <br />
+          Easy way to organize your tasks or goals. 
+          <br />
+          Log and track your activities. 
+          <br />
+          Overview your progress. 
+          <br />
+          And keep going to achieve your goals!
+        </p>
+        <figure
+          class="main-illustration"
+        >
+          <img
+            alt="list-illustration"
+            class="main-illustration__list"
+            src="list.svg"
+          />
+          <img
+            alt="calendar-illustration"
+            class="main-illustration__calendar"
+            src="calendar.svg"
+          />
+          <img
+            alt="stats-illustration"
+            class="main-illustration__stats"
+            src="stats.svg"
+          />
+        </figure>
+        <section
+          class="landing__get-started"
+        >
+          <a
+            href="/register"
+            tabindex="-1"
+          >
+            <button
+              class="main-button"
+            >
+              Get started
+            </button>
+          </a>
+           or
+          <a
+            href="/login"
+            tabindex="-1"
+          >
+            <button
+              class="secondary-button"
+            >
+              Login
+            </button>
+          </a>
+        </section>
+      </div>
+      <footer
+        class="landing__footer"
+      >
+        <a
+          href="mailto:kvalintelis@gmail.com"
+        >
+          kvalintelis@gmail.com
+        </a>
+        <p>
+          2020
+        </p>
+      </footer>
+    </div>
+  </div>
+</DocumentFragment>
+`;

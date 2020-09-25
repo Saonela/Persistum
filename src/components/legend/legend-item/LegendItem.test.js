@@ -22,6 +22,6 @@ describe('LegendItem', () => {
         const text = getByText(container, 'Learn redux');
         expect(getByRole(container, 'img')).toHaveStyle('background-color: #ebebeb');
         fireEvent.click(text);
-        expect(onToggleSpy).toHaveBeenCalled();
+        expect(onToggleSpy).toHaveBeenCalledWith(true);
     });
 });

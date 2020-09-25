@@ -1,14 +1,21 @@
 .legend {
     display: flex;
-    flex-wrap: wrap;
+    width: 100%;
+    align-items: center;
     height: var(--legend-height);
-    padding: var(--margin) var(--margin-l);
-    margin: 0 var(--margin-l);
     border-bottom: 1px solid var(--color-border);
     background: var(--color-background);
-    box-sizing: border-box;
+    overflow: auto;
+}
+
+.legend__item:first-child {
+    padding-left: var(--margin-s);
+}
+
+.legend__item:last-child {
+    padding-right: var(--margin-s);
 }
 
 .legend__item:not(:last-child) {
-    margin-right: var(--margin);
+    margin-right: var(--margin-s);
 }

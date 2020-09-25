@@ -11,3 +11,8 @@ it('should emit event on go back button click', () => {
     fireEvent.click(button);
     expect(spy).toHaveBeenCalled();
 });
+
+it('should match snapshot', () => {
+    const {asFragment} = render(<Router><LogIsCompletedMessage date={'2020'}/></Router>);
+    expect(asFragment()).toMatchSnapshot();
+});
