@@ -15,6 +15,8 @@ function CalendarView() {
     const activities = useSelector(getAllActivities);
     const filters = useSelector(state => state.filters);
 
+    console.log('CalendarView data', calendarData);
+
     return (
             <div className="calendar-view">
                 <div className="calendar-view__legend" >

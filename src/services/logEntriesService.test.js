@@ -109,74 +109,18 @@ describe('LogEntriesService', () => {
     it('should return calendar format of data log state', () => {
         expect(LogEntriesService.getCalendarLog(dataEntries)).toEqual([
             {
-                year: '2010',
-                data: [
-                    {
-                        month: '11',
-                        data: [
-                            {
-                                timestamp: '2010-11-01',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2010-11-02',
-                                activities: [123456]
-                            },
-                            {
-                                timestamp: '2010-11-03',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2010-11-04',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2010-11-05',
-                                activities: [],
-                                weekday: 5
-                            }
-                        ]
-                    }
-                ]
-            },
-            {
                 year: '2020',
                 data: [
                     {
-                        month: '4',
-                        data: [
-                            {
-                                timestamp: '2020-04-01',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2020-04-02',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2020-04-03',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2020-04-04',
-                                activities: []
-                            },
-                            {
-                                timestamp: '2020-04-05',
-                                activities: [999],
-                                weekday: 0
-                            }
-                        ]
-                    },
-                    {
                         month: '11',
                         data: [
                             {
-                                timestamp: '2020-11-01',
-                                activities: [999]
+                                timestamp: '2020-11-05',
+                                activities: [123456, 999],
+                                weekday: 4
                             },
                             {
-                                timestamp: '2020-11-02',
+                                timestamp: '2020-11-04',
                                 activities: []
                             },
                             {
@@ -184,18 +128,74 @@ describe('LogEntriesService', () => {
                                 activities: []
                             },
                             {
-                                timestamp: '2020-11-04',
+                                timestamp: '2020-11-02',
                                 activities: []
                             },
                             {
-                                timestamp: '2020-11-05',
-                                activities: [123456, 999],
-                                weekday: 4
+                                timestamp: '2020-11-01',
+                                activities: [999]
+                            }
+                        ]
+                    },
+                    {
+                        month: '4',
+                        data: [
+                            {
+                                timestamp: '2020-04-05',
+                                activities: [999],
+                                weekday: 0
                             },
+                            {
+                                timestamp: '2020-04-04',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-03',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-02',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2020-04-01',
+                                activities: []
+                            }
                         ]
                     }
                 ]
             },
+            {
+                year: '2010',
+                data: [
+                    {
+                        month: '11',
+                        data: [
+                            {
+                                timestamp: '2010-11-05',
+                                activities: [],
+                                weekday: 5
+                            },
+                            {
+                                timestamp: '2010-11-04',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2010-11-03',
+                                activities: []
+                            },
+                            {
+                                timestamp: '2010-11-02',
+                                activities: [123456]
+                            },
+                            {
+                                timestamp: '2010-11-01',
+                                activities: []
+                            }
+                        ]
+                    }
+                ]
+            }
         ]);
     });
 });

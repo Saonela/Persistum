@@ -5,9 +5,40 @@ import {within} from "@testing-library/dom";
 
 describe('LogTable', () => {
 
-    let container;
-
     const dataLog = [
+        {
+            year: '2020',
+            data: [
+                {
+                    month: '11',
+                    data: [
+                        {
+                            weekday: 2,
+                            timestamp: '2020-11-31',
+                            activities: []
+                        },
+                        {
+                            timestamp: '2020-11-10',
+                            activities: [{id: 999, name: 'c', style: {}}]
+                        }
+                    ]
+                },
+                {
+                    month: '4',
+                    data: [
+                        {
+                            weekday: 0,
+                            timestamp: '2020-04-31',
+                            activities: []
+                        },
+                        {
+                            timestamp: '2020-04-15',
+                            activities: [{id: 999, name: 'b', style: {}}]
+                        }
+                    ]
+                }
+            ]
+        },
         {
             year: '2010',
             data: [
@@ -15,51 +46,18 @@ describe('LogTable', () => {
                     month: '11',
                     data: [
                         {
-                            timestamp: '2010-11-02',
-                            activities: [{id: 123456, name: 'a', style: {}}]
-                        },
-                        {
                             weekday: 5,
                             timestamp: '2010-11-30',
                             activities: []
+                        },
+                        {
+                            timestamp: '2010-11-02',
+                            activities: [{id: 123456, name: 'a', style: {}}]
                         }
                     ],
                 }
             ]
-        },
-        {
-            year: '2020',
-            data: [
-                {
-                    month: '4',
-                    data: [
-                        {
-                            timestamp: '2020-04-15',
-                            activities: [{id: 999, name: 'b', style: {}}]
-                        },
-                        {
-                            weekday: 0,
-                            timestamp: '2020-04-31',
-                            activities: []
-                        }
-                    ]
-                },
-                {
-                    month: '11',
-                    data: [
-                        {
-                            timestamp: '2020-11-10',
-                            activities: [{id: 999, name: 'c', style: {}}]
-                        },
-                        {
-                            weekday: 2,
-                            timestamp: '2020-11-31',
-                            activities: []
-                        }
-                    ]
-                }
-            ]
-        },
+        }
     ];
 
     it('should display log cells', () => {

@@ -30,16 +30,16 @@ const LogEntriesService = {
             const monthIndex = months.indexOf(month) < 0;
 
             if (yearIndex) {
-                years.push(year);
-                stateArray.push({
+                years.unshift(year);
+                stateArray.unshift({
                     year: year,
                     data: []
                 });
             }
 
             if (monthIndex) {
-                months.push(month);
-                stateArray[years.indexOf(year)].data.push({
+                months.unshift(month);
+                stateArray[years.indexOf(year)].data.unshift({
                     month: month,
                     data: []
                 });
@@ -51,12 +51,12 @@ const LogEntriesService = {
                 for (let day = 1; day <= daysInMonth; day++) {
                     const timestamp = moment(`${year}-${month}-${day}`, 'YYYY-M-D').format('YYYY-MM-DD');
                     const monthData = stateArray[years.indexOf(year)].data[months.indexOf(month)].data;
-                    monthData.push({
+                    monthData.unshift({
                         timestamp,
                         activities: []
                     });
                     if (day === daysInMonth) {
-                        monthData[monthData.length - 1].weekday = moment(timestamp, 'YYYY-MM-DD').day();
+                        monthData[0].weekday = moment(timestamp, 'YYYY-MM-DD').day();
                     }
                 }
             }
