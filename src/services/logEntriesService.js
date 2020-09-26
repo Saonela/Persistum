@@ -45,17 +45,25 @@ const LogEntriesService = {
                 });
             }
 
-            const daysInMonth = moment((year + '-' + month), 'YYYY-MM').daysInMonth();
-            for (let day = 1; day <= daysInMonth; day++) {
-                const timestamp = moment(`${year}-${month}-${day}`, 'YYYY-M-D').format('YYYY-MM-DD');
-                if (entry.timestamp === timestamp) {
-                    stateArray[years.indexOf(year)].data[months.indexOf(month)].data.push(entry);
-                } else {
-                    stateArray[years.indexOf(year)].data[months.indexOf(month)].data.push({
+            if (stateArray[years.indexOf(year)].data[months.indexOf(month)].data.length === 0) {
+                const daysInMonth = moment((year + '-' + month), 'YYYY-MM').daysInMonth();
+
+                for (let day = 1; day <= daysInMonth; day++) {
+                    const timestamp = moment(`${year}-${month}-${day}`, 'YYYY-M-D').format('YYYY-MM-DD');
+                    const monthData = stateArray[years.indexOf(year)].data[months.indexOf(month)].data;
+                    monthData.push({
                         timestamp,
                         activities: []
                     });
+                    if (day === daysInMonth) {
+                        monthData[monthData.length - 1].weekday = moment(timestamp, 'YYYY-MM-DD').day();
+                    }
                 }
+            }
+
+            const dayLog = stateArray[years.indexOf(year)].data[months.indexOf(month)].data.find(dayLog => dayLog.timestamp === entry.timestamp);
+            if (dayLog) {
+                dayLog.activities = dayLog.activities.concat(entry.activities);
             }
         });
 

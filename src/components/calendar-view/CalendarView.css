@@ -1,5 +1,5 @@
 .calendar-view {
-    width: 100%;
+    height: 100%;
 }
 
 .calendar-view__legend {
@@ -7,7 +7,10 @@
 }
 
 .calendar-view__table {
+    max-width: 1300px;
+    margin: auto;
+}
+
+.calendar-view .scroll-container {
     height: calc(100% - var(--legend-height));
-    margin-top: var(--legend-height);
-    overflow: auto;
 }

@@ -1,0 +1,21 @@
+.weekdays-header {
+    display: flex;
+    justify-content: space-between;
+    padding-top: var(--margin-s);
+    margin-top: var(--margin);
+    margin-bottom: var(--margin);
+    border-top: 1px solid var(--color-border);
+    font-size: var(--font-size-m);
+}
+
+.weekday {
+    width: var(--width-calendar-card);
+    text-align: left;
+}
+
+
+@media only screen and (max-width: 1300px) {
+    .weekdays-header {
+        display: none;
+    }
+}

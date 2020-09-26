@@ -6,7 +6,8 @@
     --color-border: #d3d3d3;
     /*#eaeaea;*/
     --color-background: #fffffe;
-    --color-shade-background: #e7e7e7;
+    /*--color-shade-background: #e7e7e7;*/
+    --color-shade-background: #f6f6f6;
     --color-background-dark-opaque: #7a7a7a52;
     --color-highlight: #79ACE2;
     --color-theme: #4973d3;
@@ -37,5 +38,6 @@
 
     --legend-height: 50px;
 
+    --width-calendar-card: 170px;
     --width-form-button: 202px;
 }

@@ -83,7 +83,7 @@ function App({onLoadingStateChange}) {
                                 </Route>
                                 <Route path="/form" exact>
                                     <Header/>
-                                    <div className="inner-container">
+                                    <div className="inner-container scroll-container">
                                         <FormView/>
                                     </div>
                                 </Route>

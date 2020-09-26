@@ -15,11 +15,15 @@
     background: var(--color-background);
 }
 
+.scroll-container {
+    overflow: auto;
+    height: 100%;
+}
+
 .inner-container {
     width: 100%;
     height: calc(100% - var(--height-header));
     background: var(--color-shade-background);
-    overflow: auto;
 }
 
 .app-theme-background {

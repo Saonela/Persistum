@@ -22,8 +22,10 @@ function CalendarView() {
                             filters={filters}
                             onFilter={(id) => dispatch(toggleFilter(id))}/>
                 </div>
-                <div className="calendar-view__table" >
-                    {/*<LogTable dataLog={calendarData}/>*/}
+                <div className="scroll-container">
+                    <div className="calendar-view__table" >
+                        <LogTable dataLog={calendarData}/>
+                    </div>
                 </div>
             </div>
     )

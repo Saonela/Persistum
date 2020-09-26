@@ -1,0 +1,45 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`WeekdaysHeader should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="weekdays-header"
+  >
+    <div
+      class="weekday"
+    >
+      Monday
+    </div>
+    <div
+      class="weekday"
+    >
+      Tuesday
+    </div>
+    <div
+      class="weekday"
+    >
+      Wednesday
+    </div>
+    <div
+      class="weekday"
+    >
+      Thursday
+    </div>
+    <div
+      class="weekday"
+    >
+      Friday
+    </div>
+    <div
+      class="weekday"
+    >
+      Saturday
+    </div>
+    <div
+      class="weekday"
+    >
+      Sunday
+    </div>
+  </div>
+</DocumentFragment>
+`;

@@ -4,6 +4,9 @@ import moment from "moment";
 jest.mock('moment', () => {
     let input;
     const mMoment = {
+        day: () => {
+            return jest.requireActual('moment')(input).day();
+        },
         daysInMonth: () => {
             return 5;
         },
@@ -31,6 +34,10 @@ describe('LogEntriesService', () => {
         {
             timestamp: '2020-11-01',
             activities: [999]
+        },
+        {
+            timestamp: '2020-11-05',
+            activities: [123456, 999]
         },
         {
             timestamp: '2020-12-03',
@@ -78,6 +85,21 @@ describe('LogEntriesService', () => {
                     }]
                 },
                 {
+                    timestamp: '2020-11-05',
+                    activities: [
+                        {
+                            id: 123456,
+                            name: 'Learn redux',
+                            style: ''
+                        },
+                        {
+                            id: 999,
+                            name: 'Read',
+                            style: ''
+                        }
+                    ]
+                },
+                {
                     timestamp: '2020-12-03',
                     activities: []
                 }
@@ -110,7 +132,8 @@ describe('LogEntriesService', () => {
                             },
                             {
                                 timestamp: '2010-11-05',
-                                activities: []
+                                activities: [],
+                                weekday: 5
                             }
                         ]
                     }
@@ -140,7 +163,8 @@ describe('LogEntriesService', () => {
                             },
                             {
                                 timestamp: '2020-04-05',
-                                activities: [999]
+                                activities: [999],
+                                weekday: 0
                             }
                         ]
                     },
@@ -165,7 +189,8 @@ describe('LogEntriesService', () => {
                             },
                             {
                                 timestamp: '2020-11-05',
-                                activities: []
+                                activities: [123456, 999],
+                                weekday: 4
                             },
                         ]
                     }
