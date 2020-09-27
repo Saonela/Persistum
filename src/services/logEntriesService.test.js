@@ -116,8 +116,7 @@ describe('LogEntriesService', () => {
                         data: [
                             {
                                 timestamp: '2020-11-05',
-                                activities: [123456, 999],
-                                weekday: 4
+                                activities: [123456, 999]
                             },
                             {
                                 timestamp: '2020-11-04',
@@ -142,8 +141,7 @@ describe('LogEntriesService', () => {
                         data: [
                             {
                                 timestamp: '2020-04-05',
-                                activities: [999],
-                                weekday: 0
+                                activities: [999]
                             },
                             {
                                 timestamp: '2020-04-04',
@@ -173,8 +171,7 @@ describe('LogEntriesService', () => {
                         data: [
                             {
                                 timestamp: '2010-11-05',
-                                activities: [],
-                                weekday: 5
+                                activities: []
                             },
                             {
                                 timestamp: '2010-11-04',

@@ -55,9 +55,6 @@ const LogEntriesService = {
                         timestamp,
                         activities: []
                     });
-                    if (day === daysInMonth) {
-                        monthData[0].weekday = moment(timestamp, 'YYYY-MM-DD').day();
-                    }
                 }
             }
 

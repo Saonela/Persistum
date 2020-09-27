@@ -13,7 +13,6 @@ describe('LogTable', () => {
                     month: '11',
                     data: [
                         {
-                            weekday: 2,
                             timestamp: '2020-11-31',
                             activities: []
                         },
@@ -27,7 +26,6 @@ describe('LogTable', () => {
                     month: '4',
                     data: [
                         {
-                            weekday: 0,
                             timestamp: '2020-04-31',
                             activities: []
                         },
@@ -46,7 +44,6 @@ describe('LogTable', () => {
                     month: '11',
                     data: [
                         {
-                            weekday: 5,
                             timestamp: '2010-11-30',
                             activities: []
                         },
@@ -78,7 +75,7 @@ describe('LogTable', () => {
         let yearTestUtils = within(year)
         let month = yearTestUtils.queryByTestId('month-11');
         let monthTestUtils = within(month)
-        expect(monthTestUtils.queryAllByTestId('day-placeholder').length).toBe(2);
+        expect(monthTestUtils.queryAllByTestId('day-placeholder').length).toBe(5);
 
         year = queryByTestId('year-2020');
         yearTestUtils = within(year)

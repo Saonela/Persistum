@@ -12,10 +12,14 @@
     top: calc(var(--margin-xs) * -1);
     left: calc(var(--margin-xs) * -1);
     padding: var(--padding-xs);
-    width: 20px;
-    text-align: center;
+    width: 100%;
+    text-align: left;
     font-size: var(--font-size);
     font-weight: bold;
+}
+
+.log-cell__weekend {
+    color: #ff2727;
 }
 
 .log-cell__activities {
@@ -34,3 +38,10 @@
 .log-cell__activity:hover {
     border-color: var(--color-highlight);
 }
+
+@media only screen and (min-width: 1300px) {
+    .log-cell__weekday {
+        display: none;
+    }
+}
+
