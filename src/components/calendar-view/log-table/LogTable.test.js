@@ -62,13 +62,6 @@ describe('LogTable', () => {
         expect(getAllByRole('listitem', {name: 'Activity'}).length).toBe(3);
     });
 
-    it('should display no data found message', () => {
-        const {queryByText} = render(<LogTable dataLog={dataLog}/>);
-        expect(queryByText('No data have been found!')).toBeFalsy();
-        const {getByText} = render(<LogTable dataLog={[]}/>);
-        getByText('No data have been found!');
-    });
-
     it('should add placeholder tiles by last months day weekday', () => {
         let {queryByTestId} = render(<LogTable dataLog={dataLog}/>);
         let year = queryByTestId('year-2010');

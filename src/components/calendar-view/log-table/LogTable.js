@@ -41,11 +41,6 @@ function LogTable({dataLog}) {
                     </div>
                 )}
             </div>
-            {!dataLog.length ?
-                <div className="no-log-data-message">
-                    No data have been found!
-                </div> : null
-            }
         </React.Fragment>
     )
 }

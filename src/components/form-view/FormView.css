@@ -43,10 +43,6 @@ button.form-view__toggle-button {
         box-sizing: border-box;
         overflow: auto;
     }
-
-    .form-view__footer {
-        margin-top: auto;
-    }
 }
 
 @media only screen and (max-width: 540px) {

@@ -40,23 +40,25 @@ function App({onLoadingStateChange}) {
     const user = useSelector(state => state.user);
 
     useEffect(() => {
-        if (appRoutes.includes(window.location.pathname) || window.location.pathname === '/') {
-            setLoading(true);
-            onLoadingStateChange(true)
-
-            AuthAPIService.getCurrentUser().then((user) => {
-                if (user) {
-                    dispatch(setUser({id: user.uid, email: user.email}));
-                    dispatch(fetchActivities());
-                    dispatch(fetchLogEntries());
-                } else {
-                    // ... redirect ? (already done by guard)
-                }
-                setLoading(false);
-                onLoadingStateChange(false);
-            });
+        if (appRoutes.includes(window.location.pathname)) {
+            loadAppData();
         }
     }, []);
+
+    const loadAppData = () => {
+        setLoading(true);
+        onLoadingStateChange(true)
+
+        AuthAPIService.getCurrentUser().then((user) => {
+            if (user) {
+                dispatch(setUser({id: user.uid, email: user.email}));
+                dispatch(fetchActivities());
+                dispatch(fetchLogEntries());
+            }
+            setLoading(false);
+            onLoadingStateChange(false);
+        });
+    };
 
     return (
         <MuiThemeProvider theme={theme}>
@@ -66,7 +68,7 @@ function App({onLoadingStateChange}) {
                         <div className="container">
                             <Switch>
                                 <Route path="/" exact>
-                                    <LandingView/>
+                                    <LandingView onLoadingStateChange={onLoadingStateChange} onReturningUser={loadAppData}/>
                                 </Route>
                                 <Route path="/login" exact>
                                     <div className="app-theme-background">

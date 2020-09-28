@@ -1,13 +1,29 @@
-import React from "react";
+import React, {useEffect, useState} from "react";
 import "./LandingView.css"
 import list from "../../assets/landing/list.svg"
 import calendar from "../../assets/landing/calendar.svg"
 import stats from "../../assets/landing/stats.svg"
 import {Link, withRouter} from "react-router-dom";
-import {useSelector} from "react-redux";
+import AuthAPIService from "../../services/api/authAPIService";
 
-function LandingView() {
-    const user = useSelector(state => state.user);
+function LandingView({history, onReturningUser, onLoadingStateChange}) {
+
+    const [clicked, setClicked] = useState(false);
+
+    useEffect(() => {
+        if (clicked) {
+            onLoadingStateChange(true);
+            AuthAPIService.getCurrentUser().then((user) => {
+                if (user) {
+                    history.push('/form');
+                    onReturningUser();
+                } else {
+                    history.push('/register');
+                }
+                onLoadingStateChange(false);
+            });
+        }
+    }, [clicked]);
 
     return (
         <React.Fragment>
@@ -33,9 +49,7 @@ function LandingView() {
                             <img className="main-illustration__stats" src={stats} alt="stats-illustration"/>
                         </figure>
                         <section className="landing__get-started">
-                            <Link to={user ? "/form" : "/register"} tabIndex="-1">
-                                <button className="main-button">Get started</button>
-                            </Link> or
+                            <button className="main-button" onClick={() => setClicked(true)}>Get started</button>
                             <Link to="/login" tabIndex="-1">
                                 <button className="secondary-button">Login</button>
                             </Link>

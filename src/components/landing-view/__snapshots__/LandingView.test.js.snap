@@ -70,17 +70,11 @@ exports[`LandingView should match snapshot 1`] = `
         <section
           class="landing__get-started"
         >
-          <a
-            href="/register"
-            tabindex="-1"
+          <button
+            class="main-button"
           >
-            <button
-              class="main-button"
-            >
-              Get started
-            </button>
-          </a>
-           or
+            Get started
+          </button>
           <a
             href="/login"
             tabindex="-1"
