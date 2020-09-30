@@ -61,8 +61,8 @@ const logEntriesSlice = createSlice({
             state.status = ASYNC_STATE_STATUS.LOADING;
         },
         [fetchLogEntries.fulfilled]: (state, action) => {
-            state.data = action.payload;
             state.status = ASYNC_STATE_STATUS.SUCCEEDED;
+            state.data = action.payload;
         },
         [fetchLogEntries.rejected]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.FAILED;

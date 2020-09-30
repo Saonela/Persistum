@@ -25,6 +25,10 @@
     direction: rtl;
 }
 
+.list-view .log-table__days {
+    grid-template-columns: repeat(1, 1fr);
+}
+
 @media only screen and (max-width: 1300px) {
     .log-table__days {
         grid-template-columns: repeat(6, 1fr);

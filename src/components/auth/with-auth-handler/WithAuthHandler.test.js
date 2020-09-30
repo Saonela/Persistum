@@ -46,7 +46,7 @@ describe('WithAuthHandlerForm', () => {
         let component = wrapper.find(DummyComponent);
         await component.prop('onAuthSuccess')({uid: '1234', email: 'John@mail.com'});
         expect(mockDispatchFn).toHaveBeenCalledWith({id: '1234', email: 'John@mail.com'});
-        expect(mockDispatchFn).toHaveBeenCalledTimes(3);
+        expect(mockDispatchFn).toHaveBeenCalledTimes(4);
         expect(pushSpy).toHaveBeenCalledWith('/form');
     });
 });

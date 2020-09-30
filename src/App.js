@@ -17,6 +17,7 @@ import AuthAPIService from "./services/api/authAPIService";
 import {setUser} from "./redux/slices/userSlice";
 import LandingView from "./components/landing-view/LandingView";
 import withLoader from "./components/with-loader/WithLoader";
+import {fetchSettings} from "./redux/slices/settingsSlice";
 
 const themeColor = '#4973d3'; // TODO: get from variable
 const theme = createMuiTheme({
@@ -52,6 +53,7 @@ function App({onLoadingStateChange}) {
         AuthAPIService.getCurrentUser().then((user) => {
             if (user) {
                 dispatch(setUser({id: user.uid, email: user.email}));
+                dispatch(fetchSettings());
                 dispatch(fetchActivities());
                 dispatch(fetchLogEntries());
             }

@@ -1,5 +1,6 @@
 .log-cell {
     height: 110px;
+    min-height: 110px;
     padding: var(--padding-s);
     border: 1px solid var(--color-border);
     box-shadow: 12px 11px 8px -14px rgba(43, 44, 52, .6);
@@ -18,6 +19,10 @@
     font-weight: bold;
 }
 
+.log-cell__weekday {
+    float: right;
+}
+
 .log-cell__weekend {
     color: #ff2727;
 }
@@ -28,6 +33,15 @@
 }
 
 .log-cell__activity {
+    display: flex;
+    align-items: center;
+}
+
+.log-cell__activity-name {
+    margin-left: var(--margin-s);
+}
+
+.log-cell__activity-color {
     height: 22px;
     width: 22px;
     margin: 2px;
@@ -35,12 +49,20 @@
     cursor: pointer;
 }
 
-.log-cell__activity:hover {
+.log-cell__activity-color:hover {
     border-color: var(--color-highlight);
 }
 
+.list-view .log-cell {
+    height: auto;
+}
+
+.list-view .log-cell__activities {
+    flex-direction: column;
+}
+
 @media only screen and (min-width: 1300px) {
-    .log-cell__weekday {
+    .log-cell:not(.list-view) .log-cell__weekday {
         display: none;
     }
 }

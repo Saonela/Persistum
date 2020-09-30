@@ -17,6 +17,7 @@ const UtilityService = {
         return JSON.parse(JSON.stringify(d));
     },
     getCurrentShortTimestamp() {
+        console.log('GET CURRENT SHORT TIMESTAMP', moment().utc().format('YYYY-MM-DD'))
         return moment().utc().format('YYYY-MM-DD');
     },
     getTimestampYear(timestamp) {

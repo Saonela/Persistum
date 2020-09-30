@@ -7,10 +7,17 @@
 }
 
 .calendar-view__table {
+    position: relative;
     max-width: 1300px;
     margin: auto;
 }
 
 .calendar-view .scroll-container {
     height: calc(100% - var(--legend-height));
+}
+
+.calendar-view__display-toggle-button {
+    position: absolute;
+    top: var(--margin);
+    right: var(--margin);
 }
