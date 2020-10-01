@@ -1,21 +1,21 @@
 
-.log-table {
+.calendar {
     padding: var(--margin-m) var(--margin-l);
 }
 
-.log-table__year-label {
+.calendar__year-label {
     margin-bottom: calc(var(--margin-s) * -1);
     font-size: var(--font-size-xl);
     text-align: left;
 }
 
-.log-table__month-label {
+.calendar__month-label {
     margin: var(--margin-s) 0 var(--margin);
     font-size: var(--font-size-l);
     text-align: left;
 }
 
-.log-table__days {
+.calendar__days {
     display: grid;
     justify-content: center;
     grid-template-columns: repeat(7, var(--width-calendar-card));
@@ -25,37 +25,37 @@
     direction: rtl;
 }
 
-.list-view .log-table__days {
+.list-view .calendar__days {
     grid-template-columns: repeat(1, 1fr);
 }
 
 @media only screen and (max-width: 1300px) {
-    .log-table__days {
+    .calendar__days {
         grid-template-columns: repeat(6, 1fr);
     }
 }
 
 @media only screen and (max-width: 1000px) {
-    .log-table__days {
+    .calendar__days {
         grid-template-columns: repeat(5, 1fr);
     }
 }
 
 
 @media only screen and (max-width: 850px) {
-    .log-table__days {
+    .calendar__days {
         grid-template-columns: repeat(4, 1fr);
     }
 }
 
 @media only screen and (max-width: 660px) {
-    .log-table__days {
+    .calendar__days {
         grid-template-columns: repeat(3, 1fr);
     }
 }
 
 @media only screen and (max-width: 525px) {
-    .log-table__days {
+    .calendar__days {
         grid-template-columns: repeat(2, 1fr);
     }
 }

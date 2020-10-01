@@ -1,4 +1,4 @@
-.log-cell {
+.calendar-cell {
     height: 110px;
     min-height: 110px;
     padding: var(--padding-s);
@@ -8,7 +8,7 @@
     background: var(--color-background);
 }
 
-.log-cell__timestamp {
+.calendar-cell__timestamp {
     position: relative;
     top: calc(var(--margin-xs) * -1);
     left: calc(var(--margin-xs) * -1);
@@ -19,50 +19,45 @@
     font-weight: bold;
 }
 
-.log-cell__weekday {
+.calendar-cell__weekday {
     float: right;
 }
 
-.log-cell__weekend {
+.calendar-cell__weekend {
     color: #ff2727;
 }
 
-.log-cell__activities {
+.calendar-cell__activities {
     display: flex;
     flex-wrap: wrap;
 }
 
-.log-cell__activity {
+.log-activity {
     display: flex;
     align-items: center;
 }
 
-.log-cell__activity-name {
+.log-activity__name {
     margin-left: var(--margin-s);
 }
 
-.log-cell__activity-color {
+.log-activity__color {
     height: 22px;
     width: 22px;
     margin: 2px;
     border: 1px solid var(--color-border);
-    cursor: pointer;
 }
 
-.log-cell__activity-color:hover {
-    border-color: var(--color-highlight);
-}
-
-.list-view .log-cell {
+.list-view .calendar-cell {
     height: auto;
 }
 
-.list-view .log-cell__activities {
+.list-view .calendar-cell__activities {
     flex-direction: column;
 }
 
 @media only screen and (min-width: 1300px) {
-    .log-cell:not(.list-view) .log-cell__weekday {
+    .calendar-cell:not(.list-view) .calendar-cell__weekday {
         display: none;
     }
 }

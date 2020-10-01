@@ -7,7 +7,7 @@ import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
 
 function CalendarDisplayToggleButton({calendarDisplayType, onToggle}) {
     return (
-        <Tooltip disableFocusListener
+        <Tooltip disableTouchListener disableFocusListener
                  enterTouchDelay={0}
                  leaveTouchDelay={1500}
                  title="Toggle calendar view"

@@ -1,10 +1,10 @@
 import React from "react";
-import LogTable from "./LogTable";
+import Calendar from "./Calendar";
 import {render, screen} from "@testing-library/react";
 import {within} from "@testing-library/dom";
 import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
 
-describe('LogTable', () => {
+describe('Calendar', () => {
 
     const dataLog = [
         {
@@ -78,12 +78,12 @@ describe('LogTable', () => {
     }];
 
     it('should display log cells', () => {
-        render(<LogTable dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        render(<Calendar dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         expect(screen.getAllByRole('listitem', {name: 'Activity'}).length).toBe(3);
     });
 
     it('should add placeholder tiles by last months day weekday', () => {
-        render(<LogTable dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        render(<Calendar dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         let year = screen.queryByTestId('year-2010');
         let yearTestUtils = within(year)
         let month = yearTestUtils.queryByTestId('month-11');
@@ -98,7 +98,7 @@ describe('LogTable', () => {
     });
 
     it('display weekdays header if grid view', () => {
-        render(<LogTable dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        render(<Calendar dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         screen.getByText('Monday');
         screen.getByText('Wednesday');
         screen.getByText('Friday');
@@ -106,7 +106,7 @@ describe('LogTable', () => {
     });
 
     it('display hide weekdays header if list view', () => {
-        render(<LogTable dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.LIST}/>);
+        render(<Calendar dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.LIST}/>);
         expect(screen.queryByText('Monday')).not.toBeInTheDocument();
         expect(screen.queryByText('Wednesday')).not.toBeInTheDocument();
         expect(screen.queryByText('Friday')).not.toBeInTheDocument();

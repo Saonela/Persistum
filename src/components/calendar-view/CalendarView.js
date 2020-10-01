@@ -1,7 +1,7 @@
 import React, {useState} from "react";
 import './CalendarView.css'
 import {useDispatch, useSelector} from "react-redux";
-import LogTable from "./log-table/LogTable";
+import Calendar from "./calendar/Calendar";
 import Legend from "../legend/Legend";
 import {getCalendarDataLog} from "../../redux/slices/logEntriesSlice";
 import {toggleFilter} from "../../redux/slices/filtersSlice";
@@ -38,7 +38,7 @@ function CalendarView() {
                         <CalendarDisplayToggleButton calendarDisplayType={settings.calendarDisplayType}
                                                      onToggle={(type) => dispatch(updateSettings({calendarDisplayType: type}))}/>
                     </div>
-                    <LogTable dataLog={calendarData} displayType={settings.calendarDisplayType}/>
+                    <Calendar dataLog={calendarData} displayType={settings.calendarDisplayType}/>
                 </div>
                 {!loading &&
                 !calendarData.length &&

@@ -2,7 +2,6 @@
 .activity-list {
     position: relative;
     margin-top: var(--margin);
-    overflow: hidden;
     --transition-duration: 300ms;
 }
 
