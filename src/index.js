@@ -39,7 +39,7 @@ import './assets/fonts/Lato/Lato-Regular.ttf'
 // const store = createStore(reducer, initialState, applyMiddleware(thunk));
 // const firebase = new Firebase();
 
-console.log('stoer', store.getState())
+console.log('store', store.getState())
 
 ReactDOM.render(
     <Provider store={store}>
