@@ -3,6 +3,7 @@ import './CalendarCell.css'
 import moment from "moment";
 import Tooltip from "@material-ui/core/Tooltip";
 import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
+import UtilityService from "../../../services/utilityService";
 
 const LogActivityColor = React.forwardRef(({name, background, tooltip}, ref) => {
     const getColorElement = () => (
@@ -41,10 +42,12 @@ function CalendarCell({timestamp, activities, displayType}) {
     }
 
     return (
-        <div className={`calendar-cell ${displayType === CALENDAR_DISPLAY_TYPE.LIST && 'list-view'}`}>
+        <div className={`calendar-cell 
+                         ${timestamp === UtilityService.getCurrentShortTimestamp() ? 'calendar-cell--highlight' : ''}
+                         ${displayType === CALENDAR_DISPLAY_TYPE.LIST ? 'list-view' : ''}`}>
             <div className="calendar-cell__timestamp">
                 <span>{moment(timestamp).format("DD")}</span>
-                <span className={`calendar-cell__weekday ${isWeekend() && 'calendar-cell__weekend'}`}>
+                <span className={`calendar-cell__weekday ${isWeekend() ? 'calendar-cell__weekend' : ''}`}>
                     {moment(timestamp).format("dd")}
                 </span>
             </div>

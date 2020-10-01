@@ -8,6 +8,11 @@
     background: var(--color-background);
 }
 
+.calendar-cell--highlight {
+    border: 1px solid var(--color-theme);
+    box-shadow: 12px 11px 8px -14px var(--color-theme);
+}
+
 .calendar-cell__timestamp {
     position: relative;
     top: calc(var(--margin-xs) * -1);
