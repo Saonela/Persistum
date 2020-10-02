@@ -18,6 +18,7 @@ import {setUser} from "./redux/slices/userSlice";
 import LandingView from "./components/landing-view/LandingView";
 import withLoader from "./components/with-loader/WithLoader";
 import {fetchSettings} from "./redux/slices/settingsSlice";
+import StatisticsView from "./components/statistics-view/StatisticsView";
 
 const themeColor = '#4973d3'; // TODO: get from variable
 const theme = createMuiTheme({
@@ -95,6 +96,12 @@ function App({onLoadingStateChange}) {
                                     <Header/>
                                     <div className="inner-container">
                                         <CalendarView/>
+                                    </div>
+                                </Route>
+                                <Route path="/statistics" exact>
+                                    <Header/>
+                                    <div className="inner-container">
+                                        <StatisticsView/>
                                     </div>
                                 </Route>
                             </Switch>

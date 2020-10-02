@@ -16,9 +16,10 @@
     margin: 0 auto;
 }
 
-.main-logo {
-    height: auto;
-    width: 90px;
+.header__current-route {
+    display: flex;
+    align-items: center;
+    font-size: var(--font-size-m);
 }
 
 @media only screen and (max-width: 1300px) {
@@ -36,5 +37,11 @@
         padding: 0;
         margin: 0 var(--margin-m);
         border-bottom: 1px solid var(--color-border);
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    .header__current-route {
+        display: none;
     }
 }
