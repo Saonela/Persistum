@@ -1,7 +1,6 @@
 .form-view {
     max-width: 40vw;
     width: 100%;
-    padding: var(--padding) var(--padding-l);
     border: 1px solid var(--color-border);
     border-radius: 5px;
     margin: 10vh auto;
@@ -25,7 +24,7 @@
 .form-view__footer {
     border-top: 1px solid var(--color-border);
     margin-top: var(--margin-xl);
-    margin-bottom: calc(var(--margin) * -1);
+    margin-bottom: calc(var(--margin-l) * -1);
 }
 
 button.form-view__toggle-button {

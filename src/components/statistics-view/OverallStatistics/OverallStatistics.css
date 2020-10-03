@@ -1,0 +1,99 @@
+.overall-statistics__header {
+    margin-bottom: var(--margin-l);
+    font-size: var(--font-size-l);
+    text-align: left;
+}
+
+.overall-statistics__list-header {
+    display: grid;
+    justify-content: center;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    margin-bottom: var(--margin-m);
+    font-size: var(--font-size-m);
+}
+
+.overall-statistics__list-header *:first-child {
+    text-align: left;
+}
+
+.statistics-entry {
+    display: grid;
+    justify-content: center;
+    align-items: center;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    margin-bottom: var(--margin-s);
+    transition: color 150ms ease-in;
+
+}
+
+.statistics-entry:hover {
+    color: var(--color-theme);
+}
+
+.statistics-entry__activity {
+    display: flex;
+    align-items: center;
+    text-align: left;
+}
+
+.statistics-entry .activity-color {
+    margin-right: var(--margin-s);
+}
+
+@media only screen and (max-width: 820px) {
+    .overall-statistics__list-header {
+        display: none;
+    }
+
+    .overall-statistics__list {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        grid-column-gap: var(--margin-l);
+    }
+
+    .statistics-entry {
+        grid-template-columns: 1fr;
+        padding-bottom: var(--margin);
+        margin-bottom: var(--margin);
+        text-align: left;
+    }
+
+    .statistics-entry:not(:last-child) {
+        border-bottom: 1px solid var(--color-border);
+    }
+
+    .statistics-entry * {
+        padding-left: 0;
+        margin-bottom: var(--margin-xs);
+    }
+
+    .statistics-entry > *:first-child{
+        margin-bottom: var(--margin-s);
+    }
+
+    .statistics-entry > *:not(:first-child)::before {
+        content: attr(data-label);
+        display: inline-block;
+        width: 110px;
+    }
+}
+
+@media only screen and (max-width: 680px) {
+    .overall-statistics {
+        border: 0;
+        border-radius: 0;
+    }
+}
+
+@media only screen and (max-width: 540px) {
+    .overall-statistics {
+        padding-top: var(--padding-l);
+        padding-right: var(--padding-m);
+        padding-left: var(--padding-m);
+    }
+
+    .overall-statistics__list {
+        grid-template-columns: 1fr;
+    }
+}
+

@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import UtilityService from "../../services/utilityService";
 import LogEntriesService from "../../services/logEntriesService";
-import {getFilteredActivities} from "./activitiesSlice";
+import {getAllActivities, getFilteredActivities} from "./activitiesSlice";
 import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
 import LogEntriesAPIService from "../../services/api/logEntriesAPIService";
 import {getUserId, logout} from "./userSlice";
@@ -105,6 +105,13 @@ export const getCalendarDataLog = createSelector(
     [getLogEntries, getFilteredActivities],
     (logEntries, activities) => {
         return LogEntriesService.getCalendarLog(LogEntriesService.populateLogEntriesWithActivities(logEntries, activities));
+    }
+);
+
+export const getOverallStatistics = createSelector(
+    [getLogEntries, getAllActivities],
+    (logEntries, activities) => {
+        return LogEntriesService.getActivitiesOverallStatistics(logEntries, activities);
     }
 );
 

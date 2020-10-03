@@ -22,12 +22,6 @@
     font-size: var(--font-size-m);
 }
 
-@media only screen and (max-width: 1300px) {
-    .header__content {
-        padding: 0;
-    }
-}
-
 @media only screen and (max-width: 680px) {
     .header {
         border: none;

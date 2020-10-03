@@ -22,7 +22,22 @@ jest.mock('moment', () => {
 
 describe('LogEntriesService', () => {
 
-    const dataEntries = [
+    const activities = [
+        {
+            id: 123456,
+            name: 'Read 5 pages',
+            completed: false,
+            style: ''
+        },
+        {
+            id: 999,
+            name: 'Workout 30 minutes',
+            completed: false,
+            style: ''
+        }
+    ];
+
+    const logEntries = [
         {
             timestamp: '2010-11-02',
             activities: [123456]
@@ -58,7 +73,7 @@ describe('LogEntriesService', () => {
                 style: ''
             }
         ];
-        expect(LogEntriesService.populateLogEntriesWithActivities(dataEntries, activities)).toEqual(
+        expect(LogEntriesService.populateLogEntriesWithActivities(logEntries, activities)).toEqual(
             [
                 {
                     timestamp: '2010-11-02',
@@ -107,7 +122,7 @@ describe('LogEntriesService', () => {
     });
 
     it('should return calendar format of data log state', () => {
-        expect(LogEntriesService.getCalendarLog(dataEntries)).toEqual([
+        expect(LogEntriesService.getCalendarLog(logEntries)).toEqual([
             {
                 year: '2020',
                 data: [
@@ -194,5 +209,20 @@ describe('LogEntriesService', () => {
                 ]
             }
         ]);
+    });
+
+    it('should get log overall statistics', () => {
+        expect(LogEntriesService.getActivitiesOverallStatistics(logEntries, activities)).toEqual({
+            123456: {
+                count: 2,
+                firstTimestamp: '2010-11-02',
+                lastTimestamp: '2020-11-05'
+            },
+            999: {
+                count: 3,
+                firstTimestamp: '2020-04-05',
+                lastTimestamp: '2020-11-05'
+            }
+        });
     });
 });

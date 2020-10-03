@@ -32,7 +32,7 @@ const theme = createMuiTheme({
     },
 });
 
-const appRoutes = ['/form', '/calendar'];
+const appRoutes = ['/form', '/calendar', '/statistics'];
 
 function App({onLoadingStateChange}) {
 

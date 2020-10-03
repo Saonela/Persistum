@@ -65,6 +65,28 @@ const LogEntriesService = {
         });
 
         return stateArray;
+    },
+    getActivitiesOverallStatistics(logEntries, activities) {
+        const activitiesStats = {};
+        activities.forEach((activity) => {
+            activitiesStats[activity.id] = {
+                count: 0,
+                firstTimestamp: '',
+                lastTimestamp: ''
+            };
+
+            logEntries.forEach((entry) => {
+                if (entry.activities.includes(activity.id)) {
+                    activitiesStats[activity.id].count++;
+                    activitiesStats[activity.id].lastTimestamp = entry.timestamp;
+
+                    if (!activitiesStats[activity.id].firstTimestamp) {
+                        activitiesStats[activity.id].firstTimestamp = entry.timestamp;
+                    }
+                }
+            });
+        });
+        return activitiesStats
     }
 };
 

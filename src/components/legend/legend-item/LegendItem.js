@@ -1,11 +1,12 @@
 import React from "react";
 import "./LegendItem.css"
+import ActivityColor from "../../shared/ActivityColor/ActivityColor";
 
 function LegendItem({activity, isActive, onToggle}) {
     return (
         <button className={`legend-item ${!isActive ? 'legend-item--inactive' : ''}`} onClick={() => onToggle(!isActive)}>
             <div className="legend-item__name">{activity.name}</div>
-            <div className="legend-item__color" role="img" style={{'backgroundColor': activity.style.background}}/>
+            <ActivityColor background={activity.style.background}/>
         </button>
     )
 }
