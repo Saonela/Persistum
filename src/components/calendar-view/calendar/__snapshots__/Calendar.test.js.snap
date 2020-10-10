@@ -1,0 +1,111 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Calendar should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="calendar list-view"
+  >
+    <div
+      class="calendar__year"
+      data-testid="year-2010"
+    >
+      <div
+        class="calendar__year-label"
+      >
+        2010
+      </div>
+      <div
+        class="calendar__month"
+        data-testid="month-11"
+      >
+        <div
+          class="calendar__month-label"
+        >
+          November
+        </div>
+        <div
+          class="calendar__days"
+        >
+          <div
+            class="calendar__days-placeholder"
+            data-testid="day-placeholder"
+          />
+          <div
+            class="calendar__days-placeholder"
+            data-testid="day-placeholder"
+          />
+          <div
+            class="calendar__days-placeholder"
+            data-testid="day-placeholder"
+          />
+          <div
+            class="calendar__days-placeholder"
+            data-testid="day-placeholder"
+          />
+          <div
+            class="calendar__days-placeholder"
+            data-testid="day-placeholder"
+          />
+          <div
+            class="calendar-cell 
+                         
+                         list-view"
+          >
+            <div
+              class="calendar-cell__timestamp"
+            >
+              <span>
+                30
+              </span>
+              <span
+                class="calendar-cell__weekday "
+              >
+                Tu
+              </span>
+            </div>
+            <div
+              class="calendar-cell__activities"
+            />
+          </div>
+          <div
+            class="calendar-cell 
+                         
+                         list-view"
+          >
+            <div
+              class="calendar-cell__timestamp"
+            >
+              <span>
+                02
+              </span>
+              <span
+                class="calendar-cell__weekday "
+              >
+                Tu
+              </span>
+            </div>
+            <div
+              class="calendar-cell__activities"
+            >
+              <div
+                class="log-activity"
+              >
+                <div
+                  aria-label="Activity color"
+                  class="activity-color"
+                  role="img"
+                />
+                <p
+                  class="log-activity__name"
+                >
+                  a
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

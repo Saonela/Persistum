@@ -1,4 +1,4 @@
-import React, {useState} from "react";
+import React from "react";
 import './CalendarView.css'
 import {useDispatch, useSelector} from "react-redux";
 import Calendar from "./calendar/Calendar";
@@ -10,6 +10,7 @@ import BackgroundLoader from "../background-loader/BackgroundLoader";
 import {ASYNC_STATE_STATUS} from "../../redux/asyncStateStatus";
 import CalendarDisplayToggleButton from "./calendar-display-toggle-button/CalendarDisplayToggleButton";
 import {getSettings, updateSettings} from "../../redux/slices/settingsSlice";
+import NoLogDataMessage from "../shared/no-log-data-message/NoLogDataMessage";
 
 function CalendarView() {
 
@@ -24,31 +25,47 @@ function CalendarView() {
 
     const loading = activitiesLoadingStatus === ASYNC_STATE_STATUS.LOADING || logentriesLoadingStatus === ASYNC_STATE_STATUS.LOADING;
 
+    console.log('CALENDAR VIEW data', calendarData);
+    console.log('CALENDAR VIEW filters', filters);
+
+    const activitiesMap = {};
+    activities.forEach(activity => activitiesMap[activity.id] = activity);
+    console.log('CALENDAR VIEW activitiesMap', activitiesMap);
+
+    const isDataValid = () => {
+        const isDataInvalid = !loading &&
+            !calendarData.length &&
+            activitiesLoadingStatus !== ASYNC_STATE_STATUS.IDLE &&
+            logentriesLoadingStatus !== ASYNC_STATE_STATUS.IDLE;
+        return !isDataInvalid;
+    }
+
     return (
         <div className="calendar-view">
             {loading && <BackgroundLoader/>}
-            <div className="calendar-view__legend">
-                <Legend activities={activities}
-                        filters={filters}
-                        onFilter={(id) => dispatch(toggleFilter(id))}/>
-            </div>
-            <div className="scroll-container">
-                <div className="calendar-view__table">
-                    <div className="calendar-view__display-toggle-button">
-                        <CalendarDisplayToggleButton calendarDisplayType={settings.calendarDisplayType}
-                                                     onToggle={(type) => dispatch(updateSettings({calendarDisplayType: type}))}/>
+            {isDataValid() ?
+                <>
+                    <div className="calendar-view__legend">
+                        <Legend activities={activities}
+                                filters={filters}
+                                onFilter={(id) => dispatch(toggleFilter(id))}/>
                     </div>
-                    <Calendar dataLog={calendarData} displayType={settings.calendarDisplayType}/>
-                </div>
-                {!loading &&
-                !calendarData.length &&
-                activitiesLoadingStatus !== ASYNC_STATE_STATUS.IDLE &&
-                logentriesLoadingStatus !== ASYNC_STATE_STATUS.IDLE &&
-                <div className="no-log-data-message">
-                    No data have been found!
-                </div>
-                }
-            </div>
+                    <div className="scroll-container">
+                        <div className="calendar-view__table">
+                            {isDataValid() &&
+                            <div className="calendar-view__display-toggle-button">
+                                <CalendarDisplayToggleButton
+                                    calendarDisplayType={settings.calendarDisplayType}
+                                    onToggle={(type) => dispatch(updateSettings({calendarDisplayType: type}))}/>
+                            </div>
+                            }
+                            <Calendar activitiesMap={activitiesMap} dataLog={calendarData}
+                                      displayType={settings.calendarDisplayType}/>
+                        </div>
+                    </div>
+                </> :
+                <NoLogDataMessage/>
+            }
         </div>
     )
 }

@@ -1,6 +1,6 @@
 import React from "react";
 import "./LegendItem.css"
-import ActivityColor from "../../shared/ActivityColor/ActivityColor";
+import ActivityColor from "../../shared/activity-color/ActivityColor";
 
 function LegendItem({activity, isActive, onToggle}) {
     return (

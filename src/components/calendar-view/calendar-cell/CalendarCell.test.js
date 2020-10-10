@@ -25,7 +25,7 @@ describe('CalendarCell', () => {
     it('should show timestamp and activities', () => {
         render(<CalendarCell key={1} timestamp={'2012-12-21'} activities={activities} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         screen.getByText('21');
-        expect(screen.getAllByRole('listitem').length).toBe(3);
+        expect(screen.getAllByRole('img', {name: 'Activity color'}).length).toBe(3);
     })
 
     it('should display activity name if list view ', () => {

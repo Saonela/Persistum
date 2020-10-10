@@ -5,7 +5,7 @@ import WeekdaysHeader from "../weekdays-header/WeekdaysHeader";
 import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
 import CalendarCell from "../calendar-cell/CalendarCell";
 
-function Calendar({dataLog, displayType}) {
+function Calendar({activitiesMap, dataLog, displayType}) {
 
     const renderDayPlaceholder = (timestamp) => {
         const placeholders = [];
@@ -15,6 +15,10 @@ function Calendar({dataLog, displayType}) {
             placeholders.push(<div key={i} className="calendar__days-placeholder" data-testid="day-placeholder"/>);
         }
         return placeholders;
+    };
+
+    const mapIdToActivity = (activityIds) => {
+        return activityIds.map(id => activitiesMap[id]).filter(activity => activity);
     };
 
     return (
@@ -31,11 +35,10 @@ function Calendar({dataLog, displayType}) {
                                     {renderDayPlaceholder(monthData.data[0].timestamp)}
                                     {monthData.data.map((entryData) =>
                                         <CalendarCell className="calendar__cell"
-                                                      key={entryData.timestamp}
                                                       displayType={displayType}
+                                                      key={entryData.timestamp}
                                                       timestamp={entryData.timestamp}
-                                                      activities={entryData.activities}
-                                        />
+                                                      activities={mapIdToActivity(entryData.activities)}/>
                                     )}
                                 </div>
                             </div>

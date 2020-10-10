@@ -1,0 +1,10 @@
+.activity-entry {
+    display: flex;
+    align-items: center;
+    text-align: left;
+    min-height: 28px;
+}
+
+.activity-entry .activity-color {
+    margin-right: var(--margin-s);
+}

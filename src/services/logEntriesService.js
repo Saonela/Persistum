@@ -64,6 +64,7 @@ const LogEntriesService = {
             }
         });
 
+        console.log('CALENDAR LOG', stateArray)
         return stateArray;
     },
     getActivitiesOverallStatistics(logEntries, activities) {
@@ -87,6 +88,56 @@ const LogEntriesService = {
             });
         });
         return activitiesStats
+    },
+    getActivitiesTimePeriodStatistics(logEntries, activities) {
+        let usedYears = [];
+        let usedMonths = [];
+
+        const yearlyStatistics = {};
+        const monthlyStatistics = {};
+
+        const defaultActivitiesStats = {};
+        activities.forEach(activity => defaultActivitiesStats[activity.id] = {count: 0});
+        console.log('all activities', activities)
+        logEntries.forEach((entry) => {
+            const year = UtilityService.getTimestampYear(entry.timestamp);
+            const month = UtilityService.getTimestampMonth(entry.timestamp);
+            const monthPeriod = year + '-' + (month < 10 ? `0${month}` : month);
+
+            if (!usedYears.includes(year)) {
+                usedYears.push(year);
+                usedMonths = [];
+                yearlyStatistics[year] = {
+                    period: year,
+                    type: 'year',
+                    activities: UtilityService.deepCopy(defaultActivitiesStats)
+                };
+            }
+            if (!usedMonths.includes(month)) {
+                usedMonths.push(month);
+                monthlyStatistics[monthPeriod] = {
+                    period: monthPeriod,
+                    type: 'month',
+                    activities: UtilityService.deepCopy(defaultActivitiesStats)
+                };
+            }
+            entry.activities.forEach((activityId) => {
+                console.log('++++', year, monthPeriod, activityId, yearlyStatistics, monthlyStatistics)
+                if (defaultActivitiesStats[activityId]) {
+                    yearlyStatistics[year].activities[activityId].count++;
+                    monthlyStatistics[monthPeriod].activities[activityId].count++;
+                }
+            });
+        });
+
+        const statistics = [];
+        Object.keys(yearlyStatistics).forEach((yearKey) => {
+            statistics.push(yearlyStatistics[yearKey]);
+            Object.keys(monthlyStatistics).filter(key => key.includes(yearKey)).forEach((monthKey) => {
+               statistics.push(monthlyStatistics[monthKey]);
+            });
+        });
+        return statistics;
     }
 };
 

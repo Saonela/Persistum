@@ -4,35 +4,23 @@ import moment from "moment";
 import Tooltip from "@material-ui/core/Tooltip";
 import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
 import UtilityService from "../../../services/utilityService";
+import ActivityColor from "../../shared/activity-color/ActivityColor";
 
-const LogActivityColor = React.forwardRef(({name, background, tooltip}, ref) => {
-    const getColorElement = () => (
-        <div className="log-activity__color"
-             style={{background}}
-             role="listitem"
-             aria-label="Activity"/>
-    );
-
-    return (
-        tooltip ?
-            <Tooltip disableFocusListener
-                     enterTouchDelay={0}
-                     leaveTouchDelay={1500}
-                     title={name}
-                     placement="top"
-                     arrow>
-                {getColorElement()}
-            </Tooltip>
-            : <>{getColorElement()}</>
-    )
-});
-
-const LogActivity = React.forwardRef(({activity, displayType}, ref) => (
-    <div className="log-activity">
-        <LogActivityColor background={activity.style.background} name={activity.name} tooltip={displayType === CALENDAR_DISPLAY_TYPE.GRID}/>
-        {displayType === CALENDAR_DISPLAY_TYPE.LIST && <p className="log-activity__name">{activity.name}</p>}
-    </div>
-));
+const LogActivity = ({activity, displayType}) => (
+    <Tooltip disableFocusListener
+             disableHoverListener={displayType !== CALENDAR_DISPLAY_TYPE.GRID}
+             disableTouchListener={displayType !== CALENDAR_DISPLAY_TYPE.GRID}
+             enterTouchDelay={0}
+             leaveTouchDelay={1500}
+             title={activity.name}
+             placement="top"
+             arrow>
+        <div className="log-activity">
+            <ActivityColor background={activity.style.background}/>
+            {displayType === CALENDAR_DISPLAY_TYPE.LIST && <p className="log-activity__name">{activity.name}</p>}
+        </div>
+    </Tooltip>
+);
 
 function CalendarCell({timestamp, activities, displayType}) {
 

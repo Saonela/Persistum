@@ -21,9 +21,15 @@
 }
 
 .inner-container {
+    position: relative;
     width: 100%;
     height: calc(100% - var(--height-header));
     background: var(--color-shade-background);
+}
+
+/*TODO: restructure html instead of this*/
+.inner-container .background-loader__loader {
+    top: calc(50% + (-1 * var(--height-header) / 2));
 }
 
 .app-theme-background {

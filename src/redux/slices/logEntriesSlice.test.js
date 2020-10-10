@@ -1,5 +1,6 @@
 import React from "react";
 import logEntriesReducer, {
+    fetchLogEntries,
     getLogEntries, getLogEntryByTimestamp,
     getLoggedActivityIds, resetTimestamp, setTimestamp,
     toggleLogEntryActivity,
@@ -63,6 +64,26 @@ describe('LogEntriesReducer', () => {
                 {timestamp: '2010-04-05', activities: [1]},
                 {timestamp: '2020-08-09', activities: [3]}
             ]
+        });
+    });
+
+    it('should sort and set fetched log entries', () => {
+        const logEntries = [
+            {timestamp: '2010-04-05', activities: [1]},
+            {timestamp: '2020-08-09', activities: [3]},
+            {timestamp: '2020-01-01', activities: [1, 2]}
+        ];
+        let state = {
+            data: []
+        }
+
+        expect(logEntriesReducer(state, fetchLogEntries.fulfilled(logEntries))).toEqual({
+            data: [
+                {timestamp: '2010-04-05', activities: [1]},
+                {timestamp: '2020-01-01', activities: [1, 2]},
+                {timestamp: '2020-08-09', activities: [3]}
+            ],
+            status: ASYNC_STATE_STATUS.SUCCEEDED
         });
     });
 

@@ -19,7 +19,7 @@ describe('Calendar', () => {
                         },
                         {
                             timestamp: '2020-11-10',
-                            activities: [{id: 999, name: 'c', style: {}}]
+                            activities: [999]
                         }
                     ]
                 },
@@ -32,7 +32,7 @@ describe('Calendar', () => {
                         },
                         {
                             timestamp: '2020-04-15',
-                            activities: [{id: 999, name: 'b', style: {}}]
+                            activities: [999]
                         }
                     ]
                 }
@@ -50,7 +50,7 @@ describe('Calendar', () => {
                         },
                         {
                             timestamp: '2010-11-02',
-                            activities: [{id: 123456, name: 'a', style: {}}]
+                            activities: [123456]
                         }
                     ],
                 }
@@ -70,20 +70,25 @@ describe('Calendar', () => {
                     },
                     {
                         timestamp: '2010-11-02',
-                        activities: [{id: 123456, name: 'a', style: {}}]
+                        activities: [123456]
                     }
                 ],
             }
         ]
     }];
 
+    const activitiesMap = {
+        999: {id: 999, name: 'b', style: {}},
+        123456: {id: 123456, name: 'a', style: {}}
+    };
+
     it('should display log cells', () => {
-        render(<Calendar dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
-        expect(screen.getAllByRole('listitem', {name: 'Activity'}).length).toBe(3);
+        render(<Calendar activitiesMap={activitiesMap} dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        expect(screen.getAllByRole('img', {name: 'Activity color'}).length).toBe(3);
     });
 
     it('should add placeholder tiles by last months day weekday', () => {
-        render(<Calendar dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        render(<Calendar activitiesMap={activitiesMap} dataLog={dataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         let year = screen.queryByTestId('year-2010');
         let yearTestUtils = within(year)
         let month = yearTestUtils.queryByTestId('month-11');
@@ -98,7 +103,7 @@ describe('Calendar', () => {
     });
 
     it('display weekdays header if grid view', () => {
-        render(<Calendar dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
+        render(<Calendar activitiesMap={activitiesMap} dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.GRID}/>);
         screen.getByText('Monday');
         screen.getByText('Wednesday');
         screen.getByText('Friday');
@@ -106,10 +111,16 @@ describe('Calendar', () => {
     });
 
     it('display hide weekdays header if list view', () => {
-        render(<Calendar dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.LIST}/>);
+        render(<Calendar activitiesMap={activitiesMap} dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.LIST}/>);
         expect(screen.queryByText('Monday')).not.toBeInTheDocument();
         expect(screen.queryByText('Wednesday')).not.toBeInTheDocument();
         expect(screen.queryByText('Friday')).not.toBeInTheDocument();
         expect(screen.queryByText('Sunday')).not.toBeInTheDocument();
     });
+
+    it('should match snapshot', () => {
+        const {asFragment} = render(<Calendar activitiesMap={activitiesMap} dataLog={smallDataLog} displayType={CALENDAR_DISPLAY_TYPE.LIST}/>);
+        expect(asFragment()).toMatchSnapshot();
+    });
+
 });

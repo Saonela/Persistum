@@ -1,6 +1,6 @@
 .no-activities-message {
     position: relative;
-    margin: var(--margin-xl);
+    margin: var(--margin-xl) auto;
     line-height: 24px;
     text-align: center;
 }

@@ -62,6 +62,9 @@ const logEntriesSlice = createSlice({
         },
         [fetchLogEntries.fulfilled]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.SUCCEEDED;
+            action.payload.sort((a, b) => {
+                return new Date(a.timestamp) - new Date(b.timestamp);
+            });
             state.data = action.payload;
         },
         [fetchLogEntries.rejected]: (state, action) => {
@@ -104,7 +107,8 @@ export const getLoggedActivityIds = createSelector(
 export const getCalendarDataLog = createSelector(
     [getLogEntries, getFilteredActivities],
     (logEntries, activities) => {
-        return LogEntriesService.getCalendarLog(LogEntriesService.populateLogEntriesWithActivities(logEntries, activities));
+        // return LogEntriesService.getCalendarLog(LogEntriesService.populateLogEntriesWithActivities(logEntries, activities));
+        return LogEntriesService.getCalendarLog(logEntries);
     }
 );
 
@@ -112,6 +116,13 @@ export const getOverallStatistics = createSelector(
     [getLogEntries, getAllActivities],
     (logEntries, activities) => {
         return LogEntriesService.getActivitiesOverallStatistics(logEntries, activities);
+    }
+);
+
+export const getTimePeriodStatistics = createSelector(
+    [getLogEntries, getAllActivities],
+    (logEntries, activities) => {
+        return LogEntriesService.getActivitiesTimePeriodStatistics(logEntries, activities);
     }
 );
 

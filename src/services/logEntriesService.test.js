@@ -225,4 +225,81 @@ describe('LogEntriesService', () => {
             }
         });
     });
+
+    it('should get log time period statistics', () => {
+        expect(LogEntriesService.getActivitiesTimePeriodStatistics(logEntries, activities)).toEqual([
+            {
+                period: '2010',
+                type: 'year',
+                activities: {
+                    999: {
+                        count: 0
+                    },
+                    123456: {
+                        count: 1
+                    }
+                }
+            },
+            {
+                period: '2010-11',
+                type: 'month',
+                activities: {
+                    999: {
+                        count: 0
+                    },
+                    123456: {
+                        count: 1
+                    }
+                }
+            },
+            {
+                period: '2020',
+                type: 'year',
+                activities: {
+                    999: {
+                        count: 3
+                    },
+                    123456: {
+                        count: 1
+                    }
+                }
+            },
+            {
+                period: '2020-04',
+                type: 'month',
+                activities: {
+                    999: {
+                        count: 1
+                    },
+                    123456: {
+                        count: 0
+                    }
+                }
+            },
+            {
+                period: '2020-11',
+                type: 'month',
+                activities: {
+                    999: {
+                        count: 2
+                    },
+                    123456: {
+                        count: 1
+                    }
+                }
+            },
+            {
+                period: '2020-12',
+                type: 'month',
+                activities: {
+                    999: {
+                        count: 0
+                    },
+                    123456: {
+                        count: 0
+                    }
+                }
+            }
+        ]);
+    });
 });

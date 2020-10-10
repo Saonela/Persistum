@@ -6,13 +6,32 @@
 .statistics-view__content {
     position: relative;
     max-width: 1300px;
-    padding: var(--margin-m) var(--margin-l);
+    padding: 0 var(--margin-l);
+    /*padding: var(--margin-m) var(--margin-l);*/
     margin: 10vh auto;
+}
+
+.statistics-panel:not(:last-child) {
+    margin-bottom: var(--margin-xl);
+}
+
+.statistics-panel__header {
+    margin-bottom: var(--margin-l);
+    padding-bottom: var(--padding-xs);
+    border-bottom: 2px solid var(--color-theme);
+    font-size: var(--font-size-l);
+    text-align: left;
 }
 
 @media only screen and (max-width: 680px) {
     .statistics-view__content {
         padding: 0;
         margin: 0;
+    }
+    .statistics-view .statistics-panel {
+        margin-bottom: 0;
+        border: 0;
+        border-radius: 0;
+        box-shadow: none;
     }
 }

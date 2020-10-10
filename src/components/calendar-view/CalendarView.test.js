@@ -21,7 +21,7 @@ const mockDataLog = [{
                     },
                     {
                         timestamp: '2020-11-10',
-                        activities: [{id: 999, name: 'c', style: {}}]
+                        activities: [999]
                     }
                 ]
             },
@@ -34,7 +34,7 @@ const mockDataLog = [{
                     },
                     {
                         timestamp: '2020-04-15',
-                        activities: [{id: 999, name: 'b', style: {}}]
+                        activities: [999]
                     }
                 ]
             }
@@ -52,13 +52,18 @@ const mockDataLog = [{
                     },
                     {
                         timestamp: '2010-11-02',
-                        activities: [{id: 123456, name: 'a', style: {}}]
+                        activities: [123456]
                     }
                 ],
             }
         ]
     }
 ];
+
+const activitiesMap = {
+    999: {id: 999, name: 'b', style: {}},
+    123456: {id: 123456, name: 'a', style: {}}
+};
 
 jest.mock('react-redux', () => ({
     useDispatch: jest.fn(() => {}),

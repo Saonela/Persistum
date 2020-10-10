@@ -1,0 +1,9 @@
+.no-log-data-message {
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.no-log-data-message button {
+    margin-top: var(--margin);
+}
