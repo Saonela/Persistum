@@ -3,16 +3,8 @@
     padding: var(--margin-m) var(--margin-l);
 }
 
-.calendar__year-label {
-    margin-bottom: calc(var(--margin-s) * -1);
-    font-size: var(--font-size-xl);
-    text-align: left;
-}
-
-.calendar__month-label {
-    margin: var(--margin-s) 0 var(--margin);
-    font-size: var(--font-size-l);
-    text-align: left;
+.calendar__month:not(:last-child) {
+    margin-bottom: var(--margin-l);
 }
 
 .calendar__days {
@@ -23,6 +15,23 @@
     grid-row-gap: var(--margin-s);
     row-gap: var(--margin-s);
     direction: rtl;
+}
+
+.calendar-year-label {
+    margin-bottom: calc(var(--margin-s) * -1);
+    font-size: var(--font-size-xl);
+    text-align: left;
+}
+
+.calendar-month-label {
+    margin: var(--margin-s) 0 var(--margin);
+    font-size: var(--font-size-l);
+    text-align: left;
+}
+
+.calendar-month-label__year {
+    font-size: var(--font-size);
+    margin-left: var(--margin-xs);
 }
 
 .list-view .calendar__days {

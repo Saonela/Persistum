@@ -10,7 +10,7 @@ exports[`Calendar should match snapshot 1`] = `
       data-testid="year-2010"
     >
       <div
-        class="calendar__year-label"
+        class="calendar-year-label"
       >
         2010
       </div>
@@ -19,9 +19,13 @@ exports[`Calendar should match snapshot 1`] = `
         data-testid="month-11"
       >
         <div
-          class="calendar__month-label"
+          class="calendar-month-label"
         >
-          November
+          <span
+            class="calendar-month-label__month"
+          >
+            November
+          </span>
         </div>
         <div
           class="calendar__days"

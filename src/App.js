@@ -19,6 +19,7 @@ import LandingView from "./components/landing-view/LandingView";
 import withLoader from "./components/with-loader/WithLoader";
 import {fetchSettings} from "./redux/slices/settingsSlice";
 import StatisticsView from "./components/statistics-view/StatisticsView";
+import LogCompletedView from "./components/log-completed-view/LogCompletedView";
 
 const themeColor = '#4973d3'; // TODO: get from variable
 const theme = createMuiTheme({
@@ -32,7 +33,7 @@ const theme = createMuiTheme({
     },
 });
 
-const appRoutes = ['/form', '/calendar', '/statistics'];
+const appRoutes = ['/form', '/calendar', '/statistics', '/log-completed'];
 
 function App({onLoadingStateChange}) {
 
@@ -78,18 +79,24 @@ function App({onLoadingStateChange}) {
                                         <LoginView/>
                                     </div>
                                 </Route>
+                                <Route path="/logout" exact>
+                                    <Logout/>
+                                </Route>
                                 <Route path="/register" exact>
                                     <div className="app-theme-background">
                                         <RegisterView/>
                                     </div>
                                 </Route>
-                                <Route path="/logout" exact>
-                                    <Logout/>
-                                </Route>
                                 <Route path="/form" exact>
                                     <Header/>
                                     <div className="inner-container scroll-container">
                                         <FormView/>
+                                    </div>
+                                </Route>
+                                <Route path="/log-completed" exact>
+                                    <Header/>
+                                    <div className="inner-container scroll-container">
+                                        <LogCompletedView/>
                                     </div>
                                 </Route>
                                 <Route path="/calendar" exact>
