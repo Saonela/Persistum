@@ -16,7 +16,7 @@
     align-items: center;
     grid-template-columns: 2fr 1fr 1fr 1fr;
     margin-bottom: var(--margin-s);
-    transition: color 150ms ease-in;
+    transition: color 150ms ease-out;
 }
 
 .overall-statistics-entry:hover {

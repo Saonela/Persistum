@@ -10,7 +10,7 @@
     background: var(--color-background);
     color: var(--color-theme);
     cursor: pointer;
-    transition: border 150ms ease-in, color 150ms ease-in, opacity 150ms ease-in;
+    transition: border 150ms ease-out, color 150ms ease-out, opacity 150ms ease-out;
 }
 
 .legend-item--inactive {

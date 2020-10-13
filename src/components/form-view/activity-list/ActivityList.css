@@ -21,7 +21,7 @@
 
 .activity-list-transition.activity-list-transition-enter-active {
     opacity: 1;
-    transition: opacity var(--transition-duration) ease-in;
+    transition: opacity var(--transition-duration) ease-out;
 }
 
 .activity-list-transition-leave {
@@ -30,7 +30,7 @@
 
 .activity-list-transition-leave.activity-list-transition-leave-active {
     opacity: 0.01;
-    transition: opacity var(--transition-duration) ease-in;
+    transition: opacity var(--transition-duration) ease-out;
 }
 
 @media only screen and (max-width: 540px) {

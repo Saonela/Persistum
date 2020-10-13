@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useRef} from "react";
 import './CalendarView.css'
 import {useDispatch, useSelector} from "react-redux";
 import Calendar from "./calendar/Calendar";
@@ -11,8 +11,11 @@ import CalendarDisplayToggleButton from "./calendar-display-toggle-button/Calend
 import {getSettings, updateSettings} from "../../redux/slices/settingsSlice";
 import NoLogDataMessage from "../shared/no-log-data-message/NoLogDataMessage";
 import withLoader from "../with-loader/WithLoader";
+import ScrollToTopButton from "../shared/scroll-to-top-button/ScrollToTopButton";
 
 function CalendarView({onLoadingStateChange}) {
+
+    const scrollableContainer = useRef();
 
     const dispatch = useDispatch();
 
@@ -36,7 +39,7 @@ function CalendarView({onLoadingStateChange}) {
             {!!calendarData.length &&
             <>
                 <Legend activities={activities} filters={filters} onFilter={(id) => dispatch(toggleFilter(id))}/>
-                <div className="scroll-container">
+                <div className="scroll-container" ref={scrollableContainer}>
                     <div className="calendar-view__table">
                         <div className="calendar-view__display-toggle-button">
                             <CalendarDisplayToggleButton
@@ -47,6 +50,7 @@ function CalendarView({onLoadingStateChange}) {
                                   dataLog={calendarData}
                                   displayType={settings.calendarDisplayType}/>
                     </div>
+                    <ScrollToTopButton containerRef={scrollableContainer}/>
                 </div>
             </>
             }

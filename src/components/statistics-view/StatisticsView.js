@@ -1,8 +1,7 @@
 import "./StatisticsView.css"
-import React from "react";
+import React, {useRef} from "react";
 import {useSelector} from "react-redux";
 import {
-    getLogEntries,
     getOverallStatistics,
     getTimePeriodStatistics
 } from "../../redux/slices/logEntriesSlice";
@@ -12,8 +11,11 @@ import OverallStatistics from "./overall-statistics/OverallStatistics";
 import TimePeriodStatistics from "./time-period-statistics/TimePeriodStatistics";
 import NoLogDataMessage from "../shared/no-log-data-message/NoLogDataMessage";
 import withLoader from "../with-loader/WithLoader";
+import ScrollToTopButton from "../shared/scroll-to-top-button/ScrollToTopButton";
 
 function StatisticsView({onLoadingStateChange}) {
+
+    const scrollableContainer = useRef();
 
     const activities = useSelector(getAllActivities);
     const overallStatistics = useSelector(getOverallStatistics);
@@ -27,7 +29,7 @@ function StatisticsView({onLoadingStateChange}) {
     onLoadingStateChange(loading);
 
     return (
-        <div className="statistics-view">
+        <div className="statistics-view" ref={scrollableContainer}>
             {!!activities.length &&
             <div className="statistics-view__content">
                 <OverallStatistics activities={activities} statistics={overallStatistics}/>
@@ -38,6 +40,7 @@ function StatisticsView({onLoadingStateChange}) {
             activitiesLoadingStatus === ASYNC_STATE_STATUS.SUCCEEDED &&
             logentriesLoadingStatus === ASYNC_STATE_STATUS.SUCCEEDED &&
             <NoLogDataMessage/>}
+            <ScrollToTopButton containerRef={scrollableContainer}/>
         </div>
     )
 }
