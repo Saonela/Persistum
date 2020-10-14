@@ -4,7 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import Calendar from "./calendar/Calendar";
 import Legend from "../legend/Legend";
 import {getCalendarDataLog} from "../../redux/slices/logEntriesSlice";
-import {toggleFilter} from "../../redux/slices/filtersSlice";
+import {getFilters, toggleFilter} from "../../redux/slices/filtersSlice";
 import {getAllActivities} from "../../redux/slices/activitiesSlice";
 import {ASYNC_STATE_STATUS} from "../../redux/asyncStateStatus";
 import CalendarDisplayToggleButton from "./calendar-display-toggle-button/CalendarDisplayToggleButton";
@@ -19,10 +19,10 @@ function CalendarView({onLoadingStateChange}) {
 
     const dispatch = useDispatch();
 
-    const calendarData = useSelector(getCalendarDataLog);
-    const activities = useSelector(getAllActivities);
     const settings = useSelector(getSettings);
-    const filters = useSelector(state => state.filters);
+    const activities = useSelector(getAllActivities);
+    const calendarData = useSelector(getCalendarDataLog);
+    const filters = useSelector(getFilters);
 
     const activitiesLoadingStatus = useSelector(state => state.activities.status);
     const logentriesLoadingStatus = useSelector(state => state.logEntries.status);

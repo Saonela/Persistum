@@ -111,7 +111,7 @@ describe('ActivitiesReducer', () => {
         };
         expect(getFilteredActivities(state)).toEqual([
             {
-                id: 12,
+                id: 11,
                 name: 'Read 5 pages',
                 completed: false,
                 style: ''

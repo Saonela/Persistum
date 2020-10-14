@@ -89,7 +89,7 @@ const activitiesSlice = createSlice({
 export const {reorderActivities} = activitiesSlice.actions;
 
 export const getAllActivities = state => state.activities.data;
-export const getFilteredActivities = state => state.activities.data.filter(activity => !state.filters.includes(activity.id));
+export const getFilteredActivities = state => state.activities.data.filter(activity => state.filters.includes(activity.id));
 
 const activitiesReducer = activitiesSlice.reducer;
 export default activitiesReducer;

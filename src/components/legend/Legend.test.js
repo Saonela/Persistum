@@ -23,6 +23,8 @@ describe('Legend', () => {
 
     it('should mark filtered items', () => {
         const {container} = render(<Legend activities={activities} filters={[999]}/>);
-        expect(getAllByRole(container, 'img')[1]).toHaveStyle(`background-color: ${activities[1].style.background}`);
+        const filterButtons = getAllByRole(container, 'button', {name: 'Filter'});
+        expect(filterButtons[0]).not.toHaveClass('legend-item--active');
+        expect(filterButtons[1]).toHaveClass('legend-item--active');
     });
 });

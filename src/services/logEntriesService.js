@@ -10,6 +10,18 @@ const LogEntriesService = {
             };
         });
     },
+    filterActivitiesFromLogEntries(logEntries, filteredActivitiesIds) {
+        if (!filteredActivitiesIds.length) {
+            return logEntries;
+        }
+        return logEntries.map((entry) => {
+            return {
+                ...entry,
+                activities: entry.activities.filter(id => filteredActivitiesIds.includes(id))
+            };
+        });
+
+    },
     getCalendarLog(logEntries) {
         const stateArray = [];
         let years = [];

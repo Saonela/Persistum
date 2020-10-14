@@ -121,6 +121,32 @@ describe('LogEntriesService', () => {
             ]);
     });
 
+    it('should filter activities from log entries', () => {
+        expect(LogEntriesService.filterActivitiesFromLogEntries(logEntries, [])).toEqual(logEntries);
+        expect(LogEntriesService.filterActivitiesFromLogEntries(logEntries, [999])).toEqual([
+            {
+                timestamp: '2010-11-02',
+                activities: []
+            },
+            {
+                timestamp: '2020-04-05',
+                activities: [999]
+            },
+            {
+                timestamp: '2020-11-01',
+                activities: [999]
+            },
+            {
+                timestamp: '2020-11-05',
+                activities: [999]
+            },
+            {
+                timestamp: '2020-12-03',
+                activities: []
+            }
+        ]);
+    });
+
     it('should return calendar format of data log state', () => {
         expect(LogEntriesService.getCalendarLog(logEntries)).toEqual([
             {

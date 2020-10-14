@@ -21,5 +21,7 @@ const filtersSlice = createSlice({
 
 export const { toggleFilter } = filtersSlice.actions;
 
+export const getFilters = state => state.filters;
+
 const filtersReducer = filtersSlice.reducer;
 export default filtersReducer;
