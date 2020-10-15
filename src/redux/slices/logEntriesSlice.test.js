@@ -67,16 +67,6 @@ describe('LogEntriesReducer', () => {
         });
     });
 
-    it('should toggle data log activity and remove entry if no activities', () => {
-        const localState = Object.assign({}, state, {timestamp: '2010-04-05'})
-        expect(logEntriesReducer(localState, toggleLogEntryActivity(1))).toEqual({
-            timestamp: '2010-04-05',
-            data: [
-                {timestamp: '2020-01-01', activities: [1, 2]}
-            ]
-        });
-    });
-
     it('should sort and set fetched log entries', () => {
         const logEntries = [
             {timestamp: '2010-04-05', activities: [1]},
@@ -112,6 +102,14 @@ describe('LogEntriesReducer', () => {
         };
         expect(logEntriesReducer(state, updateLogEntry.fulfilled(logEntry))).toEqual({
             data: [{id: '112', timestamp: '2020-01-01', activities: [1, 2]}]
+        });
+    });
+
+    it('should update log entry and remove entry if no activities', () => {
+        const state = {data: []};
+        const logEntry = {id: '112', timestamp: '2010-04-05', activities: []};
+        expect(logEntriesReducer(state, updateLogEntry.fulfilled(logEntry))).toEqual({
+            data: []
         });
     });
 

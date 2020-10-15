@@ -76,7 +76,6 @@ const LogEntriesService = {
             }
         });
 
-        console.log('CALENDAR LOG', stateArray)
         return stateArray;
     },
     getActivitiesOverallStatistics(logEntries, activities) {

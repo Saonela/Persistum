@@ -49,7 +49,6 @@ const logEntriesSlice = createSlice({
             if (logEntry) {
                 if (logEntry.activities.includes(activityId)) {
                     logEntry.activities = logEntry.activities.filter(id => id !== activityId);
-                    state.data = state.data.filter(entry => entry.activities.length);
                 } else {
                     logEntry.activities.push(activityId);
                 }
@@ -68,6 +67,7 @@ const logEntriesSlice = createSlice({
                 return new Date(a.timestamp) - new Date(b.timestamp);
             });
             state.data = action.payload;
+            console.log('FETCHED LOG ENTRIES:', state.data)
         },
         [fetchLogEntries.rejected]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.FAILED;
@@ -81,6 +81,7 @@ const logEntriesSlice = createSlice({
             } else {
                 state.data.push(action.payload);
             }
+            state.data = state.data.filter(entry => entry.activities.length);
         },
         [logout]: (state) => {
             return {
@@ -112,8 +113,9 @@ export const getLoggedActivityIds = createSelector(
 export const getCalendarDataLog = createSelector(
     [getLogEntries, getFilters],
     (logEntries, filteredActivityIds) => {
-        logEntries = LogEntriesService.filterActivitiesFromLogEntries(logEntries, filteredActivityIds);
-        return LogEntriesService.getCalendarLog(logEntries);
+        const filteredLogEntries = LogEntriesService.filterActivitiesFromLogEntries(logEntries, filteredActivityIds);
+        const calendarLog = LogEntriesService.getCalendarLog(filteredLogEntries)
+        return calendarLog.length ? calendarLog : LogEntriesService.getCalendarLog(logEntries);
     }
 );
 

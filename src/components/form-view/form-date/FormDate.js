@@ -7,9 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import EditIcon from "@material-ui/icons/Edit";
 
 function FormDate({date, setDate, disabled}) {
-
-    console.log('FormDate', date);
-
     const DateDisplay = React.forwardRef(({value, onClick}, ref) => (
         <div className="form-date">
             <div className="form-date__container">

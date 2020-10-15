@@ -3,9 +3,6 @@ import "./OverallStatistics.css"
 import ActivityEntry from "../../shared/activity-entry/ActivityEntry";
 
 function OverallStatistics({activities, statistics}) {
-
-    console.log('overall stats', statistics);
-
     return (
         <div className="app-panel app-border overall-statistics statistics-panel">
             <div className="statistics-panel__header">Overall</div>
