@@ -110,7 +110,7 @@ const LogEntriesService = {
 
         const defaultActivitiesStats = {};
         activities.forEach(activity => defaultActivitiesStats[activity.id] = {count: 0});
-        console.log('all activities', activities)
+
         logEntries.forEach((entry) => {
             const year = UtilityService.getTimestampYear(entry.timestamp);
             const month = UtilityService.getTimestampMonth(entry.timestamp);
@@ -134,7 +134,6 @@ const LogEntriesService = {
                 };
             }
             entry.activities.forEach((activityId) => {
-                console.log('++++', year, monthPeriod, activityId, yearlyStatistics, monthlyStatistics)
                 if (defaultActivitiesStats[activityId]) {
                     yearlyStatistics[year].activities[activityId].count++;
                     monthlyStatistics[monthPeriod].activities[activityId].count++;
@@ -143,9 +142,9 @@ const LogEntriesService = {
         });
 
         const statistics = [];
-        Object.keys(yearlyStatistics).forEach((yearKey) => {
+        Object.keys(yearlyStatistics).reverse().forEach((yearKey) => {
             statistics.push(yearlyStatistics[yearKey]);
-            Object.keys(monthlyStatistics).filter(key => key.includes(yearKey)).forEach((monthKey) => {
+            Object.keys(monthlyStatistics).reverse().filter(key => key.includes(yearKey)).forEach((monthKey) => {
                statistics.push(monthlyStatistics[monthKey]);
             });
         });
