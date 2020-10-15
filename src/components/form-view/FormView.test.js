@@ -80,6 +80,11 @@ describe('FormView', () => {
     });
 
     it('should add edit class if not current date timestamp', () => {
+        const activities = [{id: 2, name: 'test activity 2', completed: false, style: {color: '#EBB'}, positionIndex: 0}];
+        Object.assign(mockState, {
+            logEntries: {data: [], timestamp: '2020-09-21'},
+            activities: {data: activities, status: ASYNC_STATE_STATUS.SUCCEEDED}
+        });
         getCurrentShortTimestamp.mockImplementation(() => '2020-09-21');
         render(<Router><FormView/></Router>);
         expect(screen.queryByText('You are not on the current date'));

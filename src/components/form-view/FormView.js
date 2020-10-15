@@ -45,44 +45,52 @@ function FormView({onLoadingStateChange}) {
     }
 
     return (
-        <div className="app-panel app-border form-view">
-            <div className="form-view__form">
-                <FormDate date={date} setDate={(date) => dispatch(setTimestamp(date))}/>
-                {!isCurrentDate() && <div className="form-view__edit-message">You are not on the current date</div>}
-                <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
-                                onSubmit={(name) => {dispatch(createActivity(name))}}/>
-                <ActivityList activities={activities}
-                              completedActivityIds={completedActivityIds}
-                              onToggle={(id) => {
-                                  dispatch(toggleLogEntryActivity(id));
-                                  dispatch(updateLogEntry(date));
-                              }}
-                              onUpdate={(activity) => {dispatch(updateActivity(activity))}}
-                              onDelete={(activity) => {
-                                  dispatch(deleteActivity(activity.id));
-                                  dispatch(updateActivitiesOrder());
-                              }}
-                              onDragEnd={(indexData) => {
-                                  dispatch(reorderActivities(indexData));
-                                  dispatch(updateActivitiesOrder());
-                              }}/>
-                {!loading && !activities.length && loadingStatus !== ASYNC_STATE_STATUS.IDLE &&
+        <>
+            {!loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE &&
+            <div className="app-panel app-border form-view">
+                <div className="form-view__form">
+                    <FormDate date={date} setDate={(date) => dispatch(setTimestamp(date))}/>
+                    {!isCurrentDate() && <div className="form-view__edit-message">You are not on the current date</div>}
+                    <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
+                                    onSubmit={(name) => {
+                                        dispatch(createActivity(name))
+                                    }}/>
+                    <ActivityList activities={activities}
+                                  completedActivityIds={completedActivityIds}
+                                  onToggle={(id) => {
+                                      dispatch(toggleLogEntryActivity(id));
+                                      dispatch(updateLogEntry(date));
+                                  }}
+                                  onUpdate={(activity) => {
+                                      dispatch(updateActivity(activity))
+                                  }}
+                                  onDelete={(activity) => {
+                                      dispatch(deleteActivity(activity.id));
+                                      dispatch(updateActivitiesOrder());
+                                  }}
+                                  onDragEnd={(indexData) => {
+                                      dispatch(reorderActivities(indexData));
+                                      dispatch(updateActivitiesOrder());
+                                  }}/>
+                    {!activities.length &&
                     <div className="no-activities-message" data-testid="no-activities">
                         <NoActivitiesMessage/>
                     </div>
-                }
-                {!loading && !!activities.length &&
-                <div className="form-view__footer">
-                    <Link to="/log-completed">
-                     <Button className="app-button app-button--outline form-view__toggle-button"
-                            variant="outlined"
-                            color="default"
-                            size="small"
-                            aria-label="complete-day-logging">Call it a day</Button>
-                    </Link>
-                </div>}
+                    }
+                    {activities.length &&
+                    <div className="form-view__footer">
+                        <Link to="/log-completed">
+                            <Button className="app-button app-button--outline form-view__toggle-button"
+                                    variant="outlined"
+                                    color="default"
+                                    size="small"
+                                    aria-label="complete-day-logging">Call it a day</Button>
+                        </Link>
+                    </div>}
+                </div>
             </div>
-        </div>
+            }
+        </>
     );
 }
 
