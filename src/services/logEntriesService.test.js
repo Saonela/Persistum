@@ -252,6 +252,22 @@ describe('LogEntriesService', () => {
         });
     });
 
+    it('should get log overall statistics', () => {
+        expect(LogEntriesService.getActivitiesOverallStatistics(logEntries, activities)).toEqual({
+            123456: {
+                count: 2,
+                firstTimestamp: '2010-11-02',
+                lastTimestamp: '2020-11-05'
+            },
+            999: {
+                count: 3,
+                firstTimestamp: '2020-04-05',
+                lastTimestamp: '2020-11-05'
+            }
+        });
+        expect(LogEntriesService.getActivitiesOverallStatistics([], activities)).toEqual(null);
+    });
+
     it('should get log time period statistics', () => {
         expect(LogEntriesService.getActivitiesTimePeriodStatistics(logEntries, activities)).toEqual([
             {
@@ -327,5 +343,6 @@ describe('LogEntriesService', () => {
                 }
             }
         ]);
+        expect(LogEntriesService.getActivitiesTimePeriodStatistics([], activities)).toEqual(null);
     });
 });

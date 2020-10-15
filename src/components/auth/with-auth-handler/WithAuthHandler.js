@@ -2,7 +2,7 @@ import React from "react";
 import {useDispatch} from "react-redux";
 import {setUser} from "../../../redux/slices/userSlice";
 import {fetchActivities} from "../../../redux/slices/activitiesSlice";
-import {fetchLogEntries} from "../../../redux/slices/logEntriesSlice";
+import {fetchLogEntries, resetTimestamp} from "../../../redux/slices/logEntriesSlice";
 import {fetchSettings} from "../../../redux/slices/settingsSlice";
 import {withRouter} from "react-router-dom";
 
@@ -15,6 +15,7 @@ function withAuthHandler(WrappedComponent) {
             dispatch(fetchSettings());
             dispatch(fetchActivities());
             dispatch(fetchLogEntries());
+            dispatch(resetTimestamp());
             history.push('/form');
         }
 

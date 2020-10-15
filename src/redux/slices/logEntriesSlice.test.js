@@ -55,7 +55,7 @@ describe('LogEntriesReducer', () => {
         });
     });
 
-    it('should dispatch toggle data log activity and create new entry if dont exist', () => {
+    it('should toggle data log activity and create new entry if dont exist', () => {
         const localState = Object.assign({}, state, {timestamp: '2020-08-09'})
         expect(logEntriesReducer(localState, toggleLogEntryActivity(3))).toEqual({
             timestamp: '2020-08-09',
@@ -63,6 +63,16 @@ describe('LogEntriesReducer', () => {
                 {timestamp: '2020-01-01', activities: [1, 2]},
                 {timestamp: '2010-04-05', activities: [1]},
                 {timestamp: '2020-08-09', activities: [3]}
+            ]
+        });
+    });
+
+    it('should toggle data log activity and remove entry if no activities', () => {
+        const localState = Object.assign({}, state, {timestamp: '2010-04-05'})
+        expect(logEntriesReducer(localState, toggleLogEntryActivity(1))).toEqual({
+            timestamp: '2010-04-05',
+            data: [
+                {timestamp: '2020-01-01', activities: [1, 2]}
             ]
         });
     });
@@ -132,7 +142,8 @@ describe('LogEntriesReducer', () => {
         expect(logEntriesReducer(state, logout())).toEqual({
             status: ASYNC_STATE_STATUS.IDLE,
             error: null,
-            data: []
+            data: [],
+            timestamp: ''
         });
     });
 });

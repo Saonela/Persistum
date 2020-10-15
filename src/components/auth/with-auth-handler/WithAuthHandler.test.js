@@ -17,7 +17,8 @@ jest.mock("../../../redux/slices/activitiesSlice", () => ({
 }));
 
 jest.mock("../../../redux/slices/logEntriesSlice", () => ({
-    fetchLogEntries: args => args
+    fetchLogEntries: args => args,
+    resetTimestamp: args => args
 }));
 
 describe('WithAuthHandlerForm', () => {
@@ -46,7 +47,7 @@ describe('WithAuthHandlerForm', () => {
         let component = wrapper.find(DummyComponent);
         await component.prop('onAuthSuccess')({uid: '1234', email: 'John@mail.com'});
         expect(mockDispatchFn).toHaveBeenCalledWith({id: '1234', email: 'John@mail.com'});
-        expect(mockDispatchFn).toHaveBeenCalledTimes(4);
+        expect(mockDispatchFn).toHaveBeenCalledTimes(5);
         expect(pushSpy).toHaveBeenCalledWith('/form');
     });
 });

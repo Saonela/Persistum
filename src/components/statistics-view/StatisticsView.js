@@ -30,13 +30,13 @@ function StatisticsView({onLoadingStateChange}) {
 
     return (
         <div className="statistics-view" ref={scrollableContainer}>
-            {!!activities.length &&
+            {timePeriodStatistics && timePeriodStatistics &&
             <div className="statistics-view__content">
                 <OverallStatistics activities={activities} statistics={overallStatistics}/>
                 <TimePeriodStatistics activities={activities} statistics={timePeriodStatistics}/>
             </div>
             }
-            {!activities.length &&
+            {(!timePeriodStatistics || !timePeriodStatistics) &&
             activitiesLoadingStatus === ASYNC_STATE_STATUS.SUCCEEDED &&
             logentriesLoadingStatus === ASYNC_STATE_STATUS.SUCCEEDED &&
             <NoLogDataMessage/>}

@@ -49,6 +49,7 @@ const logEntriesSlice = createSlice({
             if (logEntry) {
                 if (logEntry.activities.includes(activityId)) {
                     logEntry.activities = logEntry.activities.filter(id => id !== activityId);
+                    state.data = state.data.filter(entry => entry.activities.length);
                 } else {
                     logEntry.activities.push(activityId);
                 }
@@ -85,7 +86,8 @@ const logEntriesSlice = createSlice({
             return {
                 status: ASYNC_STATE_STATUS.IDLE,
                 error: null,
-                data: []
+                data: [],
+                timestamp: ''
             }
         }
     }
@@ -93,7 +95,9 @@ const logEntriesSlice = createSlice({
 
 export const { setTimestamp, resetTimestamp, toggleLogEntryActivity } = logEntriesSlice.actions;
 
-export const getTimestamp = state => state.logEntries.timestamp;
+export const getTimestamp = state => {
+    return state.logEntries.timestamp;
+}
 export const getLogEntries = state => state.logEntries.data;
 export const getLogEntryByTimestamp = (state, timestamp) => state.logEntries.data.find(entry => entry.timestamp === timestamp);
 

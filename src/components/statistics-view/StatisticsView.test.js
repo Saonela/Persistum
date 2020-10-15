@@ -63,10 +63,10 @@ describe('StatisticsView', () => {
         screen.getByText('Time Period');
     });
 
-    it('should hide statistic panels and show message if no activities', () => {
+    it('should hide statistic panels and show message if no statistics', () => {
         Object.assign(mockState, {
-            logEntries: {timestamp: '2020-09-21', data: logEntries, status: ASYNC_STATE_STATUS.IDLE},
-            activities: {data: [], status: ASYNC_STATE_STATUS.LOADING},
+            logEntries: {timestamp: '2020-09-21', data: [], status: ASYNC_STATE_STATUS.LOADING},
+            activities: {data: activities, status: ASYNC_STATE_STATUS.IDLE},
             settings: {data: {calendarDisplayType: CALENDAR_DISPLAY_TYPE.LIST}}
         });
         const {rerender} = render(<Router><StatisticsView/></Router>);
@@ -75,8 +75,8 @@ describe('StatisticsView', () => {
         expect(screen.queryByText('No data have been found!')).not.toBeInTheDocument();
 
         Object.assign(mockState, {
-            logEntries: {timestamp: '2020-09-21', data: logEntries, status: ASYNC_STATE_STATUS.SUCCEEDED},
-            activities: {data: [], status: ASYNC_STATE_STATUS.SUCCEEDED}
+            logEntries: {timestamp: '2020-09-21', data: [], status: ASYNC_STATE_STATUS.SUCCEEDED},
+            activities: {data: activities, status: ASYNC_STATE_STATUS.SUCCEEDED}
         });
         rerender(<Router><StatisticsView/></Router>);
         screen.getByText('No data have been found!');

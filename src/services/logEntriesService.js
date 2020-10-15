@@ -80,6 +80,10 @@ const LogEntriesService = {
         return stateArray;
     },
     getActivitiesOverallStatistics(logEntries, activities) {
+        if (!logEntries.length) {
+            return null;
+        }
+
         const activitiesStats = {};
         activities.forEach((activity) => {
             activitiesStats[activity.id] = {
@@ -102,6 +106,10 @@ const LogEntriesService = {
         return activitiesStats
     },
     getActivitiesTimePeriodStatistics(logEntries, activities) {
+        if (!logEntries.length) {
+            return null;
+        }
+
         let usedYears = [];
         let usedMonths = [];
 
