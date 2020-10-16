@@ -77,7 +77,7 @@ function FormView({onLoadingStateChange}) {
                         <NoActivitiesMessage/>
                     </div>
                     }
-                    {activities.length &&
+                    {!!activities.length &&
                     <div className="form-view__footer">
                         <Link to="/log-completed">
                             <Button className="app-button app-button--outline form-view__toggle-button"
