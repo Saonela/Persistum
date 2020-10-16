@@ -1,10 +1,11 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Persistum",
+  "name": "Persistum - routine tracker",
+  "description": "Recurring activities and routine logger",
   "icons": [
     {
       "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
+      "sizes": "16x16",
       "type": "image/x-icon"
     },
     {
@@ -18,8 +19,31 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": ".",
+  "shortcuts": [
+    {
+      "name": "Activities",
+      "short_name": "Log Activities",
+      "description": "Log your activities",
+      "url": "/form",
+      "icons": [{ "src": "logo96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Calendar",
+      "short_name": "View Calendar",
+      "description": "Preview your activities log in calendar",
+      "url": "/calendar",
+      "icons": [{ "src": "logo96.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "Statistics",
+      "short_name": "View Statistics",
+      "description": "Preview your activities statistics",
+      "url": "/statistics",
+      "icons": [{ "src": "logo96.png", "sizes": "96x96" }]
+    }
+  ],
+  "start_url": "../form",
   "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "theme_color": "#4973d3",
+  "background_color": "#fffffe"
 }
