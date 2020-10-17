@@ -1,6 +1,6 @@
 ## Persistum
 
-####Routine tracking app created using React ecosystem and Redux
+#### Routine tracking app created using React ecosystem and Redux
 
 Routine is key to success. 
 Mark your goals, check them everyday, overview your total progress and statistics.
