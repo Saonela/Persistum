@@ -1,9 +1,6 @@
 import {render, screen} from "@testing-library/react";
-import OverallStatistics from "../overall-statistics/OverallStatistics";
 import React from "react";
 import TimePeriodStatistics from "./TimePeriodStatistics";
-import Calendar from "../../calendar-view/calendar/Calendar";
-import {CALENDAR_DISPLAY_TYPE} from "../../../types/settings";
 
 const activities = [
     {
@@ -67,10 +64,8 @@ describe('TimePeriodStatistics', () => {
         expect(screen.getAllByText('Workout 30 minutes')).toHaveLength(3);
     });
 
-    // it('should match snapshot', () => {
-        // const {asFragment} = render(<TimePeriodStatistics activities={activities} statistics={statistics}/>);
-        // expect(asFragment()).toMatchSnapshot();
-    // });
+    it('should match snapshot', () => {
+        const {asFragment} = render(<TimePeriodStatistics activities={activities} statistics={statistics}/>);
+        expect(asFragment()).toMatchSnapshot();
+    });
 });
-
-

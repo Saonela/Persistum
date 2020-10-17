@@ -63,7 +63,6 @@ const activitiesSlice = createSlice({
             state.status = ASYNC_STATE_STATUS.SUCCEEDED;
             action.payload.sort((a, b) => a.positionIndex - b.positionIndex);
             state.data = action.payload;
-            console.log('FETCHED ACTIVITIES:', state.data)
         },
         [fetchActivities.rejected]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.FAILED;

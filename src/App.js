@@ -21,15 +21,12 @@ import {fetchSettings} from "./redux/slices/settingsSlice";
 import StatisticsView from "./components/statistics-view/StatisticsView";
 import LogCompletedView from "./components/log-completed-view/LogCompletedView";
 
-const themeColor = '#4973d3'; // TODO: get from variable
+const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--color-theme').trim();
 const theme = createMuiTheme({
     palette: {
         primary: {
             main: themeColor
-        },
-        // secondary: {
-        //     main: green[500],
-        // },
+        }
     },
 });
 

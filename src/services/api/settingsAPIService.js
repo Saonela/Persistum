@@ -1,6 +1,6 @@
 import {FirebaseDB} from "../../firebase";
 
-const getSettingsField = (userId) => FirebaseDB.collection('accounts').doc(userId) //.collection('settings');
+const getSettingsField = (userId) => FirebaseDB.collection('accounts').doc(userId);
 
 const SettingsAPIService = {
     async get(userId) {

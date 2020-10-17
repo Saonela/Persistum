@@ -3,22 +3,6 @@ import React from "react";
 import FormDate from "./FormDate";
 import {fireEvent} from "@testing-library/dom";
 
-// jest.mock('moment', () => {
-//     let input;
-//     const mMoment = {
-//         utc: (format) => {
-//             return jest.requireActual('moment')(input).format(format);
-//         },
-//         utc: () => {
-//             return jest.requireActual('moment')(input).utc();
-//         }
-//     };
-//     return jest.fn((params) => {
-//         input = params;
-//         return mMoment
-//     });
-// });
-
 describe('FormDate', () => {
 
     it('should display date', () => {

@@ -68,7 +68,6 @@ const logEntriesSlice = createSlice({
                 return new Date(a.timestamp) - new Date(b.timestamp);
             });
             state.data = action.payload;
-            console.log('FETCHED LOG ENTRIES:', state.data)
         },
         [fetchLogEntries.rejected]: (state, action) => {
             state.status = ASYNC_STATE_STATUS.FAILED;

@@ -7,7 +7,6 @@
     position: relative;
     max-width: 1300px;
     padding: 0 var(--margin-l);
-    /*padding: var(--margin-m) var(--margin-l);*/
     margin: 10vh auto;
 }
 
