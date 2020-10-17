@@ -20,6 +20,7 @@ import withLoader from "./components/with-loader/WithLoader";
 import {fetchSettings} from "./redux/slices/settingsSlice";
 import StatisticsView from "./components/statistics-view/StatisticsView";
 import LogCompletedView from "./components/log-completed-view/LogCompletedView";
+import Icon from "@material-ui/core/Icon";
 
 const themeColor = getComputedStyle(document.documentElement).getPropertyValue('--color-theme').trim();
 const theme = createMuiTheme({
@@ -112,6 +113,7 @@ function App({onLoadingStateChange}) {
                         </div>
                     </RouteAuthGuard>
                 </Router>
+                <Icon style={{position: 'fixed', visibility: 'hidden'}}>done</Icon>
             </div>
          </MuiThemeProvider>
     );
