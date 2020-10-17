@@ -1,4 +1,7 @@
-import * as firebase from "firebase";
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import 'firebase/database';
+import 'firebase/firestore';
 
 const config = {
     apiKey: "AIzaSyCU5NNhFFH124U3qgxxw1M5Q7VwkLGXvuU",
@@ -12,7 +15,8 @@ const config = {
 };
 
 export const Firebase = firebase.initializeApp(config);
+export const FirebaseAuth = Firebase.auth();
 export const FirebaseDB = Firebase.firestore();
 export const FirebaseGoogleAuthProvider = new firebase.auth.GoogleAuthProvider();
 export const FirebaseFacebookAuthProvider = new firebase.auth.FacebookAuthProvider();
-
+export const FirebasePersistence = firebase.auth.Auth.Persistence;

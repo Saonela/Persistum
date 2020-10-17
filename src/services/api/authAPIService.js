@@ -1,19 +1,16 @@
-import {Firebase, FirebaseDB} from "../../firebase";
-import * as firebase from "firebase";
-
-const firebaseAuth = Firebase.auth();
+import {FirebaseAuth, FirebaseDB, FirebasePersistence} from "../../firebase";
 
 const AuthAPIService = {
     getCurrentUser() {
         return new Promise((resolve) => {
-            firebaseAuth.onAuthStateChanged((user) => {
+            FirebaseAuth.onAuthStateChanged((user) => {
                 resolve(user);
             });
         });
     },
     register(email, password) {
         return new Promise((resolve, reject) => {
-            return firebaseAuth.createUserWithEmailAndPassword(email, password).then((response) => {
+            return FirebaseAuth.createUserWithEmailAndPassword(email, password).then((response) => {
                 const user = response.user;
                 FirebaseDB.collection('accounts').doc(user.uid).set({userId: user.uid}).then();
                 resolve(response);
@@ -24,8 +21,8 @@ const AuthAPIService = {
     },
     login(email, password) {
         return new Promise((resolve, reject) => {
-            firebaseAuth.setPersistence(firebase.auth.Auth.Persistence.LOCAL).then(() => {
-                return firebaseAuth.signInWithEmailAndPassword(email, password).then((response) => {
+            FirebaseAuth.setPersistence(FirebasePersistence.LOCAL).then(() => {
+                return FirebaseAuth.signInWithEmailAndPassword(email, password).then((response) => {
                     resolve(response);
                 });
             }).catch((error) => {
@@ -36,7 +33,7 @@ const AuthAPIService = {
     },
     loginWithProvider(provider) {
         return new Promise((resolve) => {
-            firebaseAuth.signInWithPopup(provider).then((response) => {
+            FirebaseAuth.signInWithPopup(provider).then((response) => {
                 const user = response.user;
                 FirebaseDB.collection('accounts').doc(user.uid).set({userId: user.uid}).then();
                 resolve(response);
@@ -47,13 +44,13 @@ const AuthAPIService = {
         });
     },
     logout() {
-        return firebaseAuth.signOut();
+        return FirebaseAuth.signOut();
     },
     resetPassword(email) {
-        return firebaseAuth.sendPasswordResetEmail(email);
+        return FirebaseAuth.sendPasswordResetEmail(email);
     },
     updatePassword(password) {
-        return firebaseAuth.currentUser.updatePassword(password);
+        return FirebaseAuth.currentUser.updatePassword(password);
     }
 };
 
