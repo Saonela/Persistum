@@ -7,14 +7,14 @@ Mark your goals, check them everyday, overview your total progress and statistic
 
 [www.persistum.web.app](https://persistum.web.app/)
 
-First project developed using Firebase Redux and React ecosystem.
+First project developed using Firebase, Redux and React ecosystem.
 
 ## Features
 - Persistent( **:)** ) todo/activities list which gets refreshed everyday
 - Activities color customization
 - Activities reordering
 - Editing of previous days
-- Calendar view grid or list display
+- Calendar grid or list display
 - Calendar activity filters
 - Statistics view with overall, yearly and monthly separation
 
