@@ -1,0 +1,228 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimePeriodStatistics should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="app-panel app-border time-period-statistics statistics-panel"
+  >
+    <div
+      class="statistics-panel__header"
+    >
+      Time Period
+    </div>
+    <div
+      class="time-period-statistics__item"
+    >
+      <div
+        class="time-period-statistics__period"
+      >
+        <span>
+          2020
+        </span>
+      </div>
+      <div
+        class="time-period-statistics__list-header"
+      >
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Activity
+        </p>
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Count
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Read 5 pages
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          1
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Workout 30 minutes
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          3
+        </p>
+      </div>
+    </div>
+    <div
+      class="time-period-statistics__item"
+    >
+      <div
+        class="time-period-statistics__period"
+      >
+        <span>
+          April
+        </span>
+        <span
+          class="time-period-statistics__period-secondary"
+          style="font-size: 13px;"
+        >
+          2020
+        </span>
+      </div>
+      <div
+        class="time-period-statistics__list-header"
+      >
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Activity
+        </p>
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Count
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Read 5 pages
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          0
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Workout 30 minutes
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          1
+        </p>
+      </div>
+    </div>
+    <div
+      class="time-period-statistics__item"
+    >
+      <div
+        class="time-period-statistics__period"
+      >
+        <span>
+          November
+        </span>
+        <span
+          class="time-period-statistics__period-secondary"
+          style="font-size: 13px;"
+        >
+          2020
+        </span>
+      </div>
+      <div
+        class="time-period-statistics__list-header"
+      >
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Activity
+        </p>
+        <p
+          class="time-period-statistics__header-item"
+        >
+          Count
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Read 5 pages
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          1
+        </p>
+      </div>
+      <div
+        class="time-period-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Workout 30 minutes
+        </div>
+        <p
+          class="time-period-statistics-entry__count"
+          data-label="Count:"
+        >
+          2
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;

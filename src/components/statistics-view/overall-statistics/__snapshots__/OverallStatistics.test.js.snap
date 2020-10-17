@@ -1,0 +1,109 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`OverallStatistics should match snapshot 1`] = `
+<DocumentFragment>
+  <div
+    class="app-panel app-border overall-statistics statistics-panel"
+  >
+    <div
+      class="statistics-panel__header"
+    >
+      Overall
+    </div>
+    <div
+      class="overall-statistics__list-header"
+    >
+      <p
+        class="overall-statistics__header-item"
+      >
+        Activity
+      </p>
+      <p
+        class="overall-statistics__header-item"
+      >
+        Count
+      </p>
+      <p
+        class="overall-statistics__header-item"
+      >
+        First Occurrence
+      </p>
+      <p
+        class="overall-statistics__header-item"
+      >
+        Last Occurrence
+      </p>
+    </div>
+    <div
+      class="overall-statistics__list"
+    >
+      <div
+        class="overall-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Read 5 pages
+        </div>
+        <p
+          class="overall-statistics-entry__count"
+          data-label="Count:"
+        >
+          2
+        </p>
+        <p
+          class="overall-statistics-entry__first-timestamp"
+          data-label="First Occurrence:"
+        >
+          2010-11-02
+        </p>
+        <p
+          class="overall-statistics-entry__last-timestamp"
+          data-label="Last Occurrence:"
+        >
+          2020-11-05
+        </p>
+      </div>
+      <div
+        class="overall-statistics-entry"
+      >
+        <div
+          class="activity-entry"
+          data-label="Activity"
+        >
+          <div
+            aria-label="Activity color"
+            class="activity-color"
+            role="img"
+          />
+          Workout 30 minutes
+        </div>
+        <p
+          class="overall-statistics-entry__count"
+          data-label="Count:"
+        >
+          3
+        </p>
+        <p
+          class="overall-statistics-entry__first-timestamp"
+          data-label="First Occurrence:"
+        >
+          2020-04-05
+        </p>
+        <p
+          class="overall-statistics-entry__last-timestamp"
+          data-label="Last Occurrence:"
+        >
+          2020-11-05
+        </p>
+      </div>
+    </div>
+  </div>
+</DocumentFragment>
+`;
