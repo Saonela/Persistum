@@ -51,6 +51,7 @@ const logEntriesSlice = createSlice({
                     logEntry.activities = logEntry.activities.filter(id => id !== activityId);
                 } else {
                     logEntry.activities.push(activityId);
+                    logEntry.activities.sort();
                 }
             } else {
                 state.data.push({timestamp: state.timestamp, activities: [activityId]});

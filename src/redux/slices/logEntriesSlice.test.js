@@ -39,10 +39,10 @@ describe('LogEntriesReducer', () => {
 
     it('should dispatch toggle data log activity action', () => {
         const localState = Object.assign({}, state, {timestamp: '2020-01-01'});
-        expect(logEntriesReducer(localState, toggleLogEntryActivity(3))).toEqual({
+        expect(logEntriesReducer(localState, toggleLogEntryActivity(0))).toEqual({
             timestamp: '2020-01-01',
             data: [
-                {timestamp: '2020-01-01', activities: [1, 2, 3]},
+                {timestamp: '2020-01-01', activities: [0, 1, 2]},
                 {timestamp: '2010-04-05', activities: [1]}
             ]
         });
