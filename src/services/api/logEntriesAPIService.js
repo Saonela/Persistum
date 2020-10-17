@@ -17,7 +17,23 @@ const LogEntriesAPIService = {
     },
     async delete(id, userId) {
         await getLogEntriesCollection(userId).doc(id).delete();
-    }
+    },
+    async updateMany(logEntries, userId) {
+        const batch = FirebaseDB.batch();
+        logEntries.forEach((logEntry) => {
+            const doc = getLogEntriesCollection(userId).doc(logEntry.id);
+            batch.update(doc, logEntry);
+        });
+        batch.commit().then();
+    },
+    async deleteMany(logEntries, userId) {
+        const batch = FirebaseDB.batch();
+        logEntries.forEach((logEntry) => {
+            const doc = getLogEntriesCollection(userId).doc(logEntry.id);
+            batch.delete(doc);
+        });
+        batch.commit().then();
+    },
 };
 
 export default LogEntriesAPIService;

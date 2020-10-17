@@ -12,6 +12,7 @@ import {
     updateActivity
 } from "../../redux/slices/activitiesSlice";
 import {
+    updateAllLogEntries,
     getLoggedActivityIds,
     getTimestamp, resetTimestamp, setTimestamp,
     toggleLogEntryActivity,
@@ -67,6 +68,7 @@ function FormView({onLoadingStateChange}) {
                                   onDelete={(activity) => {
                                       dispatch(deleteActivity(activity.id)).then(() => {
                                           dispatch(updateActivitiesOrder());
+                                          dispatch(updateAllLogEntries());
                                       });
                                   }}
                                   onDragEnd={(indexData) => {

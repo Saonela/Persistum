@@ -1,5 +1,6 @@
 import React from "react";
 import logEntriesReducer, {
+    updateAllLogEntries,
     fetchLogEntries,
     getLogEntries, getLogEntryByTimestamp,
     getLoggedActivityIds, resetTimestamp, setTimestamp,
@@ -9,6 +10,7 @@ import logEntriesReducer, {
 import {getCurrentShortTimestamp} from "../../services/utilityService";
 import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
 import {logout} from "./userSlice";
+import {deleteActivity} from "./activitiesSlice";
 
 jest.mock('../../services/utilityService', () => ({
     getCurrentShortTimestamp: jest.fn()
@@ -35,7 +37,6 @@ describe('LogEntriesReducer', () => {
             data: [{timestamp: '2020-01-01', activities: [1, 2]}, {timestamp: '2010-04-05', activities: [1]}]
         });
     });
-
 
     it('should dispatch toggle data log activity action', () => {
         const localState = Object.assign({}, state, {timestamp: '2020-01-01'});
@@ -110,6 +111,24 @@ describe('LogEntriesReducer', () => {
         const logEntry = {id: '112', timestamp: '2010-04-05', activities: []};
         expect(logEntriesReducer(state, updateLogEntry.fulfilled(logEntry))).toEqual({
             data: []
+        });
+    });
+
+    fit('should filter out given log entry ids', () => {
+        const state = {
+            timestamp: '2020-09-21',
+            data: [{id: 'a', timestamp: '2020-01-01', activities: [1, 2]}, {id: 'b', timestamp: '2010-04-05', activities: [1]}]
+        };
+        expect(logEntriesReducer(state, updateAllLogEntries.fulfilled(['a']))).toEqual({
+            timestamp: '2020-09-21',
+            data: [{id: 'b', timestamp: '2010-04-05', activities: [1]}]
+        });
+    });
+
+    fit('should delete activity ids from log entries if activity itself deleted', () => {
+        expect(logEntriesReducer(state, deleteActivity.fulfilled(1))).toEqual({
+            timestamp: '2020-09-21',
+            data: [{timestamp: '2020-01-01', activities: [2]}, {timestamp: '2010-04-05', activities: []}]
         });
     });
 

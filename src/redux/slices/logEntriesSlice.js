@@ -1,7 +1,7 @@
 import {createAsyncThunk, createSelector, createSlice} from "@reduxjs/toolkit";
 import UtilityService from "../../services/utilityService";
 import LogEntriesService from "../../services/logEntriesService";
-import {getAllActivities} from "./activitiesSlice";
+import {deleteActivity, getAllActivities} from "./activitiesSlice";
 import {ASYNC_STATE_STATUS} from "../asyncStateStatus";
 import LogEntriesAPIService from "../../services/api/logEntriesAPIService";
 import {getUserId, logout} from "./userSlice";
@@ -26,6 +26,16 @@ export const updateLogEntry = createAsyncThunk('logEntries/updateLogEntry', asyn
     }
 
     return logEntry;
+});
+
+export const updateAllLogEntries = createAsyncThunk('logEntries/updateAllLogEntries', async (data, thunkAPI) => {
+    const state = thunkAPI.getState();
+    const userId = getUserId(state);
+    const toUpdate = state.logEntries.data.filter(entry => entry.activities.length);
+    const toDelete = state.logEntries.data.filter(entry => !entry.activities.length);
+    LogEntriesAPIService.updateMany(toUpdate, userId).then();
+    LogEntriesAPIService.deleteMany(toDelete, userId).then();
+    return toDelete.map(logEntry => logEntry.id);
 });
 
 const logEntriesSlice = createSlice({
@@ -82,6 +92,14 @@ const logEntriesSlice = createSlice({
                 state.data.push(action.payload);
             }
             state.data = state.data.filter(entry => entry.activities.length);
+        },
+        [updateAllLogEntries.fulfilled]: (state, action) => {
+            state.data = state.data.filter(logEntry => !action.payload.includes(logEntry.id));
+        },
+        [deleteActivity.fulfilled]: (state, action) => {
+            state.data.forEach((logEntry) => {
+                logEntry.activities = logEntry.activities.filter(id => id !== action.payload);
+            });
         },
         [logout]: (state) => {
             return {
