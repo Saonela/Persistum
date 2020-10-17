@@ -54,7 +54,9 @@ function FormView({onLoadingStateChange}) {
                     {!isCurrentDate() && <div className="form-view__edit-message">You are not on the current date</div>}
                     <ActivityCreate forceInputDisplay={!activities.length && !loading && loadingStatus !== ASYNC_STATE_STATUS.IDLE}
                                     onSubmit={(name) => {
-                                        dispatch(createActivity(name))
+                                        dispatch(createActivity(name)).then(() => {
+                                            dispatch(updateActivitiesOrder());
+                                        });
                                     }}/>
                     <ActivityList activities={activities}
                                   completedActivityIds={completedActivityIds}
