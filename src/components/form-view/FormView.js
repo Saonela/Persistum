@@ -65,8 +65,9 @@ function FormView({onLoadingStateChange}) {
                                       dispatch(updateActivity(activity))
                                   }}
                                   onDelete={(activity) => {
-                                      dispatch(deleteActivity(activity.id));
-                                      dispatch(updateActivitiesOrder());
+                                      dispatch(deleteActivity(activity.id)).then(() => {
+                                          dispatch(updateActivitiesOrder());
+                                      });
                                   }}
                                   onDragEnd={(indexData) => {
                                       dispatch(reorderActivities(indexData));
